@@ -17,9 +17,11 @@ Each card has:
 2. **Denominator** — eligible population (age, continuous enrollment, qualifying events)
 3. **Numerator** — what closes the gap, compliant evidence types
 4. **Exclusions** — standard (hospice, advanced illness/frailty for 66+) plus measure-specific
-5. **NLP signal phrases** — section hints + positive signals + negative/exclusion signals + false positives to filter
-6. **Common documentation gaps** — why the measure often fails
-7. **Notes** — MY-specific changes, ECDS direction, related measures
+5. **Date of service rule** — measure-specific anchor, window, date types that count vs. mislead, "most recent" disambiguation, common date confusions. Cross-cutting framework in [`../nlp/date-of-service.md`](../nlp/date-of-service.md).
+6. **NLP signal phrases** — section hints + positive signals + negative/exclusion signals
+7. **Assertion / negation pitfalls** — measure-specific anti-patterns (ConText-style). Cross-cutting framework in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md).
+8. **Common documentation gaps** — why the measure often fails
+9. **Notes** — MY-specific changes, ECDS direction, related measures
 
 ## Measures included
 

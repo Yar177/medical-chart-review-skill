@@ -17,8 +17,8 @@ The per-measure cards in [`../hedis/`](../hedis/) tell you **what counts** for e
 |---|---|
 | [`date-of-service.md`](date-of-service.md) | DoS taxonomy, anchor selection, copy-forward handling, measure × DoS-rule grid for all 24 measures, worked test cases |
 | [`negation-and-assertion.md`](negation-and-assertion.md) | ConText 4-dimension framework, OSS library landscape, shared HEDIS anti-patterns, measure × pitfall grid, worked test cases |
-| [`extraction-patterns.md`](extraction-patterns.md) | *(Phase 3)* section detection, abbreviation expansion, telehealth, outside-records, provider attribution |
-| [`terminology-mapping.md`](terminology-mapping.md) | *(Phase 3)* LOINC / SNOMED / RxNorm / CVX / CPT / ICD-10 mapping by measure family |
+| [`extraction-patterns.md`](extraction-patterns.md) | Section detection, abbreviation expansion, copy-forward detection, telehealth, outside-records / scanned PDFs, provider attribution, multi-doc linking, doc-type classification |
+| [`terminology-mapping.md`](terminology-mapping.md) | LOINC / SNOMED / RxNorm / NDC / CVX / CPT / HCPCS / ICD-10 mapping by measure family, common pitfalls, code-first vs phrase-first guidance |
 | [`evaluation-and-validation.md`](evaluation-and-validation.md) | *(Phase 4)* metrics, IAA, MRRV simulation, failure-mode catalog, drift monitoring |
 | [`annotation-guidelines.md`](annotation-guidelines.md) | *(Phase 4)* span and attribute schema, adjudication, synthetic data |
 | [`test-fixtures/`](test-fixtures/) | *(Phase 4)* synthetic note snippets with expected evidence, DoS, and assertion attributes |
