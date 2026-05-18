@@ -54,6 +54,50 @@
 - **Assessment & Plan (A/P)** — the legal/coding-relevant section
 - **Disposition** — admit, discharge, transfer, observation
 
+## Encounter flow — reviewer checklist
+
+Most encounter notes (outpatient visit, ED note, H&P, consult) follow a standard top-to-bottom flow. When reviewing one, walk it in order and check each section against the rules below. Missing or inconsistent sections are findings, not defects to ignore.
+
+```
+Patient Header (sticky — should be on every page/note)
+└── Demographics · Allergies · Active medication list · Code status
+         │
+Encounter body (read in order)
+├── 1. Chief Complaint (CC)
+├── 2. History of Present Illness (HPI)
+├── 3. Review of Systems (ROS) — by body system
+├── 4. Past/Family/Social History (PMH/FH/SH)
+├── 5. Physical Examination (PE) — by body system
+├── 6. Vitals & flowsheet data (trended where relevant)
+├── 7. Results reviewed (labs / imaging / prior records)
+├── 8. Assessment — diagnoses with clinical reasoning
+├── 9. Plan — orders, meds, procedures, referrals, patient education
+├── 10. Disposition & follow-up
+└── 11. Signature / attestation / co-sign (resident → attending)
+```
+
+| Section | What to verify | Common findings |
+|---|---|---|
+| Patient header | Allergies + active meds match the body of the note | Allergic drug prescribed in Plan; med list contradicts HPI |
+| 1. CC | Present and matches HPI/A&P | "Follow-up" with no specified condition; CC doesn't match billed E&M |
+| 2. HPI | Adequate detail for billed E&M level; OPQRST/OLDCARTS elements | HPI cloned from prior visit; HPI inconsistent with diagnosis |
+| 3. ROS | System count matches billed E&M; not blanket "all negative" | "10-system negative ROS" copy-forward; ROS contradicts HPI |
+| 4. PMH/FH/SH | Updated stamp recent; smoking/alcohol/substance status current | Last updated >12 months; conflicts with problem list |
+| 5. PE | Findings support diagnoses in A&P | "Normal" PE with documented acute pathology; cloned PE across patients |
+| 6. Vitals | In note matches flowsheet; abnormals addressed | BP 195/110 with no plan; SpO2 86% with no intervention |
+| 7. Results | Labs/imaging cited actually exist on dates referenced | "Today's labs show..." with no lab from that date |
+| 8. Assessment | Each diagnosis has MEAT (Monitor, Evaluate, Assess, Treat) | Diagnosis listed without supporting clinical detail (HCC risk) |
+| 9. Plan | Each diagnosis in A has a corresponding plan element | Diabetes assessed, no diabetes management; medication started with no indication |
+| 10. Disposition / follow-up | Appropriate for acuity; high-risk dx has interval and contingency | Discharge with no follow-up for new CHF/CAD/cancer dx |
+| 11. Signature | Signed, timed, attribution clear; attending co-sign present if required | Note references "I, Dr. B" but signed by Dr. A; missing attending attestation |
+
+### What to elevate
+
+- **Missing section that justifies billing** → coding/CDI finding
+- **Internal contradiction** (e.g., assessment doesn't match plan, vitals don't match flowsheet) → documentation finding
+- **Abnormal value with no addressed plan** → critical / patient-safety finding
+- **Section present but cloned from a prior date** → documentation integrity finding (see Copy-forward / cloning flags below)
+
 ## Copy-forward / cloning flags
 
 - Identical ROS or PE text across multiple dates
