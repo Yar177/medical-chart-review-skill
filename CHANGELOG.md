@@ -5,6 +5,23 @@ This project follows [Semantic Versioning](https://semver.org/) and [Keep a Chan
 
 ## [Unreleased]
 
+### Changed - Repository restructure: monorepo of three skills
+
+- Split the single skill into three independently installable skills under one repo:
+  - `medical-chart-review/` - auditor / clinician / coder / CDI / quality-auditor skill (unchanged scope)
+  - `hedis-nlp/` - per-measure HEDIS extractor engineering (cross-cutting NLP + 24 measure cards + model card + abstraction template)
+  - `hcc-nlp/` - HCC / risk-adjustment extractor engineering (CMS-HCC V28 / V24 / HHS-HCC + MEAT + hierarchies + RADV + per-HCC cards + test fixtures + model card + NLP-assisted audit template)
+- All moves performed with `git mv` to preserve file history.
+- Each skill has its own `SKILL.md` with an embedded §0 PHI / scope safety gate. Splitting the safety gate across skills is non-negotiable - if a skill is installed alone, its gate must still run.
+- New root `README.md` is the umbrella; per-skill `README.md` files cover install + layout + scope for each.
+- `templates/hcc-audit.md` split into two:
+  - Lean auditor version in `medical-chart-review/templates/hcc-audit.md` (no NLP-assisted fields, matches pre-NLP-v3 form)
+  - NLP-assisted version in `hcc-nlp/templates/hcc-audit-nlp.md` (model version, MEAT evidence, hierarchy application, reviewer-override feedback)
+- Cross-skill markdown links converted to prose pointers (e.g., "see the sibling `hcc-nlp` skill's `references/foo.md`") so each skill works standalone.
+- HEDIS / HCC NLP triggers removed from the auditor skill's `SKILL.md` description; matching triggers added to the two new SKILL.md files.
+- Future planned skill: `hipaa-compliance/` as a 4th sibling (BAA review, breach response, OCR audit prep, de-identification methodology, technical safeguards for any healthcare app).
+- **No backward compatibility shims.** Existing installs that referenced the flat layout must reinstall against the new subpath (`Yar177/medical-chart-review-skill/<skill-name>`).
+
 ### Added - HCC / risk-adjustment NLP enablement (v3)
 
 - New `references/hcc/` directory packaging chart-review knowledge for data-science / NLP teams building HCC extraction pipelines (suspect engines, validate engines, RAF estimation, RADV preparation):
