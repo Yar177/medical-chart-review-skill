@@ -109,10 +109,24 @@ Triggered by requests like:
 - [abbreviations.md](references/abbreviations.md) — Clinical shorthand + JCAHO Do-Not-Use list
 - [hipaa-privacy.md](references/hipaa-privacy.md) — 18 Safe Harbor identifiers, 42 CFR Part 2
 - [provider-queries.md](references/provider-queries.md) — Compliant ACDIS/AHIMA query templates
+- [hedis/](references/hedis/) — Per-measure cards (denominator, numerator, exclusions, NLP signal phrases, **date-of-service rule**, **assertion / negation pitfalls**)
+- [hedis-supplemental-data.md](references/hedis-supplemental-data.md) — Standard / non-standard supplemental data, hybrid sampling, MRRV
+- [nlp/](references/nlp/) — **NLP-team enablement**: date of service, assertion / negation, extraction patterns, terminology mapping, evaluation methodology, annotation guidelines, test fixtures
 
 ### Templates
 
-[clinical-summary.md](templates/clinical-summary.md) · [hcc-audit.md](templates/hcc-audit.md) · [cdi-review.md](templates/cdi-review.md) · [quality-gap.md](templates/quality-gap.md) · [med-rec.md](templates/med-rec.md) · [utilization-review.md](templates/utilization-review.md) · [coding-audit.md](templates/coding-audit.md) · [data-abstraction.md](templates/data-abstraction.md)
+[clinical-summary.md](templates/clinical-summary.md) · [hcc-audit.md](templates/hcc-audit.md) · [cdi-review.md](templates/cdi-review.md) · [quality-gap.md](templates/quality-gap.md) · [med-rec.md](templates/med-rec.md) · [utilization-review.md](templates/utilization-review.md) · [coding-audit.md](templates/coding-audit.md) · [data-abstraction.md](templates/data-abstraction.md) · [hedis-abstraction.md](templates/hedis-abstraction.md) · [per-measure-model-card.md](templates/per-measure-model-card.md)
+
+## For data-science / NLP teams
+
+If you are building per-measure HEDIS extractors (e.g., GSD, BCS-E, FUH, MRP, TRC), start in [references/nlp/](references/nlp/). It packages the chart-review knowledge here into model-friendly form for the two highest-impact failure modes in production HEDIS NLP:
+
+- **Date of service** ([references/nlp/date-of-service.md](references/nlp/date-of-service.md)) — DoS taxonomy, anchor selection, copy-forward handling, measure × DoS-rule grid for all 24 measures, worked test cases.
+- **Assertion / negation** ([references/nlp/negation-and-assertion.md](references/nlp/negation-and-assertion.md)) — ConText 4-dimension framework, OSS library landscape (medspaCy, negspacy, pyConTextNLP, NegBio, scispaCy, HeidelTime, SUTime, cTAKES, CLAMP), shared HEDIS anti-patterns, measure × pitfall grid, worked test cases.
+
+Supporting files cover extraction patterns (sections, abbreviations, copy-forward, telehealth, outside records / OCR, provider attribution), terminology mapping (LOINC / SNOMED / RxNorm / NDC / CVX / CPT / HCPCS / ICD-10), evaluation methodology (span / document / patient-level metrics, IAA, MRRV simulation, failure-mode catalog, drift monitoring), annotation guidelines, and synthetic test fixtures. Use [templates/per-measure-model-card.md](templates/per-measure-model-card.md) as the canonical model documentation per extractor.
+
+Each HEDIS measure card in [references/hedis/](references/hedis/) also has its own **date-of-service rule** and **assertion / negation pitfalls** sections.
 
 ## Compliance & safety guardrails
 
