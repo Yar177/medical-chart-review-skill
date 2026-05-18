@@ -31,6 +31,26 @@
 - IVF treatment during MY (some specs)
 - PCSK9 inhibitor monotherapy
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | Qualifying ASCVD event in MY or prior year (MI, CABG, PCI, ischemic stroke/TIA, PVD, angina with confirmed ischemia) |
+| **Compliance window** | Rate 1 (Received Statin): at least one statin fill during MY. Rate 2 (PDC ≥80%): days-covered calculation across MY |
+| **Date types that COUNT** | Pharmacy dispense date (fill); ASCVD-event procedure or diagnosis date |
+| **Date types that do NOT count** | Prescription written date alone, "on statin" mention without fill evidence, sample given in office, ASCVD diagnosis date outside the look-back window |
+| **"Most recent" disambiguation** | Any qualifying fill in MY satisfies Rate 1; Rate 2 aggregates all fills across MY |
+| **Look-back / look-forward** | ASCVD event identifiable in MY or prior year; no look-forward |
+
+**Common date confusions for this measure**
+
+- Statin held during admission and never restarted at discharge - fill history will show the gap; the held period does not generate a dispense
+- 90-day fill spanning year boundary - dispense date is the fill day, not the days-supply end
+- ASCVD event in late prior MY - still qualifies for current-MY denominator
+- Outside-pharmacy cash fills (GoodRx, mail order outside plan) - chart shows "on statin" but no claim; missing dispense breaks Rate 2 even when patient is adherent
+
 ## NLP signal phrases
 
 **Section hints:** Medications, Past Medical Hx (cardiac), Problem List, Plan, cardiology consult notes
@@ -62,11 +82,22 @@
 - "hospice"
 - "on PCSK9 inhibitor"
 
-**False positives to filter**
-- "statin recommended, patient declined"
-- "discussed starting statin"
-- "statin held this admission for ___"
-- "non-statin lipid therapy: ezetimibe alone" - does NOT satisfy
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Statin recommended, patient declined" / "discussed starting statin"** - temporality: future intent or refusal; not a fill
+- **"Statin held this admission"** - currently off; needs spec-aware handling
+- **"Statin intolerance"** vague ("patient doesn't like statins") - typically does NOT exclude; need specific reaction (myalgia, rhabdo, transaminitis)
+- **"Rhabdomyolysis on prior statin" / "CK >10x ULN on statin" / "transaminitis on statin"** - exclusion signal with documented reaction
+- **"PCSK9 inhibitor" / "alirocumab" / "evolocumab"** monotherapy - exclusion signal in some specs
+- **"Ezetimibe alone" / "niacin" / "fibrate"** - non-statin lipid therapy; does NOT satisfy numerator
+- **"Atorvastatin on med list"** without fill evidence - presence on med list ≠ dispense
+- **"FH of statin myopathy"** - experiencer = family
+- **"Hx of MI 2010"** - historical ASCVD event; qualifies for denominator (lifetime for major events per most specs)
+- **"CAD" alone without confirmed ischemia / event** - may or may not qualify for denominator (spec-dependent)
+- **"Pregnant" / "actively trying to conceive" / "breastfeeding"** - exclusion signal
+- **"Combination therapy with statin"** - vague; need explicit drug name (Caduet, Vytorin = statin-containing; Liptruzet = atorvastatin/ezetimibe)
 
 ## Common documentation gaps
 

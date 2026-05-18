@@ -22,6 +22,26 @@
 - Advanced illness / frailty exclusion for members 66+
 - Palliative care during MY
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - rolling look-back |
+| **Compliance window** | Mammogram within the **27-month look-back** ending on the last day of MY (covers MY + prior year) |
+| **Date types that COUNT** | Mammogram procedure date |
+| **Date types that do NOT count** | Order date, scheduled/future date, imaging report date when delayed from procedure (use procedure date), self-reported mammogram without dated documentation |
+| **"Most recent" disambiguation** | Any qualifying mammogram in the 27-month window satisfies |
+| **Look-back / look-forward** | 27 months look-back from end of MY; no look-forward |
+
+**Common date confusions for this measure**
+
+- Mobile screening unit mammogram - the on-site exam date is the evidence date; receipt-by-EHR date can lag months
+- Outside-imaging report scanned in current MY for an exam done 2 years ago - use the exam date; falls outside 27-month window if too old
+- BI-RADS 0 (additional imaging needed) - the screening date still counts as evidence the screening occurred; do not require BI-RADS resolution date
+- Patient-reported "had mammogram last year" without a dated outside report - cannot anchor a date; not directly scoreable
+
 ## NLP signal phrases
 
 **Section hints:** Results (imaging), Past Surgical Hx, Plan, problem list, scanned outside imaging reports
@@ -40,11 +60,20 @@
 - "hospice"
 - "metastatic cancer" / "stage IV" (may trigger advanced illness exclusion at 66+)
 
-**False positives to filter**
-- "mammogram recommended" / "due for mammogram" - intent, not done
-- "patient declined mammogram" - not compliant
-- "diagnostic mammogram for palpable mass" - may count depending on spec; ECDS focuses on screening intent
-- "lumpectomy" alone is NOT mastectomy exclusion
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Negative mammogram" / "mammogram negative" / "Pap negative"-style phrasing** - in screening, "negative" = normal result = POSITIVE evidence; do NOT let NegEx flip it
+- **"Mammogram recommended" / "due for mammogram" / "referred for screening"** - temporality: future intent; not evidence of completion
+- **"Patient declined mammogram"** - refusal; does NOT close measure
+- **"Diagnostic mammogram for palpable mass"** - spec-dependent whether it counts; ECDS focuses on screening intent
+- **"Lumpectomy" alone** - lumpectomy is NOT mastectomy; does not trigger exclusion
+- **"Hx of breast cancer"** without bilateral mastectomy - history alone does not exclude; the surgical procedure does
+- **"FH of breast cancer in mother"** - experiencer = family; relevant for risk stratification, not patient exclusion or numerator
+- **"Mammogram done elsewhere"** without date - hedged; cannot place in 27-month window
+- **"BI-RADS 0" / "additional imaging needed"** - the screening DID occur; this is still evidence of completion
+- **"Patient at average risk, screening discussed"** - discussion is not screening; need actual mammogram
 
 ## Common documentation gaps
 

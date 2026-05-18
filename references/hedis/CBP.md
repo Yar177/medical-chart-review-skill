@@ -26,6 +26,26 @@
 - Advanced illness / frailty exclusion for members 66+
 - Palliative care
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | First qualifying HTN diagnosis (in first 6 months of MY or in year prior) |
+| **Compliance window** | Most recent qualifying BP during MY, **on or after the HTN-event date** |
+| **Date types that COUNT** | Encounter date of the visit where BP was recorded by clinician |
+| **Date types that do NOT count** | Note signing date when BP is copy-forward, BP recorded before the HTN-event date in MY, BPs in unstructured narrative without encounter context, prior-year BP |
+| **"Most recent" disambiguation** | Latest qualifying BP by encounter date; if multiple same-day, follow current spec (often lowest of the day or last recorded) |
+| **Look-back / look-forward** | None for numerator; HTN diagnosis identification looks back into prior year |
+
+**Common date confusions for this measure**
+
+- HTN diagnosis on problem list with no encounter dx in qualifying window - denominator failure, not numerator
+- BP recorded before the HTN event-date in MY - does NOT count for numerator even if value is at goal
+- Home BP reported in a telehealth visit - the documentation date in the clinician's note is the evidence date; verify spec acceptance
+- Single elevated BP with same-day re-check - the qualifying value per spec is usually the lowest of the day or last recorded
+
 ## NLP signal phrases
 
 **Section hints:** Vitals, Assessment, Plan, Results, flowsheet
@@ -46,11 +66,21 @@
 - "hospice" / "comfort care"
 - "frailty" / "advanced illness" / "metastatic cancer"
 
-**False positives to filter**
-- Single elevated BP without re-check or follow-up reading
-- BP from urgent care during acute pain - use the most recent qualifying reading
-- "white coat hypertension" without controlled reading
-- "secondary hypertension" - check whether spec accepts (denominator includes essential HTN primarily)
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"BP at goal" / "HTN controlled" / "normotensive"** without numeric value - hedged; needs the actual reading to score
+- **Single elevated BP from urgent care during acute pain or anxiety** - use the most recent qualifying reading per spec
+- **"BP elevated, will recheck next visit"** - first reading is the data; "will recheck" is future
+- **"PMH: HTN, BP runs 120s/70s at home"** - historical narrative; not encounter-recorded data
+- **"Patient denies HTN symptoms"** - symptom negation; does not affect BP value
+- **"Mother / spouse with HTN"** - experiencer = family
+- **"Stable on current regimen"** alone - hedged, no numeric value
+- **"Secondary hypertension" / "renovascular HTN"** - check whether spec includes; primary essential HTN is the typical denominator
+- **"White coat hypertension"** - context modifier; doesn't auto-qualify a normal value
+- **"If BP elevated next visit, will add lisinopril"** - hypothetical
+- **BP recorded in nurse-triage flowsheet only** - verify spec acceptance vs requirement for clinician attestation
 
 ## Common documentation gaps
 

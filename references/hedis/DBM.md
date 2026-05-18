@@ -42,6 +42,28 @@ Documented clinical assessment / action after the mammogram result within the sp
 - Mammogram not yet resulted at end of window
 - Per program spec - verify
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+> **Spec verification required** for the exact window length and event-definition; values below are inferred from the closed-loop-screening intent and standard radiology practice.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | Index mammogram result (often abnormal: BI-RADS 0, 3, 4, 5) |
+| **Compliance window** | Documented assessment / follow-up action within the spec-defined window after the index mammogram (commonly 30-90 days; **verify**) |
+| **Date types that COUNT** | Date of follow-up imaging procedure (diagnostic mammogram, US, MRI); biopsy procedure date; documented result-review and patient-notification date; specialist consult date |
+| **Date types that do NOT count** | Imaging report-signing date when delayed from procedure (use procedure date); referral order date alone; "will discuss at next visit" without a follow-up date |
+| **"Most recent" disambiguation** | First qualifying follow-up action within window closes the measure |
+| **Look-back / look-forward** | None look-back; look-forward = the post-mammogram window |
+
+**Common date confusions for this measure**
+
+- Diagnostic mammogram procedure date vs report-signing date - use procedure date
+- Biopsy scheduled date vs biopsy completion date - completion date is the evidence date
+- Patient-notification via portal message - the message-sent date is the documentation date
+- BI-RADS 3 short-interval follow-up imaging in 6 months - the follow-up imaging date counts when it occurs, not the recommendation date
+
 ## NLP signal phrases
 
 **Section hints:** Results (imaging, pathology), Plan, problem list, Patient Communication / Letters, scanned outside reports, message inbox / result-review documentation
@@ -77,12 +99,21 @@ Documented clinical assessment / action after the mammogram result within the sp
 - "hospice"
 - "patient declined further evaluation despite abnormal findings"
 
-**False positives to filter**
-- Mammogram result filed in chart without provider review attestation
-- "Results: normal" pasted from prior visit (copy-forward)
-- BI-RADS finding without follow-up plan documented in Plan section
-- Referral made but no documentation of why / no link to mammogram result
-- "Will discuss results at next visit" without follow-up tracking
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Recommended diagnostic mammogram" / "diagnostic mammogram ordered" / "biopsy recommended"** - temporality: future intent / order; not the follow-up action itself
+- **"Will discuss results at next visit"** without a documented follow-up tracking - vague future plan
+- **"Results: normal"** pasted from prior visit (copy-forward) without provider review attestation - not evidence of THIS-event review
+- **"BI-RADS 4, awaiting patient response"** - acknowledged but action not completed
+- **"Patient declined further evaluation despite abnormal findings"** - refusal documented; may not close measure but documents the chain
+- **"Referral made"** without documentation of why or link to the mammogram result - cannot tie to the index event
+- **"Mammogram result reviewed"** with no patient-notification or plan documentation (boilerplate) - thin evidence; assertion = hedged on whether substantive review occurred
+- **"FH of breast cancer"** - experiencer = family; relevant context, not the follow-up action
+- **"Hx of breast biopsy"** - historical; does not satisfy this-event follow-up
+- **"BI-RADS 1 / BI-RADS 2 - return to routine screening"** - normal result; "return to routine" IS the documented assessment for normal
+- **"Lost to follow-up"** - documented gap; does not close measure
 
 ## Common documentation gaps
 

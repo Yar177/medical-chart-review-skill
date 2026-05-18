@@ -26,6 +26,26 @@
 
 > "Hysterectomy" alone (without "total" / "no residual cervix") does NOT qualify - supracervical hysterectomy leaves the cervix.
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - rolling look-back by age band and modality |
+| **Compliance window** | Pap cytology within 3 years (ages 21-64); OR Pap+hrHPV co-test or primary hrHPV within 5 years (ages 30-64) |
+| **Date types that COUNT** | Specimen collection date (cytology and/or HPV) |
+| **Date types that do NOT count** | Result-posting date alone, order date, prior cervical biopsy date (biopsy is diagnostic, not screening), patient-reported date without provider documentation |
+| **"Most recent" disambiguation** | Any qualifying specimen in the applicable look-back satisfies |
+| **Look-back / look-forward** | 3 years (cytology) or 5 years (co-test / primary hrHPV); no look-forward |
+
+**Common date confusions for this measure**
+
+- Pap done at OB-GYN outside plan network - capture specimen date from outside report, not the EHR import date
+- Co-test result: cytology and HPV often share a specimen date but may have separate posting dates - use the (shared) specimen date
+- Patient reports Pap "last year" without documentation - cannot anchor a date; not directly scoreable
+- Reflex HPV after ASC-US - diagnostic workup; may not satisfy screening look-back on its own
+
 ## NLP signal phrases
 
 **Section hints:** Results (cytology, pathology), Past Surgical Hx, problem list, Plan, scanned outside pathology reports
@@ -45,11 +65,21 @@
 - "congenital absence of uterus / cervix"
 - "hospice"
 
-**False positives to filter**
-- "hysterectomy" alone - may be supracervical; confirm "total" or "cervix removed"
-- "cervical biopsy" alone is NOT screening - it's diagnostic; may or may not count
-- "Pap recommended" / "due for Pap" - intent
-- "patient declined Pap"
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Pap negative" / "NILM" / "HPV negative"** - negative = normal result = POSITIVE evidence; do NOT let NegEx flip it
+- **"Hysterectomy"** alone without "total" / "complete" / "cervix removed" - may be supracervical; exclusion not confirmed
+- **"Cervical biopsy"** alone - diagnostic, not screening; may not satisfy on its own
+- **"Pap recommended" / "due for Pap" / "will schedule Pap next visit"** - temporality: future intent
+- **"Patient declined Pap"** - refusal; does NOT close measure
+- **"Reflex HPV done after ASC-US"** - diagnostic workup; check spec for screening-look-back qualification
+- **"FH of cervical cancer"** - experiencer = family
+- **"Pap done elsewhere"** without date - hedged; cannot place in look-back
+- **"NILM, recommend routine screening interval"** - the NILM result IS evidence; the routine-interval phrase is just guidance
+- **"Cervical cytology unsatisfactory"** - inadequate sample; spec-dependent whether it counts
+- **"S/p hysterectomy"** without cervix-status detail - exclusion unclear; flag for review
 
 ## Common documentation gaps
 
