@@ -5,6 +5,28 @@ This project follows [Semantic Versioning](https://semver.org/) and [Keep a Chan
 
 ## [Unreleased]
 
+### Added - HCC / risk-adjustment NLP enablement (v3)
+
+- New `references/hcc/` directory packaging chart-review knowledge for data-science / NLP teams building HCC extraction pipelines (suspect engines, validate engines, RAF estimation, RADV preparation):
+  - `README.md` — audience, file index, core principles, library landscape, cross-links to the HEDIS NLP parallel.
+  - `model-versions.md` — CMS-HCC V28 / V24 / HHS-HCC comparison, phase-in schedule (33/67/100% blend), what changed V24 → V28 (~2,000 codes removed), version-pinning required metadata.
+  - `raf-calculation.md` — RAF formula (demographic + HCC + interactions + segment adjustment), disease-disease interactions (DM+CHF, DM+Renal, CHF+COPD, Cancer+Immune), calendar reset, payment-year vs service-year, dollar-weighted metrics.
+  - `meat-criteria.md` — MEAT as a separate NLP task with two-pass architecture, per-category detection patterns (Monitor / Evaluate / Assess / Treat), linkage problem with worked examples, section-aware MEAT table, common failure modes.
+  - `hierarchies.md` — within-family trumping (HCC 17 > 18 > 19 diabetes example), hierarchies as a post-extraction step (not in extractor), HHS-HCC separate hierarchies, hierarchy-aware metric computation, enforcement checklist.
+  - `date-of-service.md` — 5-part DoS contract, calendar-year reset, acceptable encounter settings whitelist, provider-type whitelist (MD/DO/NP/PA/CNS/CNM acceptable; resident-alone / scribe / RN / therapist not), telehealth post-COVID narrowing, AWV recapture trap, copy-forward DoS attribution rule.
+  - `negation-and-assertion.md` — 9-dimension assertion taxonomy, history-of as the #1 RADV finding with trigger phrases and disambiguation, Z-code family table (Z85/86/87 generally not HCCs; Z89/93/94/99 subset ARE; Z95.x cardiac implants do not imply current disease), family-history confusion, hedging asymmetry, section-aware priors, audit-ready assertion YAML record.
+  - `extraction-patterns.md` — suspect vs validate pipeline split, two-pass extraction architecture, provenance requirements, problem-list-only invalid, RxNorm medication signals, cross-encounter context, common architecture mistakes.
+  - `terminology-mapping.md` — terminology systems table, CMS source URLs, ICD-10 → HCC crosswalk structure, annual update cadence, SNOMED bridge gotchas, RxNorm drug-class-to-diagnosis table, LOINC for MEAT evaluation, BMI / pressure-ulcer joint-requirement rules, version-pinning checklist.
+  - `evaluation-and-validation.md` — units of analysis (span / encounter-HCC / member-year-HCC / RAF), validate vs suspect engine metric requirements, hierarchy-aware metrics, dollar-weighted RAF precision / recall, decomposed error types, gold-standard construction, internal RADV simulation pattern, drift monitoring.
+  - `annotation-guidelines.md` — annotator profiles (clinical + coder + adjudicator), per-encounter YAML annotation schema, span / assertion / MEAT linkage rules, hierarchy convention, IAA targets by dimension, adjudication workflow with rationale feedback loop.
+  - `compliance-and-enforcement.md` — RADV / OIG / FCA regime overview, recent settlement patterns, RADV operational mechanics, two-way review obligation, precision targets for auto-validation (>0.97), CDI / provider-query workflow, NLP practices that increase vs reduce risk, escalation triggers.
+  - `cards/` — 9-section exemplar HCC cards (identity / clinical definition / eligibility / required MEAT / DoS rule / hierarchy interaction / assertion pitfalls / status-code conflations / NLP extraction notes) for HCC 18 (diabetes w/ complications), HCC 22 (morbid obesity), HCC 85 (CHF), HCC 96 (specified arrhythmias), HCC 108 (vascular disease), HCC 111 (COPD).
+  - `test-fixtures/` — synthetic note + expected-extraction pairs for the highest-volume failure modes: history-of trap, hierarchy collapse, status-code amputation, MEAT gap, problem-list-only.
+- New `templates/hcc-model-card.md` — canonical YAML + Markdown per-HCC model card (YAML authoritative; stricter required-field discipline than HEDIS due to RADV exposure).
+- `templates/hcc-audit.md` expanded with NLP-assisted fields: model version, HCC crosswalk version, emission type, confidence, extracted span, attributed DoS, attributed assertion, MEAT evidence captured, MEAT linkage method, hierarchy application, candidate-log entry, reviewer override, override direction and reason. Adds an NLP pipeline feedback section that loops overrides back into the failure-mode catalog and regression-fixture set.
+- `references/coding-icd10-hcc.md` adds a cross-link header pointing NLP teams to `references/hcc/`; auditor-oriented content unchanged.
+- `SKILL.md` and `README.md` updated to surface the HCC NLP enablement directory and data-science audience parallel to the HEDIS section.
+
 ### Added - NLP-team enablement (v2)
 
 - New `references/nlp/` directory packaging chart-review knowledge for data-science / NLP teams building per-measure HEDIS extractors:

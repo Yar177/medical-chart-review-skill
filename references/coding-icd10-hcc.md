@@ -1,5 +1,7 @@
 # ICD-10-CM, HCC, and Risk Adjustment
 
+> **For NLP / data-science teams building HCC extraction pipelines:** this file is the auditor-oriented reference. For model-building knowledge (MEAT as an NLP task, hierarchies as a post-extraction step, V28 / V24 / HHS-HCC versioning, RAF dollar-weighted metrics, RADV readiness, suspect vs validate engines, per-HCC cards, test fixtures), start in [`hcc/`](hcc/). The two directories share the same underlying coding knowledge and are kept in sync.
+
 ## ICD-10-CM basics
 
 - 3–7 character alphanumeric codes (e.g., `E11.9` = Type 2 DM without complications)

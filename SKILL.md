@@ -33,6 +33,7 @@ If any of these gates fail, stop and report back to the user before proceeding.
 - Summarizing longitudinal patient history across encounters
 - Mapping data from Epic, Oracle Health (Cerner), Athenahealth, Meditech, eClinicalWorks, NextGen, Allscripts/Veradigm
 - Supporting data-science / NLP teams building per-measure HEDIS extraction models (date-of-service attribution, assertion / negation handling, evaluation, annotation, model-card documentation)
+- Supporting data-science / NLP teams building HCC / risk-adjustment extraction pipelines (CMS-HCC V28 / V24 / HHS-HCC versioning, MEAT linkage, hierarchy enforcement, RAF impact, RADV readiness, suspect vs validate engines, per-HCC model cards)
 
 ## 2. Review Types — Pick One Explicitly
 
@@ -73,6 +74,7 @@ When the task touches a domain below, read the corresponding reference file:
 - **HEDIS per-measure deep dives (denominator / numerator / exclusions / NLP signals / date-of-service rule / assertion pitfalls)** → `references/hedis/`
 - **HEDIS supplemental data and hybrid sampling provenance** → `references/hedis-supplemental-data.md`
 - **NLP enablement for HEDIS extraction pipelines (date of service, assertion / negation, extraction patterns, terminology mapping, evaluation, annotation, test fixtures)** → `references/nlp/`
+- **NLP enablement for HCC / risk-adjustment extraction pipelines (model versions, RAF calculation, MEAT, hierarchies, DoS, assertion / negation, extraction patterns, terminology mapping, evaluation, annotation, compliance, test fixtures, per-HCC cards)** → `references/hcc/`
 - **Medication review & interaction red flags** → `references/medications.md`
 - **Lab & imaging interpretation cheatsheet** → `references/labs-imaging.md`
 - **Clinical red flags & must-not-miss findings** → `references/red-flags.md`

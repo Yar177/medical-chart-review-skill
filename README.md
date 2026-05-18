@@ -112,11 +112,12 @@ Triggered by requests like:
 - [provider-queries.md](references/provider-queries.md) — Compliant ACDIS/AHIMA query templates
 - [hedis/](references/hedis/) — Per-measure cards (denominator, numerator, exclusions, NLP signal phrases, **date-of-service rule**, **assertion / negation pitfalls**)
 - [hedis-supplemental-data.md](references/hedis-supplemental-data.md) — Standard / non-standard supplemental data, hybrid sampling, MRRV
-- [nlp/](references/nlp/) — **NLP-team enablement**: date of service, assertion / negation, extraction patterns, terminology mapping, evaluation methodology, annotation guidelines, test fixtures
+- [nlp/](references/nlp/) — **NLP-team enablement (HEDIS)**: date of service, assertion / negation, extraction patterns, terminology mapping, evaluation methodology, annotation guidelines, test fixtures
+- [hcc/](references/hcc/) — **NLP-team enablement (HCC / risk adjustment)**: model versions (V28 / V24 / HHS-HCC), RAF calculation, MEAT, hierarchies, date of service, assertion / negation, extraction patterns, terminology mapping, evaluation, annotation, compliance, test fixtures, per-HCC cards
 
 ### Templates
 
-[clinical-summary.md](templates/clinical-summary.md) · [hcc-audit.md](templates/hcc-audit.md) · [cdi-review.md](templates/cdi-review.md) · [quality-gap.md](templates/quality-gap.md) · [med-rec.md](templates/med-rec.md) · [utilization-review.md](templates/utilization-review.md) · [coding-audit.md](templates/coding-audit.md) · [data-abstraction.md](templates/data-abstraction.md) · [hedis-abstraction.md](templates/hedis-abstraction.md) · [per-measure-model-card.md](templates/per-measure-model-card.md)
+[clinical-summary.md](templates/clinical-summary.md) · [hcc-audit.md](templates/hcc-audit.md) · [cdi-review.md](templates/cdi-review.md) · [quality-gap.md](templates/quality-gap.md) · [med-rec.md](templates/med-rec.md) · [utilization-review.md](templates/utilization-review.md) · [coding-audit.md](templates/coding-audit.md) · [data-abstraction.md](templates/data-abstraction.md) · [hedis-abstraction.md](templates/hedis-abstraction.md) · [per-measure-model-card.md](templates/per-measure-model-card.md) · [hcc-model-card.md](templates/hcc-model-card.md)
 
 ## For data-science / NLP teams
 
@@ -128,6 +129,23 @@ If you are building per-measure HEDIS extractors (e.g., GSD, BCS-E, FUH, MRP, TR
 Supporting files cover extraction patterns (sections, abbreviations, copy-forward, telehealth, outside records / OCR, provider attribution), terminology mapping (LOINC / SNOMED / RxNorm / NDC / CVX / CPT / HCPCS / ICD-10), evaluation methodology (span / document / patient-level metrics, IAA, MRRV simulation, failure-mode catalog, drift monitoring), annotation guidelines, and synthetic test fixtures. Use [templates/per-measure-model-card.md](templates/per-measure-model-card.md) as the canonical model documentation per extractor.
 
 Each HEDIS measure card in [references/hedis/](references/hedis/) also has its own **date-of-service rule** and **assertion / negation pitfalls** sections.
+
+## For HCC / risk-adjustment NLP teams
+
+If you are building HCC extraction pipelines (suspect engines, validate engines, RAF estimation, RADV preparation), start in [references/hcc/](references/hcc/). It packages the same chart-review knowledge into model-friendly form for the HCC-specific failure modes that drive RADV findings and One Touch / two-way review obligations:
+
+- **Model versions** ([references/hcc/model-versions.md](references/hcc/model-versions.md)) — CMS-HCC V28 / V24 / HHS-HCC differences, phase-in schedule, what changed V24 → V28, version-pinning requirements per artifact.
+- **MEAT criteria** ([references/hcc/meat-criteria.md](references/hcc/meat-criteria.md)) — MEAT as a separate NLP task with two-pass architecture, per-category detection patterns, linkage, section-aware MEAT, common failure modes.
+- **Hierarchies** ([references/hcc/hierarchies.md](references/hcc/hierarchies.md)) — within-family trumping as a post-extraction step, HHS-HCC differences, hierarchy-aware metrics.
+- **Negation & assertion** ([references/hcc/negation-and-assertion.md](references/hcc/negation-and-assertion.md)) — 9-dimension assertion taxonomy, history-of (the #1 RADV finding), Z-code family disambiguation (Z85/86/87 not HCCs; Z89/93/94/99 subset ARE), section-aware priors.
+- **Date of service** ([references/hcc/date-of-service.md](references/hcc/date-of-service.md)) — 5-part DoS contract, calendar-year reset, provider-type whitelist, telehealth boundaries, AWV recapture trap, copy-forward attribution rule.
+- **Extraction patterns** ([references/hcc/extraction-patterns.md](references/hcc/extraction-patterns.md)) — suspect vs validate split, two-pass architecture, provenance requirements, problem-list-only invalid.
+- **Evaluation & validation** ([references/hcc/evaluation-and-validation.md](references/hcc/evaluation-and-validation.md)) — units of analysis (span / encounter-HCC / member-year-HCC / RAF), hierarchy-aware metrics, dollar-weighted RAF precision / recall, decomposed errors, internal RADV simulation.
+- **Compliance & enforcement** ([references/hcc/compliance-and-enforcement.md](references/hcc/compliance-and-enforcement.md)) — RADV / OIG / FCA context, two-way review obligation, precision targets for auto-validation, CDI / provider-query workflow.
+- **Per-HCC cards** ([references/hcc/cards/](references/hcc/cards/)) — 9-section exemplar cards for HCC 18 (diabetes w/ complications), 22 (morbid obesity), 85 (CHF), 96 (specified arrhythmias), 108 (vascular disease), 111 (COPD).
+- **Test fixtures** ([references/hcc/test-fixtures/](references/hcc/test-fixtures/)) — synthetic-note + expected-extraction pairs for the highest-volume failure modes (history-of trap, hierarchy collapse, status-code amputation, MEAT gap, problem-list-only).
+
+Use [templates/hcc-model-card.md](templates/hcc-model-card.md) as the canonical per-HCC model documentation (YAML wins on conflict; stricter required-field discipline than HEDIS due to RADV exposure). Use the expanded [templates/hcc-audit.md](templates/hcc-audit.md) when an HCC chart audit is NLP-assisted; the new NLP fields capture model version, MEAT evidence, hierarchy application, and reviewer overrides for failure-mode feedback.
 
 ## Compliance & safety guardrails
 
