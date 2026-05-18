@@ -38,6 +38,7 @@ Each card has:
 - [BCS-E](BCS-E.md) — Breast Cancer Screening
 - [CCS-E](CCS-E.md) — Cervical Cancer Screening
 - [COL-E](COL-E.md) — Colorectal Cancer Screening
+- [DBM](DBM.md) — Documented Assessment After Mammogram (program-specific - see card)
 
 ### Behavioral health
 - [FUH](FUH.md) — Follow-Up After Hospitalization for Mental Illness
@@ -49,11 +50,16 @@ Each card has:
 
 ### Pediatric & perinatal
 - [PPC](PPC.md) — Prenatal and Postpartum Care (2 sub-indicators)
+- [W30](W30.md) — Well-Child Visits in the First 30 Months of Life (2 sub-indicators)
+- [WCV](WCV.md) — Child and Adolescent Well-Care Visits (ages 3-21)
 - [WCC](WCC.md) — Weight Assessment and Counseling, Nutrition and Physical Activity for Children/Adolescents (3 sub-indicators)
 
 ### Older adult
 - [ACP](ACP.md) — Advance Care Planning
 - [AIS-E](AIS-E.md) — Adult Immunization Status (multiple sub-indicators)
+- [COA](COA.md) — Care for Older Adults (4 sub-indicators: ACP, Med Review, Functional Status, Pain Assessment)
+- [FRM](FRM.md) — Fall Risk Management (HOS-based, with chart-review angle)
+- [OSW](OSW.md) — Osteoporosis Screening in Older Women
 
 ## Conventions
 
