@@ -99,6 +99,8 @@ Repeat this block per measure being abstracted. Use the per-measure cards in [`.
 | If No: human-corrected status + reason | |
 | Source snippet that drove model decision | "..." |
 
+For the canonical model-card schema (model versioning, scope, metrics, governance, MRRV simulation status), see [`per-measure-model-card.md`](per-measure-model-card.md).
+
 ---
 
 ## QA / over-read sign-off

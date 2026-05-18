@@ -19,16 +19,17 @@ The per-measure cards in [`../hedis/`](../hedis/) tell you **what counts** for e
 | [`negation-and-assertion.md`](negation-and-assertion.md) | ConText 4-dimension framework, OSS library landscape, shared HEDIS anti-patterns, measure × pitfall grid, worked test cases |
 | [`extraction-patterns.md`](extraction-patterns.md) | Section detection, abbreviation expansion, copy-forward detection, telehealth, outside-records / scanned PDFs, provider attribution, multi-doc linking, doc-type classification |
 | [`terminology-mapping.md`](terminology-mapping.md) | LOINC / SNOMED / RxNorm / NDC / CVX / CPT / HCPCS / ICD-10 mapping by measure family, common pitfalls, code-first vs phrase-first guidance |
-| [`evaluation-and-validation.md`](evaluation-and-validation.md) | *(Phase 4)* metrics, IAA, MRRV simulation, failure-mode catalog, drift monitoring |
-| [`annotation-guidelines.md`](annotation-guidelines.md) | *(Phase 4)* span and attribute schema, adjudication, synthetic data |
-| [`test-fixtures/`](test-fixtures/) | *(Phase 4)* synthetic note snippets with expected evidence, DoS, and assertion attributes |
+| [`evaluation-and-validation.md`](evaluation-and-validation.md) | Span / document / patient-level metrics, DoS-aware metrics, IAA, MRRV simulation, failure-mode catalog, drift monitoring |
+| [`annotation-guidelines.md`](annotation-guidelines.md) | Span and attribute schema, annotator profiles, adjudication workflow, synthetic data, tooling, common pitfalls |
+| [`test-fixtures/`](test-fixtures/) | Synthetic note snippets with expected evidence, DoS, and assertion attributes; regression seeds and annotation training |
+| [`../../templates/per-measure-model-card.md`](../../templates/per-measure-model-card.md) | Canonical YAML + Markdown model card template per measure |
 
 ## How to use this directory
 
 1. Read the cross-cutting file for your problem (DoS or negation) first - the shared frameworks save measure-by-measure rework.
 2. Open the per-measure card in [`../hedis/`](../hedis/) for measure-specific signals, date rules, and pitfalls.
 3. Use the worked test cases as initial regression fixtures.
-4. Mirror the per-measure model card template (Phase 4) when documenting your model.
+4. Mirror the [per-measure model card template](../../templates/per-measure-model-card.md) when documenting your model.
 
 ## Library landscape (clinical NLP for negation / assertion / temporality)
 
@@ -44,7 +45,7 @@ Named without version pins on purpose; **verify currency before adoption**:
 - **Apache cTAKES** - end-to-end clinical NLP (UMLS dictionary lookup, ConText, dependency parser)
 - **CLAMP** - clinical NLP toolkit with GUI; ConText built in
 
-Embedding / LLM approaches (zero-shot classifiers, instruction-tuned models on clinical text) can supplement rule-based ConText for harder long-range or implied negation but should never be the sole source for HEDIS evidence without human review. See [`evaluation-and-validation.md`](evaluation-and-validation.md) (Phase 4).
+Embedding / LLM approaches (zero-shot classifiers, instruction-tuned models on clinical text) can supplement rule-based ConText for harder long-range or implied negation but should never be the sole source for HEDIS evidence without human review. See [`evaluation-and-validation.md`](evaluation-and-validation.md).
 
 ## Core principles
 
