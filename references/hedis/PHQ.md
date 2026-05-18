@@ -29,6 +29,25 @@
 
 Confirm measure-specific instrument acceptance against current NCQA spec - DSF-E typically accepts PHQ-2, PHQ-9, PHQ-A, EPDS (perinatal), and others.
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the instrument-specific rule. PHQ is an instrument feeding multiple parent measures; the parent measure dictates the compliance window.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | For follow-up measures (DMS-E): positive screen or depression diagnosis date |
+| **Compliance window** | Parent-measure-specific (DSF-E annual; DMS-E follow-up window after positive screen) |
+| **Date types that COUNT** | Instrument administration date (date the patient completed the questionnaire) |
+| **Date types that do NOT count** | Note signing date when the PHQ score is copy-forward, date the form was "given to patient" without completion, prior-visit PHQ referenced without re-administration |
+| **"Most recent" disambiguation** | Latest qualifying administration in the window |
+| **Look-back / look-forward** | Driven by parent measure |
+
+**Common date confusions for this measure**
+
+- PHQ score in flowsheet vs PHQ score in narrative - both should share the administration date; if dates differ, the flowsheet entry is usually the source-of-truth
+- Copy-forward of prior PHQ score with a new note date - the score belongs to the original administration date, not the current note
+- Pediatric vs adult instrument administered on the same visit - track separately; each has its own date and parent measure
+
 ## NLP signal phrases
 
 **Section hints:** ROS (psych), Assessment, Plan, dedicated "Screening" or "Depression" section, structured questionnaire/flowsheet
@@ -65,17 +84,22 @@ Confirm measure-specific instrument acceptance against current NCQA spec - DSF-E
 - "follow-up in 4 weeks for depression"
 - "safety plan reviewed"
 
-**False positives to filter**
-- "PHQ form given to patient" without completed score
-- Reference to PHQ in a templated note pulled from prior visit (verify date)
-- "PHQ" mentioned in differential / education without actual screen
+**Assertion / negation pitfalls**
 
-**Safety-critical signals (escalate regardless of measure)**
-- "suicidal ideation" / "SI"
-- "thoughts of self-harm"
-- "plan to hurt self"
-- PHQ-9 item 9 score > 0
-- C-SSRS positive
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"PHQ form given to patient"** without completed score - distribution, not administration
+- **"PHQ-2 reviewed in chart"** - review of prior score is NOT a new administration
+- **"PHQ in differential" / "considered PHQ"** - clinical reasoning, not screening
+- **Copy-forward PHQ score** appearing across multiple notes - the score belongs to the original administration date
+- **"Depression screen negative"** - NEGATIVE result IS positive evidence that the screen was administered
+- **"Patient refused PHQ"** - refusal; typically does NOT count as screening
+- **"FH of depression"** - experiencer = family
+- **"Hx of MDD, currently stable"** - historical context; not a screen administration
+- **"PHQ-9 of 12"** as free text only - extractable, but admin / claims-only pipelines may miss when not in structured field
+- **"PHQ-A" used for adult patient** (or vice versa) - instrument-age mismatch may not satisfy parent measure
+- **Safety-critical item 9 > 0** - escalate regardless of total score and regardless of measure scoring
+- **"EPDS positive"** in perinatal context - perinatal-specific instrument; verify spec acceptance for the parent measure
 
 ## Common documentation gaps
 

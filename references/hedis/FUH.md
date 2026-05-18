@@ -23,6 +23,27 @@ Compliant follow-up = outpatient visit, intensive outpatient encounter, partial 
 - Death during follow-up window
 - Hospice
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | Inpatient discharge with principal mental health diagnosis |
+| **Compliance window** | Rate 1: outpatient MH follow-up within 7 days of discharge. Rate 2: within 30 days |
+| **Date types that COUNT** | Encounter date of the outpatient MH visit (including qualifying telehealth / e-visit / IOP / PHP) |
+| **Date types that do NOT count** | Scheduled-but-not-attended appointment date, no-show date, ED visit date, phone-only contact without provider documentation (verify spec), discharge date itself |
+| **"Most recent" disambiguation** | First qualifying follow-up visit in the window closes the rate |
+| **Look-back / look-forward** | Look-forward 7 and 30 days from discharge date (calendar days, not business days) |
+
+**Common date confusions for this measure**
+
+- Day-of-discharge visit - typically does NOT count; day 1 is the next calendar day
+- Calendar vs business days - the 7-day window is calendar days; weekends and holidays count against you
+- Telehealth visit date - the visit encounter date is the evidence date (not the chart-signing date)
+- Outside community mental health center visit - capture the actual visit date from the outside note, not the import date
+- Discharge date itself can be ambiguous on discharges that span midnight - use the spec-defined discharge date (typically the day the discharge order is signed)
+
 ## NLP signal phrases
 
 **Section hints:** Discharge summary, Plan, follow-up appointments, telehealth visit notes, scanned outside provider notes
@@ -59,11 +80,21 @@ Compliant follow-up = outpatient visit, intensive outpatient encounter, partial 
 - "expired"
 - Follow-up visit > 30 days post-discharge
 
-**False positives to filter**
-- Follow-up scheduled but not attended (no-show)
-- Visit with PCP only (not a mental health provider unless spec allows certain PCP scenarios)
-- Phone call from staff without provider documentation
-- ED visit (does NOT count as follow-up)
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **Follow-up scheduled but not attended (no-show)** - intent / scheduling; not evidence of visit completion
+- **"Patient seen by PCP for med refill"** - PCP visit alone typically does NOT count unless spec allows specific scenarios; MH provider attribution matters
+- **Phone call from case manager / care coordinator** without provider documentation - typically does NOT meet visit criteria (verify spec)
+- **ED visit post-discharge** - ED does NOT count as outpatient MH follow-up
+- **"Discussed by phone with patient post-discharge"** - phone-only, no provider visit attribution
+- **"Patient declined follow-up"** - refusal; does NOT close measure
+- **"FH of bipolar disorder"** - experiencer = family
+- **"Hx of MDD"** without current discharge anchor - historical reference; the inpatient anchor drives the measure
+- **"Telepsychiatry visit" coded as phone-only encounter** - spec-acceptance varies; phone may or may not qualify depending on MY
+- **"PHP day 1 scheduled for next week"** - future intent; the actual encounter date counts when it occurs
+- **"Patient AMA from psych unit"** - AMA may exclude depending on current spec; check before scoring
 
 ## Common documentation gaps
 

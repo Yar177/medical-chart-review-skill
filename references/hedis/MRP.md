@@ -20,6 +20,26 @@
 - Death within 30 days post-discharge
 - Transfers between inpatient settings handled as single stay per spec
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | Inpatient discharge (acute or non-acute) |
+| **Compliance window** | Med rec within **30 days** of discharge; day of discharge does NOT count - day 1 is the next calendar day |
+| **Date types that COUNT** | Date the med-rec documentation was entered by an eligible provider |
+| **Date types that do NOT count** | Discharge summary signing date alone, day-of-discharge med-list refresh, med rec by non-eligible role (MA, scribe), reconciliation > 30 days post-discharge |
+| **"Most recent" disambiguation** | First qualifying med-rec in the window closes the measure |
+| **Look-back / look-forward** | Look-forward 30 calendar days from discharge |
+
+**Common date confusions for this measure**
+
+- Day-of-discharge med rec at the hospital - typically does NOT count for outpatient MRP; day 1 is the next calendar day
+- Med rec note dated the day of the outpatient visit but signed days later - the visit / reconciliation date is the evidence date, not the signing date
+- Discharge date split across midnight - use the spec-defined discharge date
+- Med rec done at follow-up visit but documented in a separate addendum days later - use the visit date as the reconciliation event date
+
 ## NLP signal phrases
 
 **Section hints:** Medications, Plan, dedicated "Medication Reconciliation" tab/field, post-discharge visit note
@@ -45,10 +65,21 @@
 - "current meds listed" alone
 - "no changes to medications" alone (does not demonstrate reconciliation)
 
-**False positives to filter**
-- "med rec" used in a different context (e.g., medication-assisted recovery)
-- Med list refreshed at visit without reference to discharge meds
-- Discharge med list printed for patient (intent, not reconciliation)
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Medications reviewed" alone** - boilerplate; does NOT demonstrate reconciliation; this is the #1 MRP false positive
+- **"Current meds listed"** alone - listing is not reconciliation
+- **"No changes to medications"** alone - statement of stability is not reconciliation evidence
+- **"Med rec" used in a different context** (e.g., medication-assisted recovery, medical record) - lexical collision; require reconciliation-specific phrasing
+- **"Discharge med list printed for patient"** - distribution / intent, not reconciliation
+- **"Med list reconciled by MA / scribe"** - eligible roles are prescribing practitioner, clinical pharmacist, or RN; other roles do NOT satisfy
+- **"Med rec to be done at next visit"** - future intent
+- **"Patient refused to review meds"** - refusal documented; does NOT close measure
+- **Day-0 med rec at hospital discharge** - day of discharge does NOT count for outpatient MRP
+- **"Reconciled with patient verbally"** without documentation of the reconciliation itself - assertion = hedged on substantive content
+- **"Outside hospital discharge meds not available"** - barrier to substantive reconciliation; documentation alone of the barrier is not reconciliation
 
 ## Common documentation gaps
 

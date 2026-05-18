@@ -47,6 +47,25 @@ Receipt of discharge information by PCP on day of discharge or following day, in
 - Transfers between inpatient settings (may be counted as single stay per spec)
 - Inpatient psychiatric or chemical dependency stays handled differently
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rules; TRC has four sub-indicators each with its own DoS shape.
+
+| Sub-indicator | Anchor | Window | Date type that counts | Date types that mislead |
+|---|---|---|---|---|
+| **TRC-Notification** | Inpatient admission | Notification on day of admission or following day | Date PCP / receiving practitioner was notified (HIE feed timestamp, fax-received date, EHR cross-system message date) | Date the hospital generated the message (if delayed); date discovered in inbox later |
+| **TRC-Discharge Info** | Inpatient discharge | Receipt on day of discharge or following day | Date the discharge document was received by PCP system, with required components | Discharge summary signing date by hospital provider (vs receipt date); fax-cover-sheet date |
+| **TRC-Patient** | Inpatient discharge | Outpatient visit within 30 days of discharge (day of discharge does NOT count) | Encounter date of the post-discharge visit | Scheduled date, no-show date, ED visit, phone-only contact (verify spec) |
+| **TRC-Med** | Inpatient discharge | Med rec within 30 days of discharge (day of discharge does NOT count) | Date the med-rec documentation was entered by eligible provider | Day-0 hospital med rec, med-list refresh without explicit reconciliation, reconciliation by ineligible role |
+
+**Common date confusions for this measure**
+
+- Discharge date ambiguity on overnight discharges - use spec-defined discharge date
+- HIE-feed timestamp vs receiving-system file-import timestamp - capture the earliest evidence the document was available to PCP
+- Same-day discharge and outpatient visit - day-0 visit typically does NOT count for TRC-Patient or TRC-Med
+- Calendar days, not business days - weekend gaps count against the windows
+- TRC-Med vs MRP - same intent, same window; some programs report both, some only one
+
 ## NLP signal phrases - TRC-Patient
 
 **Section hints:** Encounter type, Plan, scheduling section, follow-up appointments
@@ -62,10 +81,15 @@ Receipt of discharge information by PCP on day of discharge or following day, in
 - "hospice" / "comfort care"
 - "expired during hospitalization"
 
-**False positives to filter**
-- Visit scheduled but not attended
-- Phone call from staff with no provider documentation (verify spec accepts)
-- ED visit (does NOT count as follow-up)
+**Assertion / negation pitfalls - TRC-Patient**
+
+- Visit scheduled but not attended - intent, not completion
+- Phone-only contact without provider documentation - verify spec; many sub-indicators reject phone-only
+- ED visit post-discharge - ED does NOT count as TRC-Patient follow-up
+- "Patient declined post-discharge visit" - refusal; does NOT close measure
+- "Visit with PA / NP only" - acceptable when PCP / ongoing-care provider role; verify scope
+- "Telehealth visit" coded as phone-only - spec acceptance varies
+- Day-of-discharge office visit - day 0 typically does NOT count
 
 ## NLP signal phrases - TRC-Med
 
@@ -83,9 +107,17 @@ Receipt of discharge information by PCP on day of discharge or following day, in
 - "medications reviewed" alone - typically NOT explicit reconciliation
 - "current meds listed" alone
 
-**False positives to filter**
-- Med list refresh at visit without reference to discharge meds
-- "med rec" in a different context (e.g., medication-assisted treatment "med")
+**Assertion / negation pitfalls - TRC-Med**
+
+> See also [`MRP.md`](MRP.md) - same intent, same window.
+
+- "Medications reviewed" alone - boilerplate; not reconciliation
+- "Current meds listed" alone - listing is not reconciliation
+- "Med rec" in unrelated context (medication-assisted, medical record) - lexical collision
+- Med list refresh at visit without reference to discharge meds - not reconciliation
+- "Med rec by MA / scribe" - eligible roles only (prescriber, clinical pharmacist, RN)
+- Day-0 med rec - does NOT count
+- "Will reconcile at next visit" - future intent
 
 ## NLP signal phrases - TRC-Notification and TRC-Discharge Info
 
@@ -98,9 +130,14 @@ Receipt of discharge information by PCP on day of discharge or following day, in
 - "hospital course summary on file"
 - Date-of-receipt logged in document management
 
-**False positives to filter**
-- Discharge summary received outside the 2-day window
-- Discharge summary received but missing required components
+**Assertion / negation pitfalls - TRC-Notification and TRC-Discharge Info**
+
+- Discharge summary received outside the 2-day window - too late, does NOT count
+- Discharge summary received but missing required components (dx list, discharge meds, pending tests, treating provider) - incomplete; does NOT satisfy
+- "Admission notification expected" / "awaiting hospital report" - future intent
+- Notification received via HIE feed but not surfaced to PCP inbox - capture the earliest receipt timestamp, not the inbox-acknowledgment date
+- Fax cover sheet timestamp vs actual document receipt - use the document timestamp
+- "Hospital report on file" without timestamp - cannot place within the 2-day window
 
 ## Common documentation gaps
 
