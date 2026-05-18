@@ -45,6 +45,25 @@ Documented pain assessment using:
 - Death during MY
 - Per current spec - verify
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rules; COA has four sub-indicators each independently evaluated, all MY-bounded.
+
+| Sub-indicator | Anchor | Window | Date type that counts | Date types that mislead |
+|---|---|---|---|---|
+| **COA-ACP** | None - MY-only (lifetime for AD on file - verify) | During MY | ACP discussion date, AD signing date, POLST signing date | Brochure-given date, "deferred" date |
+| **COA-Med Review** | None - MY-only | During MY | Date of documented review by eligible provider (prescriber or clinical pharmacist), with current med list | Date med list was pulled into note without explicit review; date of review by ineligible role (MA, scribe) |
+| **COA-Func Status** | None - MY-only | During MY | Date of functional status assessment (ADL/IADL or 3+ functional dimensions or standardized tool) | Date of isolated single-system assessment (e.g., post-op ROM) |
+| **COA-Pain Assess** | None - MY-only | During MY | Date of pain assessment with severity/scale or "no pain reported" attestation | Date pain was mentioned in PMH without current assessment |
+
+**Common date confusions for this measure**
+
+- COA-Med Review and standalone MRP can share the same encounter date but require different elements (MRP is post-discharge reconciliation; COA-Med Review is annual ambulatory review)
+- COA-ACP often satisfied by the same documentation as standalone ACP measure; the evidence date applies to both
+- Functional status documented in nursing intake vs provider note - provider-attestation requirements vary
+- Pharm.D. CMR done at retail pharmacy - the CMR date counts if documentation flows into plan EHR with provider role visible
+- Pain assessment in vitals (5th vital sign) vs narrative pain discussion - vitals-based pain score date applies
+
 ## NLP signal phrases - COA-ACP
 
 See [ACP](ACP.md) for full signal list. Key signals: "advance directive", "POLST/MOLST", "healthcare proxy", "code status discussed", "goals of care".
@@ -67,9 +86,19 @@ See [ACP](ACP.md) for full signal list. Key signals: "advance directive", "POLST
 - "med rec" alone without explicit review by eligible provider
 - Med list pulled into note without provider sign-off on review
 
-**False positives to filter**
-- Review by MA / front-desk staff (not eligible provider)
-- Medication list printed for patient without review documentation
+**Assertion / negation pitfalls - COA-Med Review**
+
+> Cross-cutting assertion guidance lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md).
+
+- **Review by MA / front-desk staff** (not eligible provider) - eligible roles: prescriber or clinical pharmacist
+- **Medication list printed for patient** without review documentation - distribution, not review
+- **"Medications: see list"** without review attestation - listing, not review
+- **"Med rec"** alone without explicit review by eligible provider - lexical ambiguity
+- **Med list pulled into note** without provider sign-off on review - template artifact
+- **"Will review meds at next visit"** - future intent
+- **"Patient declined to review meds"** - refusal; does NOT close measure
+- **"Hx of polypharmacy"** in PMH - historical reference, not current review
+- **"Reviewed PRN meds only"** - partial; spec requires comprehensive review
 
 ## NLP signal phrases - COA-Func Status
 
@@ -91,8 +120,20 @@ See [ACP](ACP.md) for full signal list. Key signals: "advance directive", "POLST
 - "no functional limitations" alone (lacks specificity per some specs)
 - "geriatric review of systems" without functional content
 
-**False positives to filter**
-- Functional status discussed for an isolated complaint (e.g., post-op ROM) - not a comprehensive assessment
+**Assertion / negation pitfalls - COA-Func Status**
+
+> Cross-cutting assertion guidance lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md).
+
+- **Functional status discussed for an isolated complaint** (e.g., post-op ROM) - not a comprehensive assessment
+- **"No functional limitations"** alone - lacks specificity per some specs (verify)
+- **"Geriatric review of systems"** without functional content - generic
+- **"Independent"** alone without ADL/IADL detail - hedged
+- **"FH of dementia"** - experiencer = family
+- **"Hx of stroke with residual weakness"** in PMH - historical context; need current functional assessment
+- **"Patient declined functional assessment"** - refusal; does NOT close measure
+- **"Will assess function at next visit"** - future intent
+- **"Cognitive screen pending"** - future
+- **"Lives with family"** alone - living arrangement noted; not a functional assessment
 
 ## NLP signal phrases - COA-Pain Assess
 
@@ -112,9 +153,20 @@ See [ACP](ACP.md) for full signal list. Key signals: "advance directive", "POLST
 - "pain" mentioned in PMH without current assessment
 - "on pain medications" without current pain assessment
 
-**False positives to filter**
-- Pain referenced in a single-organ-system review without dedicated assessment
-- "pain assessment unable to complete" without alternative method (e.g., non-verbal scale for dementia)
+**Assertion / negation pitfalls - COA-Pain Assess**
+
+> Cross-cutting assertion guidance lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md).
+
+- **Pain referenced in a single-organ-system review** without dedicated assessment - not a pain assessment
+- **"Pain assessment unable to complete"** without alternative method (e.g., non-verbal scale for dementia) - barrier without resolution
+- **"Pain" mentioned in PMH** without current assessment - historical context
+- **"On pain medications"** without current pain assessment - treatment listed, not assessment
+- **"Patient declined pain assessment"** - refusal; does NOT close measure
+- **"FH of chronic pain"** - experiencer = family
+- **"Will assess pain at next visit"** - future intent
+- **"Chronic pain stable"** without severity/scale - hedged; severity needed
+- **"Pain: yes"** in checkbox without scale - thin; spec acceptance varies
+- **"No complaints today"** alone - generic absence of complaints; pain-specific attestation is stronger evidence
 
 ## Common documentation gaps
 

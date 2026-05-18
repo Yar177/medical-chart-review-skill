@@ -25,6 +25,26 @@
 - Sports physical that includes comprehensive preventive components (verify spec)
 - Documentation must show preventive care content: developmental/behavioral surveillance, anticipatory guidance, immunizations review, growth/BMI tracking, physical exam, risk behavior screening (adolescent)
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - MY-only |
+| **Compliance window** | At least one comprehensive well-care visit during MY |
+| **Date types that COUNT** | Encounter date of well-care visit with PCP or OB/GYN |
+| **Date types that do NOT count** | Sick-visit date, specialist-visit date without PCP attribution, scheduled-but-not-attended date, sports-physical without comprehensive components, telehealth without component completeness (verify spec) |
+| **"Most recent" disambiguation** | Any qualifying well-care visit in MY satisfies |
+| **Look-back / look-forward** | None - MY-only |
+
+**Common date confusions for this measure**
+
+- Annual physical billed but documented as problem-focused - the encounter date still applies if documentation supports well-care content; if not, the visit fails regardless of date
+- Sports / school physical signed by PCP - the visit date counts only if comprehensive preventive components are documented
+- Specialist visit (dermatology, ortho) - does NOT count regardless of date unless serving as PCP
+- Adolescent contraception visit at OB/GYN - the OB/GYN visit can satisfy if comprehensive well-care components are documented
+
 ## NLP signal phrases
 
 **Section hints:** Encounter type, Chief Complaint, Assessment, Plan, Anticipatory Guidance section, growth chart, immunization tab
@@ -58,12 +78,22 @@
 - "URI" / "strep throat" / "ear infection"
 - Single-issue focused visits without preventive content
 
-**False positives to filter**
-- "annual visit" billed but documentation purely problem-focused
-- Sports physical without comprehensive preventive components (some plans accept, some don't)
-- Specialist visit (e.g., dermatology, ortho) without PCP attribution
-- "appointment scheduled" without visit completed
-- Telehealth well-care visit acceptance varies by spec; component completeness matters
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Annual visit" billed but documentation purely problem-focused** - billing alone does not equal well-care content
+- **Sports physical without comprehensive preventive components** - spec-dependent acceptance; lean toward not qualifying without depth
+- **Specialist visit** (dermatology, ortho, etc.) without PCP attribution - does NOT count
+- **"Appointment scheduled"** without visit completed - future intent
+- **"Telehealth well-care visit"** without component completeness - acceptance varies by spec and depends on the components documented
+- **Adolescent visit at OB/GYN for contraception only** without comprehensive well-care components - may not qualify
+- **"Anticipatory guidance given"** without topic specifics - hedged
+- **"Parent reports child seen for annual"** without documentation - patient-reported only
+- **"Refused vaccines"** - vaccine refusal does NOT disqualify a well-care visit
+- **"Will schedule annual at next visit"** - future intent
+- **"School physical form completed"** alone - form completion alone does not equal comprehensive well-care
+- **"FH reviewed"** - generic; not a well-care content component on its own
 
 ## Common documentation gaps
 

@@ -30,6 +30,23 @@ Compliant visit must be with an OB/GYN, midwife, family practitioner, or other P
 - Hospice
 - Per current spec - verify
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rules; PPC has two sub-indicators with different DoS shapes.
+
+| Sub-indicator | Anchor | Window | Date type that counts | Date types that mislead |
+|---|---|---|---|---|
+| **PPC-Prenatal** | Pregnancy (EDC anchors trimester) | First trimester (≤13w6d) OR within 42 days of plan enrollment for late enrollees | Prenatal visit encounter date with gestational age within first trimester | Pregnancy-confirmation date alone (lab pregnancy test), referral-to-OB date, OB intake scheduled but not completed |
+| **PPC-Postpartum** | Delivery date | Postpartum visit on or between **day 7 and day 84** after delivery | Postpartum visit encounter date with documented postpartum components | Visit < day 7 (too early), visit > day 84 (too late), in-hospital day-0 postpartum check, phone check-in without exam components (verify spec) |
+
+**Common date confusions for this measure**
+
+- Delivery date inferred from infant DOB - usually correct but verify against maternal record
+- First prenatal visit at outside OB practice - capture the outside visit date from transferred records, not the date records arrived
+- Postpartum visit done at OB but billed without postpartum-specific E&M code - encounter date still applies if documentation has required components
+- Postpartum depression screen done on a separate day from the 6-week visit - the screen and the visit have independent dates; only the postpartum-visit date is the PPC-Postpartum evidence date
+- Transfer of prenatal care mid-pregnancy - first-trimester visit must have occurred (with prior or current provider); the date is from whichever provider performed it
+
 ## NLP signal phrases - PPC-Prenatal
 
 **Section hints:** OB Hx, Assessment, Plan, problem list, Prenatal Flowsheet, scanned outside OB records
@@ -52,10 +69,19 @@ Compliant visit must be with an OB/GYN, midwife, family practitioner, or other P
 - "miscarriage" / "spontaneous abortion" / "SAB"
 - "elective termination" / "TAB"
 
-**False positives to filter**
-- "pregnancy confirmed" without subsequent prenatal visit
-- "referred to OB" without visit completed
-- Visit with non-OB provider for unrelated issue during pregnancy
+**Assertion / negation pitfalls - PPC-Prenatal**
+
+> Cross-cutting assertion guidance lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md).
+
+- **"Pregnancy confirmed"** without subsequent prenatal visit - confirmation is not a prenatal visit
+- **"Referred to OB"** without visit completed - future intent
+- **Visit with non-OB provider for unrelated issue during pregnancy** - not a prenatal visit
+- **"Hx of prior pregnancy"** - historical reference; not the current pregnancy anchor
+- **"Pregnancy test positive today"** alone - confirmation, not prenatal care
+- **"OB intake scheduled for next week"** - future intent
+- **"Patient declined OB visit"** - refusal; does NOT close measure
+- **"FH of pregnancy complications"** - experiencer = family
+- **GA documented as "approximately 14 weeks"** - hedged; first-trimester boundary requires precise GA ≤13w6d
 
 ## NLP signal phrases - PPC-Postpartum
 
@@ -80,10 +106,20 @@ Compliant visit must be with an OB/GYN, midwife, family practitioner, or other P
 - "stillbirth" / "IUFD" / "fetal demise"
 - "hospice"
 
-**False positives to filter**
-- "postpartum follow-up scheduled" without visit completed
-- Visit < 7 days post-delivery (too early) or > 84 days (too late)
-- Phone call check-in without exam content (varies by spec - some accept telehealth)
+**Assertion / negation pitfalls - PPC-Postpartum**
+
+> Cross-cutting assertion guidance lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md).
+
+- **"Postpartum follow-up scheduled"** without visit completed - future intent
+- **Visit < 7 days post-delivery** - too early (in-hospital day-0 to day-2 checks do NOT count for PPC-Postpartum)
+- **Visit > 84 days post-delivery** - too late
+- **Phone check-in without exam content** - typically does NOT meet visit criteria (spec may accept some telehealth - verify)
+- **"6-week postpartum visit done elsewhere"** without dated outside record - cannot place in 7-84 day window
+- **"Lactation consult"** alone - lactation visit may or may not include postpartum exam components; verify
+- **"Patient declined postpartum visit"** - refusal; does NOT close measure
+- **"Hx of postpartum depression"** - historical; not the current postpartum visit
+- **"Fundal exam wnl"** - normal result is positive evidence the exam occurred; do NOT let NegEx flip
+- **"Postpartum depression screen positive, no exam done"** - screen done; postpartum exam still required for PPC-Postpartum
 
 ## Common documentation gaps
 

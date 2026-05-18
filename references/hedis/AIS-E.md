@@ -34,6 +34,28 @@
 - Documented anaphylactic reaction to vaccine or component (vaccine-specific)
 - Some specs allow patient-refusal exclusion - verify
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rules; AIS-E has multiple sub-indicators with different look-back windows.
+
+| Sub-indicator | Anchor | Window | Date type that counts | Date types that mislead |
+|---|---|---|---|---|
+| **AIS-FLU** | Current flu season | Aug 1 of MY-1 through end of MY (verify exact spec dates) | Vaccine administration date in current flu season | Prior-season flu shot; "flu shot recommended today" without admin; vaccine ordered but not given |
+| **AIS-TDAP / AIS-TS** | None - lifetime/look-back | Within past 10 years through end of MY (Tdap once-lifetime may overlay) | Vaccine administration date in look-back window | "Tetanus booster recommended"; outside-record fragment without date |
+| **AIS-ZOSTER** | Age 50+ | Lifetime through end of MY; 2-dose series required | Both dose administration dates with second dose by end of MY | Series-in-progress (1 dose only); "Shingrix recommended"; live zoster vaccine (Zostavax) may not satisfy current spec |
+| **AIS-PNEUMO** | Age 66+ (typically) | Lifetime through end of MY (spec-specific schedule complexity) | Vaccine administration date(s) per current PCV/PPSV schedule | Outdated PCV product without current re-vaccination; "pneumovax recommended" |
+| **AIS-HEPB** | None | Lifetime through end of MY; series complete | All series doses administered (2-dose Heplisav-B or 3-dose) with last dose by end of MY | Series-in-progress; "HepB recommended" |
+| **AIS-COVID** | Spec-dependent | Spec-dependent current vaccine recommendation | Vaccine administration date(s) per current ACIP recommendation | Prior-formulation vaccine without current update; "COVID vaccine recommended" |
+
+**Common date confusions for this measure**
+
+- Vaccine administered at retail pharmacy / state IIS - the administration date counts; capture from IIS feed, not the date the data arrived in EHR
+- Vaccine "recommended" today but administered next week - the administration date is the evidence date, not the recommendation date
+- Series-complete measures (Zoster, HepB) - the **last** dose date determines compliance; an in-progress series with last dose after MY-end does NOT satisfy
+- Outside-record fragments without administration date - cannot place in window
+- Date of "first dose" used as evidence for series-complete measure - second dose is required
+- Historical flu shot in a prior season - prior-season shots do NOT satisfy current AIS-FLU
+
 ## NLP signal phrases
 
 **Section hints:** Immunization tab/section, Plan, ROS (recent illness), History (vaccine record), scanned outside records
@@ -53,10 +75,24 @@
 - "patient declined" - non-compliant, but document for refusal tracking
 - "hospice"
 
-**False positives to filter**
-- "vaccine recommended" / "offered today" - intent, not administration
-- "due for flu shot" - reminder, not compliance
-- Vaccine ordered but no administration record
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Vaccine recommended" / "offered today"** - intent, not administration
+- **"Due for flu shot"** - reminder, not compliance
+- **Vaccine ordered but no administration record** - order placed; administration not confirmed
+- **"Patient declined"** - refusal; non-compliant (some specs allow refusal exclusion)
+- **"Got it elsewhere"** without confirming date / source - patient-reported; verify against IIS or outside record
+- **"FH of vaccine reactions"** - experiencer = family
+- **"Hx of flu shot in 2019"** - historical reference; prior-season for current AIS-FLU
+- **"Anaphylaxis to egg"** - historical flu exclusion; verify spec - egg-allergy exclusion narrowed in recent years
+- **"Tdap given as infant"** - childhood DTaP does NOT satisfy adult Tdap requirement
+- **"Pneumovax 2018"** as evidence for current pneumococcal sub-indicator - PCV/PPSV schedule complexity; verify the current sequence requirement
+- **"Shingrix dose 1 given"** alone - series incomplete; AIS-ZOSTER requires both doses
+- **"COVID vaccine x2 in 2021"** - prior-formulation; verify current ACIP-recommended update for AIS-COVID
+- **"Vaccine refused due to misinformation"** - documents refusal context but does NOT close measure
+- **"Will get at pharmacy"** - future intent; verify subsequent IIS feed
 
 ## Common documentation gaps
 

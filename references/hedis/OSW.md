@@ -26,6 +26,28 @@
 - Advanced illness / frailty exclusion for members 66+
 - Per current spec - verify
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - lifetime/look-back through end of MY |
+| **Compliance window** | Lifetime through end of MY (verify current spec - some accept 2-year look-back, some lifetime) |
+| **Date types that COUNT** | DXA scan date, date osteoporosis/osteopenia diagnosis was first established, date osteoporosis medication was prescribed (implies prior diagnosis) |
+| **Date types that do NOT count** | DXA referral date (without scan completed), "DXA recommended" date, "patient declined DXA" date, spine X-ray with incidental "osteopenia" comment (not DXA), calcium/vitamin D supplementation date (does NOT imply prior screening) |
+| **"Most recent" disambiguation** | Most recent DXA, or earliest qualifying diagnosis/medication on file by end of MY |
+| **Look-back / look-forward** | Lifetime through end of MY typically; verify spec |
+
+**Common date confusions for this measure**
+
+- DXA done at outside imaging center years ago; scanned report exists - the scan date counts if the report is on file
+- Osteoporosis on problem list with no DXA in EHR - the diagnosis on file may satisfy (implies prior screening); spec-dependent
+- Bisphosphonate use for non-osteoporosis indication (Paget's, malignancy hypercalcemia) - does NOT imply osteoporosis screening; the prescription date does NOT count
+- DXA done at age 64, member now 67 - lifetime evidence typically counts; verify spec
+- Spine X-ray with incidental "osteopenia" comment - NOT a DXA; do NOT use that date
+- DXA scheduled but not completed - referral date does NOT count
+
 ## NLP signal phrases
 
 **Section hints:** Results (imaging, DXA reports), Past Medical Hx, Problem List, Medications, Plan, scanned outside DXA reports
@@ -59,13 +81,24 @@
 - "comfort care"
 - "metastatic" / "advanced illness" / "frailty"
 
-**False positives to filter**
-- "DXA recommended" / "DXA referral pending" - intent, not done
-- "patient declined DXA"
-- "spine X-ray" alone is NOT DXA
-- "calcium / vitamin D supplementation" alone does NOT imply prior screening (commonly recommended for prevention without screening)
-- "fall risk discussion" without bone density screen
-- Bisphosphonate use for **non-osteoporosis indication** (e.g., Paget disease, malignancy-related hypercalcemia) - verify context
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"DXA recommended" / "DXA referral pending"** - intent, not done
+- **"Patient declined DXA"** - refusal; does NOT close measure
+- **"Spine X-ray"** alone is NOT DXA - modality mismatch
+- **"Calcium / vitamin D supplementation"** alone does NOT imply prior screening - commonly recommended for prevention without screening
+- **"Fall risk discussion"** without bone density screen - unrelated measure context
+- **Bisphosphonate use for non-osteoporosis indication** (Paget's, malignancy hypercalcemia) - lexical collision; verify context
+- **"Hx of fractures"** in PMH - history; OSW is screening, not fracture-driven (that's OMW); do NOT conflate
+- **"FH of osteoporosis"** - experiencer = family
+- **"BMD low"** without numeric T-score - hedged
+- **"Osteopenia per imaging"** without confirming modality is DXA - modality ambiguity
+- **"Started Fosamax for prophylaxis"** without osteoporosis/osteopenia diagnosis - prophylaxis may not imply prior screening; verify
+- **"DXA scheduled"** - future intent
+- **"Patient on calcium"** alone - supplementation, not screening
+- **"Bone health discussed"** - hedged; not screening
 
 ## Common documentation gaps
 

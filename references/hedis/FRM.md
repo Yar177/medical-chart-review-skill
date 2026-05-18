@@ -41,6 +41,27 @@ Common chart-reviewable evidence:
 - Bed-bound / non-ambulatory members (varies by spec)
 - Per current spec - verify
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). FRM is HOS-driven (member self-report on the Medicare Health Outcomes Survey); the chart-review angle here is about documenting falls and interventions so they align with member self-report.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | Member-reported fall, balance problem, or walking problem in past 12 months (HOS-derived) |
+| **Compliance window** | Discussion + intervention in past 12 months (HOS recall window) |
+| **Date types that COUNT (chart-side alignment)** | Date of fall-risk screening, fall-discussion documentation, intervention referral, medication review for FRIDs |
+| **Date types that do NOT count (chart-side)** | Boilerplate "fall precautions" without specifics, "PT recommended" without fall-specific rationale, intervention dated > 12 months before HOS administration |
+| **"Most recent" disambiguation** | Most recent qualifying documentation aligns with member's recall window |
+| **Look-back / look-forward** | 12 months look-back from HOS administration date |
+
+**Common date confusions for this measure**
+
+- HOS administration date sets the recall window; chart documentation older than 12 months prior to HOS does NOT corroborate
+- Fall event date vs intervention date - both matter; the event must be within 12-month recall, and the intervention should follow
+- Multiple falls - each fall date is potentially relevant; document each
+- PT referral date vs PT visit date - the referral date can be the intervention date; the visit date is separate evidence
+- FRID medication review date - the review event date is what aligns with HOS, not the date the medication was originally prescribed
+
 ## NLP signal phrases
 
 **Section hints:** HPI (fall history), ROS (musculoskeletal, neurologic), Social Hx, Assessment, Plan, dedicated "Fall Risk" or "Geriatric Assessment" section
@@ -86,11 +107,24 @@ Common chart-reviewable evidence:
 - "hospice"
 - "uses wheelchair full-time" - verify spec impact
 
-**False positives to filter**
-- "fall precautions" boilerplate without specific discussion
-- "fall risk: low" without screening tool result behind it
-- Fall in HPI not followed by intervention or screening
-- "PT recommended" without fall-specific rationale
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Fall precautions"** boilerplate without specific discussion - generic template
+- **"Fall risk: low"** without screening tool result behind it - unsupported attestation
+- **Fall in HPI not followed by intervention or screening** - event documented; no compliance evidence
+- **"PT recommended"** without fall-specific rationale - unrelated PT context
+- **"Hx of falls"** in PMH without timeframe - historical reference; cannot place in 12-month recall window
+- **"FH of falls in elderly parents"** - experiencer = family
+- **"Patient denies falls"** - NEGATIVE; does NOT establish FRM denominator (denominator comes from HOS, not chart)
+- **"Near-fall last year"** - near-falls may or may not align with HOS "fall" definition; verify
+- **"Patient declined fall-prevention discussion"** - refusal; documents but does not close measure
+- **"Will discuss fall prevention at next visit"** - future intent
+- **"Education materials given on fall prevention"** alone - distribution without discussion documentation
+- **"FRIDs reviewed: no changes"** - acceptable review evidence; do NOT mistake "no changes" for absence of review
+- **"Vitamin D recommended"** in generic AG without fall-prevention rationale - generic recommendation
+- **"Bed-bound"** - exclusion signal; do NOT flip
 
 ## Common documentation gaps
 
