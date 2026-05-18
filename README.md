@@ -6,11 +6,21 @@ An AI agent skill for expert-level review of medical charts, EMRs, and EHRs. Des
 
 ## Install
 
-This skill follows the [Agent Skills](https://agentskills.io/) open standard. It works in **Claude Code**, **GitHub Copilot in VS Code**, **GitHub Copilot CLI**, and **GitHub Copilot cloud agent**.
+This skill follows the [Agent Skills](https://agentskills.io/) open standard. It works in **Claude Code**, **GitHub Copilot** (VS Code, CLI, cloud agent), **Cursor**, **Codex**, **Windsurf**, **Gemini**, **Cline**, and other skills-compatible agents.
+
+### Recommended: one-line install via `skills.sh`
+
+```bash
+npx skills add Yar177/medical-chart-review-skill
+```
+
+This auto-detects your agent(s) and drops the skill into the correct directory for each one. No platform-specific paths to remember. See [skills.sh](https://skills.sh) for details.
+
+### Manual install
 
 The folder name must be `medical-chart-review` (it has to match the `name` field in `SKILL.md`).
 
-### Claude Code
+#### Claude Code
 
 Personal (available in all projects):
 ```bash
@@ -26,7 +36,7 @@ git clone https://github.com/Yar177/medical-chart-review-skill.git \
   .claude/skills/medical-chart-review
 ```
 
-### GitHub Copilot (VS Code, CLI, cloud agent)
+#### GitHub Copilot (VS Code, CLI, cloud agent)
 
 Personal (available in all workspaces):
 ```bash
