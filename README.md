@@ -6,12 +6,58 @@ An AI agent skill for expert-level review of medical charts, EMRs, and EHRs. Des
 
 ## Install
 
-Drop the folder into your agent's skills directory:
+This skill follows the [Agent Skills](https://agentskills.io/) open standard. It works in **Claude Code**, **GitHub Copilot in VS Code**, **GitHub Copilot CLI**, and **GitHub Copilot cloud agent**.
 
-- **Claude / generic agents**: `~/.agents/skills/medical-chart-review/`
-- **GitHub Copilot (VS Code)**: also expose as `.github/instructions/medical-chart-review.instructions.md` if you want it auto-applied
+The folder name must be `medical-chart-review` (it has to match the `name` field in `SKILL.md`).
 
-The agent discovers the skill via `SKILL.md`'s frontmatter `description`.
+### Claude Code
+
+Personal (available in all projects):
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/Yar177/medical-chart-review-skill.git \
+  ~/.claude/skills/medical-chart-review
+```
+
+Project-only (commit alongside the repo):
+```bash
+mkdir -p .claude/skills
+git clone https://github.com/Yar177/medical-chart-review-skill.git \
+  .claude/skills/medical-chart-review
+```
+
+### GitHub Copilot (VS Code, CLI, cloud agent)
+
+Personal (available in all workspaces):
+```bash
+mkdir -p ~/.copilot/skills
+git clone https://github.com/Yar177/medical-chart-review-skill.git \
+  ~/.copilot/skills/medical-chart-review
+```
+
+Project-only (commit alongside the repo):
+```bash
+mkdir -p .github/skills
+git clone https://github.com/Yar177/medical-chart-review-skill.git \
+  .github/skills/medical-chart-review
+```
+
+In VS Code, the skill appears as `/medical-chart-review` in the chat slash-command menu and is also auto-loaded when your prompt matches the description.
+
+### Verify it loaded
+
+- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`.
+- **VS Code Copilot**: open the Chat view → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for `medical-chart-review`.
+
+## Quick start
+
+Once installed, try one of these prompts:
+
+> *"I want to do an HCC audit on a synthetic patient chart. Walk me through the safety gate first."*
+
+> *"/medical-chart-review summarize this discharge summary"* *(paste de-identified or synthetic chart text)*
+
+The agent will run the PHI/scope check from `SKILL.md` §0, then route to the appropriate template under [templates/](templates/).
 
 ## When the agent loads it
 

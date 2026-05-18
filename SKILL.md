@@ -1,6 +1,5 @@
 ---
 name: medical-chart-review
-version: 0.1.0
 description: Expert-level review and analysis of medical charts, EMRs, and EHRs. Use when asked to "review a chart", "audit medical records", "extract from EHR", "summarize patient history", "check documentation", "validate ICD-10/HCC/CPT coding", "perform CDI review", "risk adjustment audit", "HEDIS gap analysis", "medication reconciliation", "identify red flags in chart", "abstract clinical data", or any task involving SOAP notes, progress notes, discharge summaries, problem lists, H&P, consult notes, lab/imaging interpretation, or Epic/Cerner/Athena/Meditech data. DO NOT USE FOR: providing direct patient care, making diagnoses for live patients, prescribing, or anything requiring a licensed clinician's judgment of record. DO NOT USE FOR: handling real identifiable PHI without explicit user confirmation that data is de-identified or that the environment is HIPAA-compliant.
 ---
 
