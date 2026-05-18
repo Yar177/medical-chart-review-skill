@@ -29,7 +29,7 @@ Evidence types:
 
 ## Date of service rule
 
-> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md) (added in Phase 1). This section captures the measure-specific rule.
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
 
 | Field | Value |
 |---|---|
@@ -69,7 +69,7 @@ Evidence types:
 
 **Assertion / negation pitfalls**
 
-> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md) (added in Phase 1). This block captures measure-specific pitfalls.
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
 
 - **"HbA1c result: 6.8%" near the word "negative"** (e.g., "negative for diabetic retinopathy; HbA1c 6.8%") - the A1c is POSITIVE evidence; do not let nearby negation triggers scope onto the result
 - **"HbA1c not done this visit" / "A1c deferred"** - negation of the action; this visit does not contribute evidence

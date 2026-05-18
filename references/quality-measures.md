@@ -1,6 +1,6 @@
 # Quality Measures: HEDIS, Stars, MIPS
 
-> **Deep dives:** This file is the overview. For per-measure denominator / numerator / exclusion / NLP-signal cards, see [`hedis/`](hedis/). For data provenance and supplemental-data rules, see [`hedis-supplemental-data.md`](hedis-supplemental-data.md). For the abstraction worksheet, see [`../templates/hedis-abstraction.md`](../templates/hedis-abstraction.md).
+> **Deep dives:** This file is the overview. For per-measure denominator / numerator / exclusion / NLP-signal cards, see [`hedis/`](hedis/). For data provenance and supplemental-data rules, see [`hedis-supplemental-data.md`](hedis-supplemental-data.md). For NLP-team guidance on date of service, negation/assertion, extraction patterns, and evaluation, see [`nlp/`](nlp/). For the abstraction worksheet, see [`../templates/hedis-abstraction.md`](../templates/hedis-abstraction.md).
 
 ## HEDIS (Healthcare Effectiveness Data and Information Set)
 

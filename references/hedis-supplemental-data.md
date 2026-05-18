@@ -97,6 +97,7 @@ Patient refusal generally does NOT close a measure but may be tracked separately
 ## See also
 
 - [`hedis/README.md`](hedis/README.md) — per-measure cards
+- [`nlp/`](nlp/) — NLP-team guidance for HEDIS extractors (date of service, negation/assertion, extraction patterns, evaluation)
 - [`../templates/hedis-abstraction.md`](../templates/hedis-abstraction.md) — abstraction worksheet template
 - NCQA HEDIS Volume 2 (Technical Specifications)
 - NCQA HEDIS Volume 5 (HEDIS Compliance Audit)

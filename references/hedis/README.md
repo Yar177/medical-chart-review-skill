@@ -81,6 +81,7 @@ False positives are called out per measure - filter those before scoring.
 
 ## See also
 
+- [`../nlp/`](../nlp/) — cross-cutting NLP guidance for data-science teams building per-measure extractors (date of service, negation/assertion, extraction patterns, evaluation)
 - [`../hedis-supplemental-data.md`](../hedis-supplemental-data.md) — provenance rules for chart-abstracted evidence
 - [`../quality-measures.md`](../quality-measures.md) — broader quality framework overview
 - [`../../templates/hedis-abstraction.md`](../../templates/hedis-abstraction.md) — abstraction worksheet
