@@ -24,6 +24,26 @@
 - Advanced illness / frailty exclusion for members 66+
 - Gestational or steroid-induced diabetes (denominator exclusion if it's the only diabetes evidence)
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - MY-only |
+| **Compliance window** | Most recent qualifying BP during MY |
+| **Date types that COUNT** | Encounter date of the visit where BP was recorded by clinician |
+| **Date types that do NOT count** | Note signing date when BP is copy-forward, historical BP narrative in HPI/PMH, prior-year BP, order date |
+| **"Most recent" disambiguation** | If multiple BPs in MY, use the latest qualifying BP by encounter date; if multiple on same date, follow current spec (often lowest of the day or last recorded) |
+| **Look-back / look-forward** | None |
+
+**Common date confusions for this measure**
+
+- Triage BP later re-checked same day - the re-check value is what scores; date is the encounter date
+- BP copy-forwarded into a current note from a prior visit - the BP belongs to the prior encounter date, not the current note
+- Home BP log dictated in narrative - the log date is the BP date, not the note date (verify spec acceptance of home BPs)
+- BP value buried in a problem-list comment with no encounter linkage - not directly scoreable
+
 ## NLP signal phrases
 
 **Section hints:** Vitals, Plan ("BP at goal"), Assessment ("HTN controlled"), Results, flowsheet
@@ -40,11 +60,21 @@
 - "hospice" / "comfort care"
 - "metastatic" / "advanced illness"
 
-**False positives to filter**
-- BP from triage taken before pain treatment / panic (often re-checked - use most recent during MY per spec)
-- "BP elevated, re-check" without follow-up reading (use the re-check value if same date)
-- BP from non-clinician source (e.g., patient-reported without clinician documentation) - verify current spec
-- "white coat hypertension" without confirmed reading at goal
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"BP at goal" / "BP controlled" / "normotensive" without numeric value** - hedged; needs the actual systolic/diastolic to score
+- **"BP elevated, recheck recommended"** with no recheck value - first reading is the data; "recheck" is future intent
+- **"Initial BP 160/95 due to pain, repeat after analgesia 132/78"** - spec-dependent handling; usually the repeat value scores
+- **"PMH: HTN, BP usually 130s/80s"** - temporality: historical narrative, not current encounter value
+- **BP from triage taken before pain treatment or panic** - often re-checked; use the most recent qualifying value per spec
+- **"Patient denies HTN symptoms"** - negation of symptoms, not of BP value
+- **"Mother's BP runs high"** - experiencer = family
+- **"WNL" / "stable"** alone - hedged, no numeric value
+- **"BP on home cuff: 122/76"** - patient-reported home reading; verify current spec acceptance (often requires clinician documentation)
+- **"White coat hypertension"** - context modifier; does not automatically qualify a normal reading
+- **"If BP elevated next visit, will start lisinopril"** - hypothetical; not evidence
 
 ## Common documentation gaps
 

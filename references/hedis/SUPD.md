@@ -24,6 +24,26 @@
 - PCSK9 inhibitor use (replaces statin)
 - Some specs exclude pre-diabetes / metformin-only as denominator
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - MY-only |
+| **Compliance window** | At least one statin fill during MY |
+| **Date types that COUNT** | Pharmacy dispense date (fill date) |
+| **Date types that do NOT count** | Prescription written date alone, "on statin" mention without fill evidence, sample given in office, prior-year fill with no MY refill |
+| **"Most recent" disambiguation** | Any qualifying fill in MY satisfies; PDC sub-measures aggregate fills across MY |
+| **Look-back / look-forward** | None for the basic SUPD; PQA PDC variants have their own look-back rules |
+
+**Common date confusions for this measure**
+
+- Outside-pharmacy cash fills (GoodRx, 340B, mail order outside plan) - chart may show "on statin" with no claim; the evidence date is the dispense date if obtainable, otherwise the case fails admin scoring
+- Office samples - sample distribution date is NOT a pharmacy dispense
+- Prescription written prior MY with first fill in current MY - the **fill date** counts, not the write date
+- 90-day fill spanning the year boundary - the dispense date is the day the prescription is filled, not the days-supply end date
+
 ## NLP signal phrases
 
 **Section hints:** Medications list, Active Meds, Prescriptions, Plan, scanned outside med lists, pharmacy fill history
@@ -47,10 +67,21 @@
 - "hospice"
 - "PCSK9 inhibitor" / "alirocumab" / "evolocumab" / "Praluent" / "Repatha"
 
-**False positives to filter**
-- "statin recommended" / "discussed starting statin" - no fill
-- "statin held due to elevated LFTs" - not currently on
-- "patient refuses statin" - not compliant
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Statin recommended" / "discussed starting statin" / "will start atorvastatin"** - temporality: future intent; not a fill
+- **"Statin held due to elevated LFTs" / "statin paused"** - currently off; needs spec-specific handling and may require exclusion documentation
+- **"Patient refuses statin"** - refusal alone does NOT close the measure and does NOT exclude unless paired with documented intolerance
+- **"Statin intolerance" / "rhabdomyolysis on prior statin" / "myalgia with atorvastatin"** - exclusion signal; needs specific reaction documented to qualify
+- **"PCSK9 inhibitor" / "alirocumab" / "evolocumab" / "Praluent" / "Repatha"** - exclusion signal; replaces statin in some specs
+- **"Atorvastatin" on med list** without fill evidence - presence on med list alone does not equal a dispense; verify pharmacy data
+- **"FH of statin myopathy"** - experiencer = family; does not exclude the patient
+- **"Niacin" / "ezetimibe" / "fish oil"** - NOT statins; do not credit as numerator
+- **"Combination therapy with statin"** - vague; need explicit drug name (Caduet, Vytorin contain statins; many combos do not)
+- **"Pre-diabetes" / "metformin alone for PCOS"** - check denominator definition; may not qualify as diabetes for SUPD
+- **"Cirrhosis" / "decompensated liver disease"** - exclusion signal
 
 ## Common documentation gaps
 

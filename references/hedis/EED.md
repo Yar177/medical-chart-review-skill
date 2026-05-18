@@ -21,6 +21,26 @@
 - Palliative care
 - Bilateral eye enucleation may be a numerator-positive depending on spec
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - MY-only with 1-year look-back extension |
+| **Compliance window** | Eye exam by eye care professional during MY; OR negative-retinopathy exam in the year prior to MY |
+| **Date types that COUNT** | Procedure date of retinal/dilated exam; for teleophthalmology, the imaging date |
+| **Date types that do NOT count** | Note signing date alone, order/referral date, scheduled future exam, vision screening (Snellen) date |
+| **"Most recent" disambiguation** | Any qualifying exam in the window; if a prior-year negative exam carries forward, the original exam date is the evidence date |
+| **Look-back / look-forward** | 1 prior year extension if the prior exam was **negative for diabetic retinopathy** |
+
+**Common date confusions for this measure**
+
+- Outside ophthalmology report received during MY but the exam itself was in a prior year - the **exam date** is the evidence date, not the receipt or scan date
+- Teleophthalmology / point-of-care retinal imaging: the imaging acquisition date is the evidence date, not the remote-read date if delayed
+- Annual PCP "vision screening" date confused with retinal exam date - they are not equivalent regardless of date
+- Cataract surgery date confused with retinal exam - the surgery does not satisfy the eye-exam requirement on its own
+
 ## NLP signal phrases
 
 **Section hints:** Results (eye exam reports), Plan, problem list, scanned outside ophthalmology reports
@@ -39,11 +59,20 @@
 - "comfort care"
 - "bilateral enucleation"
 
-**False positives to filter**
-- "vision screening" by primary care (Snellen alone) is NOT a retinal exam
-- "eye exam recommended" / "due for ophthalmology referral" - intent
-- "patient declined ophthalmology referral"
-- "glasses prescription updated" - refraction is not a retinal exam
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"Vision screening" by PCP (Snellen alone)** - NOT a retinal exam regardless of context
+- **"Will refer to ophthalmology" / "due for eye exam"** - temporality: future intent
+- **"Patient declined ophthalmology referral"** - refusal, not compliance; tracked separately
+- **"Glasses prescription updated" / "refraction stable"** - refraction is not a retinal exam
+- **"Family hx of diabetic retinopathy"** - experiencer = family
+- **"No DR noted"** without provider type or exam date - hedged; need eye-care-professional attribution and date
+- **"Eye exam done elsewhere"** without date or provider type - hedged; cannot anchor a date or qualify the provider
+- **"PMH: diabetic retinopathy"** - historical dx; does not prove an eye exam this MY
+- **"S/p cataract surgery"** - cataract surgery alone does not satisfy the retinal exam requirement
+- **"Eye exam negative for DR"** in a prior-year note - POSITIVE evidence (extends one MY); do not let "negative" flip it
 
 ## Common documentation gaps
 

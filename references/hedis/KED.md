@@ -24,6 +24,26 @@ Both tests must be in the same MY - missing either fails the measure.
 - ESRD / dialysis / kidney transplant
 - Advanced illness / frailty exclusion for members 66+
 
+## Date of service rule
+
+> Cross-cutting DoS guidance lives in [`../nlp/date-of-service.md`](../nlp/date-of-service.md). This section captures the measure-specific rule.
+
+| Field | Value |
+|---|---|
+| **Anchor event** | None - MY-only |
+| **Compliance window** | BOTH eGFR AND uACR results within the same MY |
+| **Date types that COUNT** | Lab specimen collection date for each test independently |
+| **Date types that do NOT count** | Result-posting date alone, order date, prior-year test (does NOT extend), one component in MY with the other component in a different MY |
+| **"Most recent" disambiguation** | Latest qualifying specimen for each component if multiple in MY |
+| **Look-back / look-forward** | None - both components must be in the same MY |
+
+**Common date confusions for this measure**
+
+- eGFR routinely on BMP (in MY) + uACR last year - NOT compliant for current MY; both must be in MY
+- uACR ordered late in MY, specimen actually collected next MY - does not count for current MY
+- Nephrology labs outside the system - capture the specimen date from the outside report, not the import date
+- One MY's eGFR carried forward into a current note - the evidence date is the original specimen date, which may be outside current MY
+
 ## NLP signal phrases
 
 **Section hints:** Results (labs), Assessment, Plan
@@ -49,11 +69,21 @@ Both tests must be in the same MY - missing either fails the measure.
 - "hospice"
 - "metastatic" / "advanced illness" / "frailty"
 
-**False positives to filter**
-- "urinalysis with protein" alone is NOT uACR
-- "BUN" without eGFR
-- "creatinine" without an eGFR calculation in result (most modern labs auto-calculate; older results may not)
-- Urine dipstick protein - NOT acceptable substitute for uACR
+**Assertion / negation pitfalls**
+
+> Cross-cutting assertion guidance (ConText framework, library recommendations, shared HEDIS anti-patterns) lives in [`../nlp/negation-and-assertion.md`](../nlp/negation-and-assertion.md). This block captures measure-specific pitfalls.
+
+- **"uACR ordered" / "microalbumin pending" / "will check renal function"** - temporality: future / order; not evidence
+- **"Urinalysis: protein negative" or "UA dipstick"** - urine dipstick is NOT a uACR; do not substitute
+- **"BUN/Cr normal"** without an explicit calculated eGFR - need the eGFR value; modern labs auto-calc, older or outside labs may not
+- **"PMH: CKD stage 3"** - historical dx; does not satisfy this MY's screening
+- **"Patient declined uACR" / "refused urine sample"** - refusal, not compliance
+- **"Will recheck kidney function in 6 months"** - future
+- **"Hx of microalbuminuria, on ACEi"** - historical, does not replace MY testing
+- **"FH of ESRD" / "FH of polycystic kidney disease"** - experiencer = family
+- **"Spot urine: 30 mg/g"** without explicit uACR labeling - ambiguous unit context; need explicit albumin-to-creatinine ratio
+- **"Renal function stable" / "kidneys WNL"** - hedged; no numeric values; needs both eGFR and uACR with values
+- **"Creatinine 0.9"** alone with no eGFR calculation - need the calculated eGFR result
 
 ## Common documentation gaps
 
