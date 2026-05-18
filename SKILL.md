@@ -43,6 +43,7 @@ Always ask the user (or restate) which review you're performing. Each has differ
 | **CDI review** | Documentation specificity for accurate coding | `templates/cdi-review.md` |
 | **HCC / risk-adjustment audit** | Validate every HCC has MEAT support | `templates/hcc-audit.md` |
 | **HEDIS / quality gap** | Identify open care gaps | `templates/quality-gap.md` |
+| **HEDIS abstraction** | Auditable per-measure abstraction with provenance | `templates/hedis-abstraction.md` |
 | **Medication reconciliation** | Reconcile across sources, flag interactions | `templates/med-rec.md` |
 | **Utilization / peer review** | Medical necessity and LOS | `templates/utilization-review.md` |
 | **Coding audit (DRG/CPT)** | Validate billed codes against documentation | `templates/coding-audit.md` |
@@ -67,6 +68,8 @@ When the task touches a domain below, read the corresponding reference file:
 - **ICD-10-CM, HCC, RAF, MEAT criteria** → `references/coding-icd10-hcc.md`
 - **CPT/E&M leveling, DRG basics** → `references/coding-cpt-drg.md`
 - **HEDIS / Stars / MIPS measures** → `references/quality-measures.md`
+- **HEDIS per-measure deep dives (denominator / numerator / exclusions / NLP signals)** → `references/hedis/`
+- **HEDIS supplemental data and hybrid sampling provenance** → `references/hedis-supplemental-data.md`
 - **Medication review & interaction red flags** → `references/medications.md`
 - **Lab & imaging interpretation cheatsheet** → `references/labs-imaging.md`
 - **Clinical red flags & must-not-miss findings** → `references/red-flags.md`

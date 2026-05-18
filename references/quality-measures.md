@@ -1,5 +1,7 @@
 # Quality Measures: HEDIS, Stars, MIPS
 
+> **Deep dives:** This file is the overview. For per-measure denominator / numerator / exclusion / NLP-signal cards, see [`hedis/`](hedis/). For data provenance and supplemental-data rules, see [`hedis-supplemental-data.md`](hedis-supplemental-data.md). For the abstraction worksheet, see [`../templates/hedis-abstraction.md`](../templates/hedis-abstraction.md).
+
 ## HEDIS (Healthcare Effectiveness Data and Information Set)
 
 Published annually by NCQA. Used by health plans for accreditation and by CMS for MA Stars.
@@ -24,7 +26,21 @@ Published annually by NCQA. Used by health plans for accreditation and by CMS fo
 | **OMW** | Osteoporosis Management in Women who had a Fracture |
 
 ### Hybrid measures
-Some HEDIS measures allow **hybrid** (admin + medical record) sampling — chart review fills gaps that claims miss.
+Some HEDIS measures allow **hybrid** (admin + medical record) sampling - chart review fills gaps that claims miss. Hybrid abstraction is subject to NCQA Medical Record Review Validation (MRRV); see [`hedis-supplemental-data.md`](hedis-supplemental-data.md) for provenance rules and audit-trail expectations.
+
+### Per-measure deep-dive cards
+
+The [`hedis/`](hedis/) directory has per-measure reference cards covering denominator, numerator, exclusions, NLP signal phrases, common documentation gaps, and notes. Cards are organized by clinical area:
+
+- **Diabetes:** BPD, EED, GSD (replaces HBD MY 2024), KED, SUPD
+- **Cardiovascular:** CBP, SPC
+- **Cancer screening:** BCS-E, CCS-E, COL-E
+- **Behavioral health:** FUH, PHQ (PHQ-2 / PHQ-9 instruments)
+- **Transitions:** MRP, TRC (4 sub-indicators including TRC-Med and TRC-Patient)
+- **Pediatric & perinatal:** PPC (prenatal + postpartum), WCC (BMI + nutrition + physical activity)
+- **Older adult:** ACP, AIS-E (flu, Td/Tdap, zoster, pneumococcal, hepatitis B, COVID-19 sub-indicators)
+
+See [`hedis/README.md`](hedis/README.md) for the full index and card structure.
 
 ## CMS Stars (Medicare Advantage & Part D)
 
