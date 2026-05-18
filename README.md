@@ -100,6 +100,7 @@ Triggered by requests like:
 
 - [chart-structure.md](references/chart-structure.md) — EHR systems (Epic, Cerner, Athena, Meditech) and universal chart sections
 - [note-types.md](references/note-types.md) — SOAP, H&P, OLDCARTS/OPQRST, note taxonomy
+- [administrative-insurance.md](references/administrative-insurance.md) — face sheet, insurance verification, eligibility on DOS, COB, prior auth, referrals, payer policy basics, denial categories
 - [coding-icd10-hcc.md](references/coding-icd10-hcc.md) — ICD-10-CM, MEAT criteria, CMS-HCC, RAF
 - [coding-cpt-drg.md](references/coding-cpt-drg.md) — CPT modifiers, E&M 2021+ leveling, MS-DRG
 - [quality-measures.md](references/quality-measures.md) — HEDIS, CMS Stars, MIPS

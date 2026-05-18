@@ -4,6 +4,17 @@
 **Criteria set**: [InterQual / MCG / payer-specific]
 **Reviewer**: AI UR reviewer (not a substitute for credentialed UR nurse/physician advisor)
 
+## Administrative evidence
+- Payer / plan / product: [...]
+- Member ID: [ref]
+- Eligibility on DOS: [verified / not verified / unable to confirm]
+- Primary vs secondary (COB): [...]
+- Prior authorization #: [...] · Service authorized: [...] · Approved level of care: [...] · Approved date range / units / days: [...]
+- Referral on file (if required): [yes / no / N/A]
+- Notice of admission sent (if required by payer): [yes / no / N/A]
+- Continued-stay authorization (per concurrent review): [...]
+- Administrative findings: [eligibility / auth / referral / COB / POS / none]
+
 ## Admission criteria
 - Severity of illness: [met / not met — cite indicators]
 - Intensity of service: [met / not met — cite orders]

@@ -14,6 +14,15 @@
 | Modifiers | | | | |
 | E&M level | | | | |
 
+## Administrative evidence
+- Payer / plan / product: [...]
+- Eligibility on DOS: [verified / not verified / unable to confirm]
+- Place of service (POS) code vs documented setting: [match / mismatch]
+- Prior authorization # tied to billed CPT(s): [auth # → CPT(s)] · [match / mismatch / not required]
+- Referral on file (specialist + HMO/POS): [yes / no / N/A]
+- Step therapy / medical-necessity documentation (if applicable): [...]
+- Payer-specific modifier or bundling rules: [see `references/local-policy.md` if present]
+
 ## DRG analysis (inpatient)
 - Billed DRG: [n] — [description]
 - Recommended DRG: [n] — [description]

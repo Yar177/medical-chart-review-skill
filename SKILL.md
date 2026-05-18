@@ -52,7 +52,7 @@ Always ask the user (or restate) which review you're performing. Each has differ
 
 ## 3. Standard Workflow
 
-1. **Orient.** Identify chart type, EHR system, date range, encounter type, specialty. Note any missing sections.
+1. **Orient.** Identify chart type, EHR system, date range, encounter type, specialty. Note any missing sections. Check the face sheet for active coverage, eligibility on the date of service, prior authorization, and referral status (see `references/administrative-insurance.md`) — administrative gaps drive most denials and belong in the finding set.
 2. **Index.** Build a quick map: demographics → problem list → meds → allergies → encounters (chronological) → labs/imaging → procedures.
 3. **Read deeply.** For each note, parse SOAP (Subjective, Objective, Assessment, Plan). Watch for copy-forward / cloned text — flag it.
 4. **Cross-reference.** Reconcile problem list ↔ assessment ↔ med list ↔ billed codes ↔ labs. Discrepancies are findings.
@@ -66,6 +66,7 @@ When the task touches a domain below, read the corresponding reference file:
 
 - **Chart anatomy & EHR systems** → `references/chart-structure.md`
 - **SOAP, H&P, and note types** → `references/note-types.md`
+- **Face sheet, insurance verification, eligibility, COB, prior auth, referrals, payer policy basics** → `references/administrative-insurance.md`
 - **ICD-10-CM, HCC, RAF, MEAT criteria** → `references/coding-icd10-hcc.md`
 - **CPT/E&M leveling, DRG basics** → `references/coding-cpt-drg.md`
 - **HEDIS / Stars / MIPS measures** → `references/quality-measures.md`
@@ -104,6 +105,7 @@ Stop and elevate to **Critical** findings if you encounter:
 - Missing informed consent for documented procedure
 - Discharge without follow-up plan for high-acuity diagnosis
 - Significant discrepancy between problem list, medication list, and active diagnoses
+- Service rendered outside the coverage period, or procedure documented with no prior authorization on file when the payer requires one
 
 See `references/red-flags.md` for the full list.
 
