@@ -21,7 +21,13 @@ For covered entities and business associates (engineering, security, and complia
 
 ## Install
 
-See the [root README](../README.md) for install instructions (this skill installs as `hipaa-compliance` from the monorepo).
+[![skills.sh](https://skills.sh/b/Yar177/medical-chart-review-skill)](https://www.skills.sh/Yar177/medical-chart-review-skill)
+
+```bash
+npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
+```
+
+See the [root README](../README.md) for manual install, agent targeting, and global vs project scope.
 
 ## When the agent loads it
 

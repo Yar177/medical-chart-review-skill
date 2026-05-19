@@ -8,7 +8,13 @@ This is one of three skills in this monorepo. For NLP engineering work, see the 
 
 ## Install
 
-See the [root README](../README.md) for install instructions. This skill installs as `medical-chart-review`.
+[![skills.sh](https://skills.sh/b/Yar177/medical-chart-review-skill)](https://www.skills.sh/Yar177/medical-chart-review-skill)
+
+```bash
+npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review
+```
+
+See the [root README](../README.md) for manual install, agent targeting, and global vs project scope.
 
 ## Quick start
 

@@ -5,6 +5,14 @@ This project follows [Semantic Versioning](https://semver.org/) and [Keep a Chan
 
 ## [Unreleased]
 
+### Changed - Discoverability (root + all 4 skills)
+
+- Install commands switched from undocumented subpath form (`owner/repo/skill`) to the documented `--skill <name>` flag, including `--skill '*'` for all four. Applies to root README and the four per-skill READMEs.
+- Root README: added skills.sh install-count badge, MIT license badge, and Agent Skill Spec badge at the top; added a Quickstart section above the safety warning so the install one-liner is the first actionable element.
+- Per-skill READMEs: added skills.sh install-count badge and a one-line `npx skills add ... --skill <name>` install command in each.
+- SKILL.md descriptions: appended additional search-likely synonym trigger phrases for `skills find` keyword matching (e.g. `chart abstraction`, `clinical documentation review`, `DRG validation`, `quality measure NLP`, `NCQA HEDIS extractor`, `MRRV audit prep`, `risk adjustment NLP`, `RAF score NLP`, `MEAT validation`, `RADV readiness`, `HIPAA audit`, `HIPAA compliance checklist`, `breach 4-factor assessment`, `OCR investigation`, `Safe Harbor de-identification`, `Expert Determination`, `PHI handling review`). Required `name` / `description` schema unchanged.
+- GitHub repo metadata: updated description to mention all 4 skills with install command; set homepage to the skills.sh repo page; added topics `skills-sh`, `clinical-nlp`, `radv`, `baa`, `de-identification` (now at the 20-topic cap).
+
 ### Added - `hipaa-compliance/` skill (4th sibling)
 
 - New `hipaa-compliance/` skill for builders, compliance officers, privacy / security teams working on any healthcare app handling PHI. Audience is broader than chart review - covers web / mobile / SaaS / cloud / AI services.

@@ -25,7 +25,13 @@ A skill for data-science / NLP engineering teams building HCC / risk-adjustment 
 
 ## Install
 
-See the [root README](../README.md) for install instructions (this skill installs as `hcc-nlp` from the monorepo).
+[![skills.sh](https://skills.sh/b/Yar177/medical-chart-review-skill)](https://www.skills.sh/Yar177/medical-chart-review-skill)
+
+```bash
+npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
+```
+
+See the [root README](../README.md) for manual install, agent targeting, and global vs project scope.
 
 ## When the agent loads it
 

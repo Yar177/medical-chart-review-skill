@@ -1,6 +1,24 @@
 # medical-chart-review-skill
 
-A monorepo of healthcare AI agent skills. Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience.
+[![skills.sh](https://skills.sh/b/Yar177/medical-chart-review-skill)](https://www.skills.sh/Yar177/medical-chart-review-skill)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Agent Skill Spec](https://img.shields.io/badge/spec-agentskills.io-blue)](https://agentskills.io/)
+
+A monorepo of **4 healthcare AI agent skills** - chart review, HEDIS NLP, HCC NLP, and HIPAA compliance. Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience and works with Claude Code, Cursor, GitHub Copilot, Codex, Windsurf, Gemini, and [40+ other agents](https://www.skills.sh/agent).
+
+## Quickstart
+
+Pick one (or use `--skill '*'` to install all four):
+
+```bash
+npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review
+npx skills add Yar177/medical-chart-review-skill --skill hedis-nlp
+npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
+npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
+
+# All four at once
+npx skills add Yar177/medical-chart-review-skill --skill '*'
+```
 
 > ⚠️ Every skill in this repo produces documentation, engineering, or compliance analysis. None of them provide medical advice. Final clinical, coding, regulatory, and compliance decisions require credentialed humans.
 
@@ -25,25 +43,34 @@ The skills are designed to coexist. Cross-references between them are written as
 
 ## Install
 
-Each skill is independently installable via [`skills.sh`](https://skills.sh) or by cloning into the appropriate directory for your agent. The path format `<repo>/<skill>` selects a specific skill from this monorepo.
+Each skill is independently installable via [`skills.sh`](https://www.skills.sh) or by cloning into the appropriate directory for your agent. Use the `--skill <name>` flag to pick a specific skill from this monorepo.
 
 ### Recommended: `skills.sh` one-liner
 
 ```bash
 # Install one
-npx skills add Yar177/medical-chart-review-skill/medical-chart-review
-npx skills add Yar177/medical-chart-review-skill/hedis-nlp
-npx skills add Yar177/medical-chart-review-skill/hcc-nlp
-npx skills add Yar177/medical-chart-review-skill/hipaa-compliance
+npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review
+npx skills add Yar177/medical-chart-review-skill --skill hedis-nlp
+npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
+npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
 
 # Or all four
-npx skills add Yar177/medical-chart-review-skill/medical-chart-review \
-                Yar177/medical-chart-review-skill/hedis-nlp \
-                Yar177/medical-chart-review-skill/hcc-nlp \
-                Yar177/medical-chart-review-skill/hipaa-compliance
+npx skills add Yar177/medical-chart-review-skill --skill '*'
+
+# Target a specific agent (e.g. claude-code, cursor, codex, github-copilot)
+npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review -a claude-code
+
+# Install globally instead of per-project
+npx skills add Yar177/medical-chart-review-skill --skill '*' -g
 ```
 
-> If your version of `skills.sh` does not support subpath install, use the manual install below.
+List what's available without installing:
+
+```bash
+npx skills add Yar177/medical-chart-review-skill --list
+```
+
+> If your `skills.sh` CLI is older and `--skill` is unavailable, use the manual install below.
 
 ### Manual install (Claude Code)
 
