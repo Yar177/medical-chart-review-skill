@@ -14,11 +14,9 @@ abstract: >-
   humans before clinical, billing, regulatory, or compliance use.
 type: software
 authors:
-  - alias: Yar177
-    # TODO: replace with your real name. Example:
-    # family-names: "Lastname"
-    # given-names: "Firstname"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: "Sher"
+    name-particle: "Dr."
+    alias: Yar177
 repository-code: "https://github.com/Yar177/medical-chart-review-skill"
 url: "https://www.skills.sh/Yar177/medical-chart-review-skill"
 license: MIT
