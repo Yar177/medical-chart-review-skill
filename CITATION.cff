@@ -20,6 +20,10 @@ authors:
     orcid: "https://orcid.org/0009-0002-4530-3577"
 repository-code: "https://github.com/Yar177/medical-chart-review-skill"
 url: "https://www.skills.sh/Yar177/medical-chart-review-skill"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20278242"
+    description: "Zenodo archive of v0.1.2"
 license: MIT
 keywords:
   - agent-skills
