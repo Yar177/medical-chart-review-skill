@@ -17,6 +17,7 @@ authors:
   - family-names: "Sher"
     given-names: "Hoshiar"
     alias: Yar177
+    orcid: "https://orcid.org/0009-0002-4530-3577"
 repository-code: "https://github.com/Yar177/medical-chart-review-skill"
 url: "https://www.skills.sh/Yar177/medical-chart-review-skill"
 license: MIT
