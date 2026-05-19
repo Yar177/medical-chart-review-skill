@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use these skills in research, please cite this repository."
+title: "medical-chart-review-skill: Healthcare AI agent skills (chart review, HEDIS NLP, HCC NLP, HIPAA compliance)"
+abstract: >-
+  A monorepo of four independently installable Agent Skills for healthcare
+  AI workflows. Includes: medical-chart-review (clinical chart audit, CDI,
+  coding validation, HEDIS gap analysis, medication reconciliation),
+  hedis-nlp (per-measure HEDIS NLP extractor design with MRRV-ready
+  pipelines), hcc-nlp (CMS-HCC V28/V24/HHS-HCC risk-adjustment extractor
+  design with MEAT, hierarchy enforcement, and RADV readiness), and
+  hipaa-compliance (HIPAA Privacy/Security/Breach Notification Rule
+  guidance, BAA review, de-identification, OCR audit prep, and technical
+  safeguards). Outputs are advisory and must be reviewed by credentialed
+  humans before clinical, billing, regulatory, or compliance use.
+type: software
+authors:
+  - alias: Yar177
+    # TODO: replace with your real name. Example:
+    # family-names: "Lastname"
+    # given-names: "Firstname"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+repository-code: "https://github.com/Yar177/medical-chart-review-skill"
+url: "https://www.skills.sh/Yar177/medical-chart-review-skill"
+license: MIT
+keywords:
+  - agent-skills
+  - skills-sh
+  - healthcare
+  - clinical-nlp
+  - medical-coding
+  - cdi
+  - hedis
+  - hedis-nlp
+  - hcc
+  - hcc-nlp
+  - risk-adjustment
+  - radv
+  - hipaa
+  - baa
+  - breach-notification
+  - de-identification
+  - phi
+  - ehr
+  - emr
