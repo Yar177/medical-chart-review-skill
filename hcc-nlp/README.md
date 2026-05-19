@@ -69,6 +69,7 @@ The agent will run the PHI/scope gate from `SKILL.md` §0, then load [`reference
 
 - [`medical-chart-review`](../medical-chart-review/) - clinical chart review for clinicians, coders, CDI / quality auditors. Its `references/coding-icd10-hcc.md` is the auditor-oriented complement to this skill's NLP-oriented files. Its `templates/hcc-audit.md` is the human-auditor version of this skill's `hcc-audit-nlp.md`.
 - [`hedis-nlp`](../hedis-nlp/) - HEDIS NLP. HEDIS and HCC are different products; do not conflate.
+- [`hipaa-compliance`](../hipaa-compliance/) - HIPAA compliance for the platform hosting this pipeline: BAA review, breach response, OCR audit prep, de-identification methodology, technical safeguards. RADV exposure makes audit-evidence retention especially relevant.
 
 ## Compliance & safety guardrails
 

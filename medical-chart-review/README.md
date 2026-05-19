@@ -71,6 +71,7 @@ Triggered by requests like:
 
 - [`hedis-nlp`](../hedis-nlp/) - per-measure HEDIS extractor design (DoS, assertion, evaluation, model cards)
 - [`hcc-nlp`](../hcc-nlp/) - HCC / risk-adjustment extractor design (V28 / V24 / HHS-HCC, MEAT, hierarchies, RADV readiness)
+- [`hipaa-compliance`](../hipaa-compliance/) - HIPAA Privacy + Security + Breach Notification, BAA review, OCR audit prep, de-identification methodology. This skill's `references/hipaa-privacy.md` is the reviewer-facing 18-identifier checklist; the sibling is the broader builder / compliance-officer view.
 
 ## Compliance & safety guardrails
 

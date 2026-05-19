@@ -5,6 +5,22 @@ This project follows [Semantic Versioning](https://semver.org/) and [Keep a Chan
 
 ## [Unreleased]
 
+### Added - `hipaa-compliance/` skill (4th sibling)
+
+- New `hipaa-compliance/` skill for builders, compliance officers, privacy / security teams working on any healthcare app handling PHI. Audience is broader than chart review - covers web / mobile / SaaS / cloud / AI services.
+- `SKILL.md` with §0 PHI + scope + counsel-deferral safety gate. Description includes `DO NOT USE FOR` clauses pointing at the three sibling skills (chart abstraction, HEDIS NLP, HCC NLP) and at legal counsel.
+- 12 references covering:
+  - Three Rules: `privacy-rule.md` (TPO, authorization, minimum necessary, NPP, patient rights, marketing / fundraising), `security-rule.md` (admin / physical / technical safeguards, R/A spec map, NIST 800-66 Rev. 2 mapping), `breach-notification.md` (4-factor risk assessment, 60-day rule, OCR / media / individual notice tiers, ransomware default-breach posture).
+  - De-id + BAA: `de-identification.md` (verbatim 18 Safe Harbor identifiers, Expert Determination, Limited Data Set, AI training caveats), `baa-review.md` (45 CFR 164.504(e) required clauses + common gaps + subcontractor flow-down).
+  - Operations: `ocr-audit-prep.md` (Phase 2 protocol, evidence inventory, common findings table), `incident-response.md` (security incident vs breach, NIST 800-61 IR phases, BA-side IR).
+  - Technical: `technical-safeguards.md` (encryption at rest / in transit, FIPS, audit controls, MFA, web tracking, AI services), `access-and-authorization.md` (RBAC, minimum necessary in practice, workforce lifecycle, break-glass), `vendor-cloud-shared-resp.md` (AWS / Azure / GCP eligible services, AI BAA matrix, shared responsibility).
+  - Boundaries: `state-laws-and-overlap.md` (HIPAA-as-floor, 42 CFR Part 2 SUD, CMIA / CCPA, GDPR, FTC - high-level; defers deeper state work to counsel).
+  - Plus `references/README.md` index grouped by Three Rules / De-id+BAA / Operations / Technical / Boundaries.
+- 5 templates: `baa-review-checklist.md` (clause-by-clause review + memo), `breach-risk-assessment.md` (4-factor worksheet + low-probability determination memo + retention), `risk-analysis.md` (NIST 800-30 style mapped to Security Rule standards with full coverage matrix), `incident-response-playbook.md` (phase-by-phase with decision trees + scenario-specific quick refs), `ocr-audit-evidence-binder.md` (binder index keyed to Phase 2 protocol).
+- Cross-skill references in content files use prose pointers; cross-skill README nav uses real markdown links (each skill installable standalone).
+- Root `README.md` updated: hipaa-compliance added to skills table, "Which skill should I install?" decision list, install commands (skills.sh + Claude Code + Copilot, personal + project), and repo tree.
+- Sibling READMEs (`medical-chart-review`, `hedis-nlp`, `hcc-nlp`) updated to link to `hipaa-compliance` in their "Related skills" sections.
+
 ### Changed - Repository restructure: monorepo of three skills
 
 - Split the single skill into three independently installable skills under one repo:

@@ -11,15 +11,15 @@ A monorepo of healthcare AI agent skills. Each subdirectory is an independently 
 | [`medical-chart-review/`](medical-chart-review/) | Clinicians, CRC/CCS coders, CDI specialists, quality auditors | Reads charts, validates documentation against coding and quality standards, produces auditable findings and provider queries |
 | [`hedis-nlp/`](hedis-nlp/) | Data-science / NLP engineering teams | Per-measure HEDIS extractor design, DoS attribution, assertion handling, evaluation, annotation, model-card documentation, MRRV-ready pipelines |
 | [`hcc-nlp/`](hcc-nlp/) | Data-science / NLP engineering teams | HCC / risk-adjustment extractor design (suspect + validate engines), CMS-HCC V28 / V24 / HHS-HCC versioning, MEAT, hierarchies, RADV readiness, per-HCC model cards |
-
-Planned future skills (not yet built): `hipaa-compliance/` (BAA review, breach response, OCR audit prep, de-identification methodology, HIPAA technical safeguards for any healthcare app - intended audience is broader than chart review; useful for web / mobile / SaaS teams handling PHI).
+| [`hipaa-compliance/`](hipaa-compliance/) | Builders / compliance officers / privacy + security teams for any healthcare app | HIPAA Privacy + Security + Breach Notification Rules, BAA review, de-identification methodology, OCR audit prep, breach response, technical safeguards for web / mobile / cloud / AI services handling PHI |
 
 ## Which skill should I install?
 
 - **Reviewing charts, auditing records, doing CDI / coding / HEDIS / HCC audits as a human or AI-assisted human** → install [`medical-chart-review/`](medical-chart-review/)
 - **Building per-measure HEDIS extractors (GSD, BCS-E, FUH, MRP, TRC, etc.)** → install [`hedis-nlp/`](hedis-nlp/)
 - **Building HCC extractors, suspect engines, validate engines, RAF pipelines, RADV-ready workflows** → install [`hcc-nlp/`](hcc-nlp/)
-- **Building all of the above as a unified platform** → install all three
+- **Designing / reviewing HIPAA compliance for an app: BAAs, breach response, OCR audit prep, de-id strategy, technical safeguards, cloud + AI service boundaries** → install [`hipaa-compliance/`](hipaa-compliance/)
+- **Building all of the above as a unified platform** → install all four
 
 The skills are designed to coexist. Cross-references between them are written as prose pointers (e.g., "see the `medical-chart-review` skill's `references/coding-icd10-hcc.md`") rather than clickable links so each skill works standalone.
 
@@ -34,11 +34,13 @@ Each skill is independently installable via [`skills.sh`](https://skills.sh) or 
 npx skills add Yar177/medical-chart-review-skill/medical-chart-review
 npx skills add Yar177/medical-chart-review-skill/hedis-nlp
 npx skills add Yar177/medical-chart-review-skill/hcc-nlp
+npx skills add Yar177/medical-chart-review-skill/hipaa-compliance
 
-# Or all three
+# Or all four
 npx skills add Yar177/medical-chart-review-skill/medical-chart-review \
                 Yar177/medical-chart-review-skill/hedis-nlp \
-                Yar177/medical-chart-review-skill/hcc-nlp
+                Yar177/medical-chart-review-skill/hcc-nlp \
+                Yar177/medical-chart-review-skill/hipaa-compliance
 ```
 
 > If your version of `skills.sh` does not support subpath install, use the manual install below.
@@ -53,6 +55,7 @@ git clone https://github.com/Yar177/medical-chart-review-skill.git /tmp/mcr-skil
 cp -R /tmp/mcr-skills/medical-chart-review ~/.claude/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           ~/.claude/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             ~/.claude/skills/
+cp -R /tmp/mcr-skills/hipaa-compliance    ~/.claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -64,6 +67,7 @@ git clone https://github.com/Yar177/medical-chart-review-skill.git /tmp/mcr-skil
 cp -R /tmp/mcr-skills/medical-chart-review .claude/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           .claude/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             .claude/skills/
+cp -R /tmp/mcr-skills/hipaa-compliance    .claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -77,6 +81,7 @@ git clone https://github.com/Yar177/medical-chart-review-skill.git /tmp/mcr-skil
 cp -R /tmp/mcr-skills/medical-chart-review ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             ~/.copilot/skills/
+cp -R /tmp/mcr-skills/hipaa-compliance    ~/.copilot/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -88,15 +93,16 @@ git clone https://github.com/Yar177/medical-chart-review-skill.git /tmp/mcr-skil
 cp -R /tmp/mcr-skills/medical-chart-review .github/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           .github/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             .github/skills/
+cp -R /tmp/mcr-skills/hipaa-compliance    .github/skills/
 rm -rf /tmp/mcr-skills
 ```
 
-The skill folder names must remain `medical-chart-review`, `hedis-nlp`, and `hcc-nlp` - they must match the `name` field in each `SKILL.md`.
+The skill folder names must remain `medical-chart-review`, `hedis-nlp`, `hcc-nlp`, and `hipaa-compliance` - they must match the `name` field in each `SKILL.md`.
 
 ### Verify it loaded
 
-- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`.
-- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the three skills.
+- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`, `/hipaa-compliance`.
+- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the four skills.
 
 ## Repository structure
 
@@ -126,14 +132,20 @@ medical-chart-review-skill/    (this repo)
 │       └── hedis-abstraction.md
 │
 └── hcc-nlp/                   (HCC engineering skill)
+│   ├── SKILL.md
+│   ├── README.md
+│   ├── references/            (12 files + cards/ + test-fixtures/)
+│   │   ├── cards/             (HCC 18, 22, 85, 96, 108, 111 exemplars)
+│   │   └── test-fixtures/     (synthetic regression fixtures)
+│   └── templates/
+│       ├── hcc-model-card.md
+│       └── hcc-audit-nlp.md
+│
+└── hipaa-compliance/         (HIPAA builder / compliance-officer skill)
     ├── SKILL.md
     ├── README.md
-    ├── references/            (12 files + cards/ + test-fixtures/)
-    │   ├── cards/             (HCC 18, 22, 85, 96, 108, 111 exemplars)
-    │   └── test-fixtures/     (synthetic regression fixtures)
-    └── templates/
-        ├── hcc-model-card.md
-        └── hcc-audit-nlp.md
+    ├── references/            (12 files - Three Rules, BAA, de-id, technical safeguards, OCR audit, IR, state-law boundaries)
+    └── templates/             (5 files - BAA review, breach 4-factor, risk analysis, IR playbook, OCR audit binder)
 ```
 
 ## Versioning

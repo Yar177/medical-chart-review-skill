@@ -57,6 +57,7 @@ The agent will run the PHI/scope gate from `SKILL.md` §0, then load the GSD mea
 
 - [`medical-chart-review`](../medical-chart-review/) - clinical chart review for clinicians, coders, CDI / quality auditors. Read its `references/coding-icd10-hcc.md`, `quality-measures.md`, and `note-types.md` for the auditor-oriented complement to this skill's NLP-oriented files.
 - [`hcc-nlp`](../hcc-nlp/) - HCC / risk-adjustment NLP. HEDIS and HCC are different products; do not conflate.
+- [`hipaa-compliance`](../hipaa-compliance/) - HIPAA compliance for the platform hosting this pipeline: BAA review with EHR / annotation / cloud vendors, breach response for extraction-pipeline incidents, OCR audit prep, de-identification methodology if the pipeline produces de-id outputs.
 
 ## Compliance & safety guardrails
 
