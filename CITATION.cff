@@ -15,7 +15,7 @@ abstract: >-
 type: software
 authors:
   - family-names: "Sher"
-    name-particle: "Dr."
+    given-names: "Hoshiar"
     alias: Yar177
 repository-code: "https://github.com/Yar177/medical-chart-review-skill"
 url: "https://www.skills.sh/Yar177/medical-chart-review-skill"
