@@ -36,6 +36,7 @@ Triggered by requests like:
 - "do a HEDIS gap analysis"
 - "reconcile these medications"
 - "extract structured data from this note"
+- "classify this chart" / "what kind of chart is this?" / "detect the care setting"
 
 **Not** triggered for: live patient care, prescribing, diagnosis of real patients, handling identifiable PHI in non-compliant environments, or NLP engineering (use the sibling `hedis-nlp` / `hcc-nlp` skills).
 
@@ -57,6 +58,7 @@ Triggered by requests like:
 ### References (loaded only when needed)
 
 - [chart-structure.md](references/chart-structure.md) - EHR systems (Epic, Cerner, Athena, Meditech) and universal chart sections
+- [chart-types.md](references/chart-types.md) - Care-setting + payer-program taxonomy, detection signal catalog, confidence scoring, disambiguation rules, longitudinal segmentation
 - [note-types.md](references/note-types.md) - SOAP, H&P, OLDCARTS/OPQRST, note taxonomy
 - [administrative-insurance.md](references/administrative-insurance.md) - face sheet, insurance verification, eligibility on DOS, COB, prior auth, referrals, payer policy basics, denial categories
 - [coding-icd10-hcc.md](references/coding-icd10-hcc.md) - ICD-10-CM, MEAT criteria, CMS-HCC, RAF (auditor-oriented; complementary NLP engineering view lives in the sibling `hcc-nlp` skill)
@@ -71,7 +73,7 @@ Triggered by requests like:
 
 ### Templates
 
-[clinical-summary.md](templates/clinical-summary.md) · [hcc-audit.md](templates/hcc-audit.md) · [cdi-review.md](templates/cdi-review.md) · [quality-gap.md](templates/quality-gap.md) · [med-rec.md](templates/med-rec.md) · [utilization-review.md](templates/utilization-review.md) · [coding-audit.md](templates/coding-audit.md) · [data-abstraction.md](templates/data-abstraction.md)
+[clinical-summary.md](templates/clinical-summary.md) · [hcc-audit.md](templates/hcc-audit.md) · [cdi-review.md](templates/cdi-review.md) · [quality-gap.md](templates/quality-gap.md) · [med-rec.md](templates/med-rec.md) · [utilization-review.md](templates/utilization-review.md) · [coding-audit.md](templates/coding-audit.md) · [data-abstraction.md](templates/data-abstraction.md) · [chart-triage.md](templates/chart-triage.md)
 
 ## Related skills in this repo
 

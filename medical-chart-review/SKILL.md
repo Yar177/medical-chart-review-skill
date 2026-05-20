@@ -1,6 +1,6 @@
 ---
 name: medical-chart-review
-description: 'Expert-level review and analysis of medical charts, EMRs, and EHRs by clinicians, coders, and CDI/quality auditors. Use when asked to "review a chart", "chart review", "chart abstraction", "clinical documentation review", "audit medical records", "extract from EHR", "summarize patient history", "check documentation", "validate ICD-10/HCC/CPT coding", "DRG validation", "perform CDI review", "risk adjustment audit", "HEDIS gap analysis", "medication reconciliation", "identify red flags in chart", "abstract clinical data", or any task involving SOAP notes, progress notes, discharge summaries, problem lists, H&P, consult notes, lab/imaging interpretation, or Epic/Cerner/Athena/Meditech data. DO NOT USE FOR providing direct patient care, making diagnoses for live patients, prescribing, or anything requiring a licensed clinician''s judgment of record. DO NOT USE FOR building HEDIS or HCC NLP extraction pipelines (use the hedis-nlp or hcc-nlp skills in the same repo). DO NOT USE FOR HIPAA compliance program work like BAA review, breach response, OCR audit prep, de-identification methodology, or technical-safeguard design (use the hipaa-compliance skill). DO NOT USE FOR handling real identifiable PHI without explicit user confirmation that data is de-identified or that the environment is HIPAA-compliant.'
+description: 'Expert-level review and analysis of medical charts, EMRs, and EHRs by clinicians, coders, and CDI/quality auditors. Use when asked to "review a chart", "chart review", "chart abstraction", "clinical documentation review", "audit medical records", "extract from EHR", "summarize patient history", "check documentation", "validate ICD-10/HCC/CPT coding", "DRG validation", "perform CDI review", "risk adjustment audit", "HEDIS gap analysis", "medication reconciliation", "identify red flags in chart", "abstract clinical data", "classify chart", "what kind of chart is this", "identify chart type", "detect care setting", "chart triage", or any task involving SOAP notes, progress notes, discharge summaries, problem lists, H&P, consult notes, lab/imaging interpretation, or Epic/Cerner/Athena/Meditech data. DO NOT USE FOR providing direct patient care, making diagnoses for live patients, prescribing, or anything requiring a licensed clinician''s judgment of record. DO NOT USE FOR building HEDIS or HCC NLP extraction pipelines (use the hedis-nlp or hcc-nlp skills in the same repo). DO NOT USE FOR HIPAA compliance program work like BAA review, breach response, OCR audit prep, de-identification methodology, or technical-safeguard design (use the hipaa-compliance skill). DO NOT USE FOR handling real identifiable PHI without explicit user confirmation that data is de-identified or that the environment is HIPAA-compliant.'
 ---
 
 # Medical Chart / EMR / EHR Review
@@ -49,22 +49,25 @@ Always ask the user (or restate) which review you're performing. Each has differ
 | **Utilization / peer review** | Medical necessity and LOS | `templates/utilization-review.md` |
 | **Coding audit (DRG/CPT)** | Validate billed codes against documentation | `templates/coding-audit.md` |
 | **Data abstraction** | Structured extraction for research/registry | `templates/data-abstraction.md` |
+| **Chart triage / classification** | Detect care setting + payer program before any other review | `templates/chart-triage.md` |
 
 ## 3. Standard Workflow
 
 1. **Orient.** Identify chart type, EHR system, date range, encounter type, specialty. Note any missing sections. Check the face sheet for active coverage, eligibility on the date of service, prior authorization, and referral status (see `references/administrative-insurance.md`) — administrative gaps drive most denials and belong in the finding set.
-2. **Index.** Build a quick map: demographics → problem list → meds → allergies → encounters (chronological) → labs/imaging → procedures.
-3. **Read deeply.** For each note, parse SOAP (Subjective, Objective, Assessment, Plan). Watch for copy-forward / cloned text — flag it.
-4. **Cross-reference.** Reconcile problem list ↔ assessment ↔ med list ↔ billed codes ↔ labs. Discrepancies are findings.
-5. **Apply review-type rules.** See `references/` for the relevant domain (HCC, HEDIS, CDI, etc.).
-6. **Surface findings.** Group as: *Critical* (patient safety / urgent), *Documentation gap*, *Coding opportunity*, *Quality gap*, *Informational*.
-7. **Produce output** using the matching template. Include citations to specific notes (date, note type, section).
+2. **Triage when undeclared.** If the user has not declared the care setting and payer program (or the declaration contradicts the chart content), run the detection in `references/chart-types.md` and emit a `templates/chart-triage.md` report. Confidence-gated: High → proceed; Medium → proceed with caveat; Low → stop and ask.
+3. **Index.** Build a quick map: demographics → problem list → meds → allergies → encounters (chronological) → labs/imaging → procedures.
+4. **Read deeply.** For each note, parse SOAP (Subjective, Objective, Assessment, Plan). Watch for copy-forward / cloned text — flag it.
+5. **Cross-reference.** Reconcile problem list ↔ assessment ↔ med list ↔ billed codes ↔ labs. Discrepancies are findings.
+6. **Apply review-type rules.** See `references/` for the relevant domain (HCC, HEDIS, CDI, etc.).
+7. **Surface findings.** Group as: *Critical* (patient safety / urgent), *Documentation gap*, *Coding opportunity*, *Quality gap*, *Informational*.
+8. **Produce output** using the matching template. Include citations to specific notes (date, note type, section).
 
 ## 4. Core Domain Knowledge — Load On Demand
 
 When the task touches a domain below, read the corresponding reference file:
 
 - **Chart anatomy & EHR systems** → `references/chart-structure.md`
+- **Chart-type detection (care setting + payer program), confidence scoring, disambiguation (inpatient vs obs, SNF vs IRF vs LTCH, HHA vs hospice, etc.), longitudinal segmentation** → `references/chart-types.md`
 - **SOAP, H&P, and note types** → `references/note-types.md`
 - **Face sheet, insurance verification, eligibility, COB, prior auth, referrals, payer policy basics** → `references/administrative-insurance.md`
 - **ICD-10-CM, HCC, RAF, MEAT criteria** → `references/coding-icd10-hcc.md`

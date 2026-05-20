@@ -27,7 +27,7 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 
 | Skill | Audience | What it does |
 |---|---|---|
-| [`medical-chart-review/`](medical-chart-review/) | Clinicians, CRC/CCS coders, CDI specialists, quality auditors | Reads charts, validates documentation against coding and quality standards, produces auditable findings and provider queries |
+| [`medical-chart-review/`](medical-chart-review/) | Clinicians, CRC/CCS coders, CDI specialists, quality auditors | Reads charts, classifies care setting + payer program, validates documentation against coding and quality standards, produces auditable findings and provider queries |
 | [`hedis-nlp/`](hedis-nlp/) | Data-science / NLP engineering teams | Per-measure HEDIS extractor design, DoS attribution, assertion handling, evaluation, annotation, model-card documentation, MRRV-ready pipelines |
 | [`hcc-nlp/`](hcc-nlp/) | Data-science / NLP engineering teams | HCC / risk-adjustment extractor design (suspect + validate engines), CMS-HCC V28 / V24 / HHS-HCC versioning, MEAT, hierarchies, RADV readiness, per-HCC model cards |
 | [`hipaa-compliance/`](hipaa-compliance/) | Builders / compliance officers / privacy + security teams for any healthcare app | HIPAA Privacy + Security + Breach Notification Rules, BAA review, de-identification methodology, OCR audit prep, breach response, technical safeguards for web / mobile / cloud / AI services handling PHI |
@@ -145,8 +145,8 @@ medical-chart-review-skill/    (this repo)
 ├── medical-chart-review/      (auditor skill)
 │   ├── SKILL.md
 │   ├── README.md
-│   ├── references/            (12 files)
-│   └── templates/             (8 files including auditor HCC audit)
+│   ├── references/            (13 files, incl. chart-types.md for care-setting + payer-program detection)
+│   └── templates/             (9 files, incl. chart-triage.md and the auditor HCC audit)
 │
 ├── hedis-nlp/                 (HEDIS engineering skill)
 │   ├── SKILL.md

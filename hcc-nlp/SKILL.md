@@ -71,7 +71,7 @@ If any gate fails, stop and report back.
 - **Per-HCC exemplar cards** → [`references/cards/`](references/cards/) - HCC 18, 22, 85, 96, 108, 111 (use the 9-section schema for new cards)
 - **Synthetic regression fixtures** → [`references/test-fixtures/`](references/test-fixtures/) - history-of trap, hierarchy collapse, status-code amputation, MEAT gap, problem-list-only
 
-For clinical / coding / chart-review knowledge (auditor-oriented ICD-10, MEAT criteria, EHR section anatomy, medication review, red flags, HIPAA basics), use the `medical-chart-review` skill in the same repo. Specifically `medical-chart-review/references/coding-icd10-hcc.md` is the auditor-oriented complement to this skill's NLP-oriented files. Cross-reference; do not duplicate.
+For clinical / coding / chart-review knowledge (auditor-oriented ICD-10, MEAT criteria, EHR section anatomy, medication review, red flags, HIPAA basics), use the `medical-chart-review` skill in the same repo. Specifically `medical-chart-review/references/coding-icd10-hcc.md` is the auditor-oriented complement to this skill's NLP-oriented files. Cross-reference; do not duplicate. **Chart-type detection** (care setting + payer program, which gates HCC capture rules - e.g., inpatient principal diagnosis rules vs outpatient face-to-face requirements, MA vs ACA HHS-HCC model selection) lives in [`../medical-chart-review/references/chart-types.md`](../medical-chart-review/references/chart-types.md). Defer there instead of reinventing the classifier.
 
 For HEDIS NLP, use the `hedis-nlp` skill in the same repo. HEDIS and HCC are different products with different rules.
 

@@ -5,6 +5,16 @@ This project follows [Semantic Versioning](https://semver.org/) and [Keep a Chan
 
 ## [Unreleased]
 
+### Added - Chart-type detection & differentiation (`medical-chart-review/`)
+
+- New `references/chart-types.md` - authoritative chart-type taxonomy for the repo. Covers 15 care settings (inpatient acute, observation, outpatient, ED, SNF, HHA, IRF, LTCH, hospice, L&D, perioperative, pediatric, telehealth, behavioral health, urgent care) and 9 payer programs (Medicare FFS, MA, ACA Marketplace, Medicaid, Commercial, VA/DoD, Workers' Comp, Auto/Liability, Self-pay). Includes a high-precision detection signal catalog, confidence scoring (High/Medium/Low → proceed/caveat/ask), "always ask" conditions, dispositive disambiguation rules for the five hardest pairs (inpt vs obs, SNF vs IRF vs LTCH, HHA vs hospice, urgent care vs ED, inpt vs ambulatory surgery), cross-cutting attributes (pediatric, L&D, perioperative, telehealth-modality layer on a primary setting), longitudinal multi-setting segmentation, and a 42 CFR Part 2 privacy callout that defers to `hipaa-privacy.md`.
+- New `templates/chart-triage.md` - structured triage report with Summary table (setting + attributes + payer + confidence + Part 2 class + next-review routing), Signals cited, optional per-encounter table, disambiguation notes, unresolved-questions checklist, and routing rationale. Template instructs the agent to omit empty sections rather than fill placeholders.
+- `SKILL.md` updated: added "Chart triage / classification" row to §2 Review Types; split §3 Workflow step 1 into **1. Orient** + **2. Triage when undeclared** (confidence-gated, runs only when the user has not declared setting + payer); added `chart-types.md` link to §4 Core Domain Knowledge; appended triggers "classify chart", "what kind of chart is this", "identify chart type", "detect care setting", "chart triage" to the frontmatter description.
+- `references/chart-structure.md` updated: added a banner pointing setting-specific document signals (MDS, OASIS, IRF-PAI, hospice CTI, anesthesia record, partogram, growth chart) to `chart-types.md`. Universal-section content unchanged.
+- `README.md` updated: indexed new reference + template; added "classify this chart / what kind of chart is this? / detect the care setting" to the trigger list.
+- Sibling skills (`hedis-nlp/SKILL.md`, `hcc-nlp/SKILL.md`) updated to defer chart-type detection to `medical-chart-review/references/chart-types.md` instead of reinventing it. Both note the downstream implication (HEDIS denominator eligibility / HCC capture rules vary by setting and payer).
+- Behavior change: when a user invokes the skill without declaring setting + payer, the agent now emits a triage report first, cites the signals that drove the classification, and refuses to guess on Low confidence.
+
 ### Changed - Discoverability (root + all 4 skills)
 
 - Install commands switched from undocumented subpath form (`owner/repo/skill`) to the documented `--skill <name>` flag, including `--skill '*'` for all four. Applies to root README and the four per-skill READMEs.

@@ -62,7 +62,7 @@ Always ask the user (or restate) which task you're doing. Each has different rul
 - **Per-measure deep dives (denominator, numerator, exclusions, NLP signals, measure-specific DoS rule and assertion pitfalls)** → [`references/hedis/`](references/hedis/)
 - **Supplemental data and hybrid sampling provenance** → [`references/hedis-supplemental-data.md`](references/hedis-supplemental-data.md)
 
-For clinical / coding / chart-review knowledge (ICD-10, MEAT criteria, EHR section anatomy, medication review, red flags, HIPAA basics), use the `medical-chart-review` skill in the same repo. Cross-reference it; do not duplicate its content here.
+For clinical / coding / chart-review knowledge (ICD-10, MEAT criteria, EHR section anatomy, medication review, red flags, HIPAA basics), use the `medical-chart-review` skill in the same repo. Cross-reference it; do not duplicate its content here. **Chart-type detection** (care setting + payer program, which gates denominator eligibility for most HEDIS measures - e.g., MA-only measures, setting-restricted measures, telehealth-eligible measures) lives in [`../medical-chart-review/references/chart-types.md`](../medical-chart-review/references/chart-types.md). Defer there instead of reinventing the classifier.
 
 For HCC / risk-adjustment NLP, use the `hcc-nlp` skill in the same repo. HEDIS and HCC are different products with different rules.
 
