@@ -1,6 +1,8 @@
 # Chart Structure & EHR Systems
 
 > **Classifying the chart first?** This file covers the *universal* anatomy that applies to most encounter notes. For **chart-type detection** (inpatient vs observation vs SNF vs HHA vs hospice vs IRF vs L&D vs perioperative vs telehealth vs behavioral health, plus payer-program signals), see [`chart-types.md`](chart-types.md). Setting-specific documents (MDS, OASIS, IRF-PAI, hospice CTI, anesthesia record, partogram, growth chart) are catalogued there - not here.
+>
+> **Validating dates against a section?** This file defines the sections; [`date-of-service.md`](date-of-service.md) defines which sections are valid evidence for DoS attribution (Procedures / HPI / Op Note Body = valid; Plan / PMH / FamHx / Allergies / ROS = invalid for procedure DoS).
 
 ## Universal chart sections
 

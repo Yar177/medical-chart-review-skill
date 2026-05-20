@@ -1,5 +1,7 @@
 # Clinical Note Types
 
+> **Validating the DoS for a note?** For the default DoS source per note type (op note → `Date of Procedure:` header; lab report → collection date; progress note → encounter header date; etc.), see [`date-of-service.md`](date-of-service.md) §2.
+
 ## SOAP format
 - **S — Subjective**: patient's reported symptoms, HPI, ROS, history updates
 - **O — Objective**: vitals, exam findings, labs, imaging, measured data

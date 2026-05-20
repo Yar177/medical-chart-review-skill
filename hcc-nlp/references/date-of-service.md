@@ -4,6 +4,8 @@
 
 The cross-cutting HEDIS DoS framework lives in the sibling `hedis-nlp` skill's `references/nlp/date-of-service.md` (in this same repo). This file is HCC-specific. Read it before writing date logic for any HCC extractor.
 
+> **Clinical taxonomy lives in [`../../medical-chart-review/references/date-of-service.md`](../../medical-chart-review/references/date-of-service.md)** - 12 date kinds, note-type → DoS mapping, section semantics, tense / modality lexicon, and the abstractor view of copy-forward. **The HEDIS NLP DoS file at [`../../hedis-nlp/references/nlp/date-of-service.md`](../../hedis-nlp/references/nlp/date-of-service.md) owns the strategy cascade (S0a-S7), `dos_policy` schema, copy-forward detection algorithm, and provenance column set.** This file owns the HCC-specific contract and the HCC-specific deltas on top of the cascade.
+
 ---
 
 ## 1. The HCC date-of-service contract
@@ -131,17 +133,19 @@ See [`negation-and-assertion.md`](negation-and-assertion.md) for the full hedgin
 
 ## 8. Date types in HCC charts
 
-| Date type | Use for HCC? | Notes |
-|---|---|---|
-| Encounter / visit date | **Yes - primary** | The date the face-to-face occurred |
-| Note signing date | Sometimes | Use if encounter date is missing; verify it matches a real visit |
-| Discharge date | Yes for inpatient | The DOS for inpatient HCC is the discharge date for most purposes |
-| Admission date | Sometimes | Used for some inpatient analytics; HCC typically anchors on discharge |
-| Procedure date | Yes if face-to-face | Procedure-only encounters need provider visit component |
-| Lab specimen date | No, on its own | Lab alone is not a face-to-face |
-| Imaging exam date | No, on its own | Imaging alone is not a face-to-face |
-| Order date | No | Ordering is not evidence of MEAT |
-| Document scan date | No | Outside records: use the original document date |
+| Date type | Use for HCC? | Notes | `MATCH_DATE_KIND` |
+|---|---|---|---|
+| Encounter / visit date | **Yes - primary** | The date the face-to-face occurred | `service` |
+| Note signing date | Sometimes | Use if encounter date is missing; verify it matches a real visit | `signed` |
+| Discharge date | Yes for inpatient | The DOS for inpatient HCC is the discharge date for most purposes | `service` (inpatient) |
+| Admission date | Sometimes | Used for some inpatient analytics; HCC typically anchors on discharge | `service` (inpatient-admit) |
+| Procedure date | Yes if face-to-face | Procedure-only encounters need provider visit component | `procedure` |
+| Lab specimen date | No, on its own | Lab alone is not a face-to-face | `collection` |
+| Imaging exam date | No, on its own | Imaging alone is not a face-to-face | `study` |
+| Order date | No | Ordering is not evidence of MEAT | `order` |
+| Document scan date | No | Outside records: use the original document date | `authored` (scan) |
+
+The `MATCH_DATE_KIND` column matches the shared schema in `../../hedis-nlp/references/nlp/date-of-service.md` §17; HCC and HEDIS extractors emit the same kind taxonomy so downstream auditors see one provenance contract.
 
 ## 9. Copy-forward and the DoS-attribution problem
 
@@ -181,10 +185,67 @@ Unlike most HEDIS measures, HCC has no measure-specific anchor window. The rule 
 - **Telehealth assumption.** Applying COVID-era telehealth permissiveness to current-year encounters. Pin telehealth rules to the service year.
 - **AWV templating.** Validating templated AWV problem-list reviews without per-condition MEAT. Stricter MEAT enforcement for AWV-sourced HCCs.
 
+## 12. Cascade alignment with HEDIS NLP
+
+The strategy cascade S0a-S7 in [`../../hedis-nlp/references/nlp/date-of-service.md`](../../hedis-nlp/references/nlp/date-of-service.md) §13 applies here too. HCC-specific deltas:
+
+- **S0a (procedure-date header) is rarely the DoS for HCC.** Procedure-only encounters generally are not face-to-face for risk adjustment. Use S0a only when the same encounter also carries a provider face-to-face visit component (e.g., op note with a separately documented pre-op or post-op evaluation by an acceptable provider type).
+- **S0d (encounter-header date) is the dominant strategy** for HCC. AWVs, office visits, and inpatient stays all anchor here.
+- **S0b / S0c (lab collection, imaging study)** are *not* valid as standalone HCC DoS - lab-only and imaging-only encounters are not face-to-face. They may attach to a separate face-to-face encounter on the same date.
+- **S6 (doc-date fallback) is universally disqualifying for HCC.** No face-to-face can be inferred from a signing date. Set `doc_date_fallback_allowed: false` in every HCC `dos_policy`.
+- **S7 (DocTime relative) is acceptable only for resolving relative MEAT phrasing inside a confirmed face-to-face encounter** - not for inferring a face-to-face from a relative phrase alone.
+
+Per-measure `dos_policy` does not apply to HCC the way it does to HEDIS (HCC has no per-measure spec windows). Instead, apply a single `hcc_dos_policy`:
+
+```yaml
+hcc_dos_policy:
+  allowed_strategies: [S0a, S0d, S1, S2, S3, S4, S5, S7]    # S0b, S0c, S6 excluded
+  preferred_strategies: [S0d]
+  invalid_sections: [Plan, Family History, Social History, Allergies, ROS, Patient Instructions]
+  invalid_note_types: [patient_message, phone_note, e_visit_below_face_to_face, scanned_outside_unverified]
+  invalid_date_kinds: [order, scheduled, signed, authored, addendum]
+  invalid_tense:    [FUTURE_NOT_DONE]
+  flag_tense:       [PATIENT_REPORTED]
+  required_precision: day                                    # month acceptable if entirely within service year
+  doc_date_fallback_allowed: false
+  require_face_to_face: true
+  require_credentialed_provider: true                        # see §4 provider whitelist
+  require_calendar_year_match: true                          # see §2 calendar-year reset
+  require_copy_forward_dedup: true
+  awv_meat_strict: true                                      # see §6 AWV trap
+```
+
+## 13. Provenance columns (MERGE contract)
+
+HCC extractors emit the same provenance schema as HEDIS NLP (see [`../../hedis-nlp/references/nlp/date-of-service.md`](../../hedis-nlp/references/nlp/date-of-service.md) §17), plus two HCC-specific columns:
+
+```
+-- Shared with HEDIS (same names, same semantics):
+MATCH_DATE                    DATE
+MATCH_DATE_TEXT               STRING
+MATCH_DATE_KIND               STRING
+MATCH_DATE_PRECISION          STRING
+MATCH_DATE_STRATEGY           STRING
+MATCH_DATE_SECTION            STRING
+MATCH_DATE_IN_TABLE           BOOLEAN
+MATCH_NOTE_TYPE               STRING
+MATCH_TENSE                   STRING
+MATCH_IS_COPY_FORWARD         BOOLEAN
+MATCH_COPY_FORWARD_GROUP_ID   STRING
+MATCH_PROVIDER_CREDENTIAL     STRING
+
+-- HCC-specific:
+MATCH_FACE_TO_FACE_VERIFIED   BOOLEAN  -- encounter type confirmed acceptable (§3)
+MATCH_ENCOUNTER_SETTING       STRING   -- office | outpatient | inpatient | snf | hha | telehealth_video | telehealth_audio_only | awv | lab_only | imaging_only | other
+```
+
+**Defensibility for RADV:** RADV reviewers will ask "why is this HCC credited to calendar year 2025?" The answer must be "S0d encounter-header date 2025-08-14, face-to-face verified, signed by NP, not copy-forward, MEAT present in HPI section" - directly readable from these columns.
+
 ## See also
 
 - [`meat-criteria.md`](meat-criteria.md) - MEAT is the second leg of the DoS contract
 - [`negation-and-assertion.md`](negation-and-assertion.md) - inpatient vs outpatient hedging rules
 - [`extraction-patterns.md`](extraction-patterns.md) - copy-forward, section detection
-- Sibling `hedis-nlp` skill, `references/nlp/date-of-service.md` - shared DoS framework with HEDIS
+- Sibling [`../../medical-chart-review/references/date-of-service.md`](../../medical-chart-review/references/date-of-service.md) - clinical DoS taxonomy (date kinds, sections, tense lexicon, note-type → DoS)
+- Sibling [`../../hedis-nlp/references/nlp/date-of-service.md`](../../hedis-nlp/references/nlp/date-of-service.md) - strategy cascade S0a-S7, `dos_policy` schema, copy-forward detection algorithm, provenance columns, M1-M12 punch list
 - [`compliance-and-enforcement.md`](compliance-and-enforcement.md) - RADV implications of DoS errors

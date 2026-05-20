@@ -145,7 +145,7 @@ medical-chart-review-skill/    (this repo)
 ├── medical-chart-review/      (auditor skill)
 │   ├── SKILL.md
 │   ├── README.md
-│   ├── references/            (13 files, incl. chart-types.md for care-setting + payer-program detection)
+│   ├── references/            (14 files, incl. chart-types.md and date-of-service.md)
 │   └── templates/             (9 files, incl. chart-triage.md and the auditor HCC audit)
 │
 ├── hedis-nlp/                 (HEDIS engineering skill)

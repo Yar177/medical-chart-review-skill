@@ -11,7 +11,7 @@ A skill for data-science / NLP engineering teams building HCC / risk-adjustment 
   - RAF calculation with disease-disease interactions, calendar reset, dollar-weighted metrics
   - MEAT as a separate NLP task (two-pass architecture, linkage problem)
   - Hierarchies as a post-extraction step (within-family trumping)
-  - Date of service (5-part contract, calendar-year reset, provider-type whitelist, telehealth boundaries, AWV recapture trap)
+  - Date of service (5-part contract, calendar-year reset, provider-type whitelist, telehealth boundaries, AWV recapture trap; cascade alignment with HEDIS NLP plus HCC-specific `hcc_dos_policy` and provenance columns `MATCH_FACE_TO_FACE_VERIFIED` / `MATCH_ENCOUNTER_SETTING`)
   - Assertion / negation (9-dimension taxonomy, history-of as #1 RADV finding, Z-code family disambiguation, family-history confusion, hedging asymmetry, section-aware priors)
   - Extraction patterns (suspect vs validate engine split, two-pass architecture, provenance requirements)
   - Terminology / crosswalk handling

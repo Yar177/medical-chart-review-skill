@@ -37,6 +37,7 @@ Triggered by requests like:
 - "reconcile these medications"
 - "extract structured data from this note"
 - "classify this chart" / "what kind of chart is this?" / "detect the care setting"
+- "validate the date of service" / "what date counts for this evidence?" / "encounter date vs result date"
 
 **Not** triggered for: live patient care, prescribing, diagnosis of real patients, handling identifiable PHI in non-compliant environments, or NLP engineering (use the sibling `hedis-nlp` / `hcc-nlp` skills).
 
@@ -59,6 +60,7 @@ Triggered by requests like:
 
 - [chart-structure.md](references/chart-structure.md) - EHR systems (Epic, Cerner, Athena, Meditech) and universal chart sections
 - [chart-types.md](references/chart-types.md) - Care-setting + payer-program taxonomy, detection signal catalog, confidence scoring, disambiguation rules, longitudinal segmentation
+- [date-of-service.md](references/date-of-service.md) - 12 date kinds, note-type → DoS mapping, section validity, tense / modality lexicon, precision rules, copy-forward (clinical view); NLP teams operationalize via the sibling `hedis-nlp` / `hcc-nlp` skills
 - [note-types.md](references/note-types.md) - SOAP, H&P, OLDCARTS/OPQRST, note taxonomy
 - [administrative-insurance.md](references/administrative-insurance.md) - face sheet, insurance verification, eligibility on DOS, COB, prior auth, referrals, payer policy basics, denial categories
 - [coding-icd10-hcc.md](references/coding-icd10-hcc.md) - ICD-10-CM, MEAT criteria, CMS-HCC, RAF (auditor-oriented; complementary NLP engineering view lives in the sibling `hcc-nlp` skill)
