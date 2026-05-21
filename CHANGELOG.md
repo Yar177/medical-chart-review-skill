@@ -3,7 +3,7 @@
 All notable changes to this skill are documented here.
 This project follows [Semantic Versioning](https://semver.org/) and [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased]
+## [0.3.0] - 2026-05-21
 
 ### Added - `fhir-r4-implementation/` skill (7th sibling)
 
