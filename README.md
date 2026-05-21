@@ -48,6 +48,19 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 
 The skills are designed to coexist. Cross-references between them are written as prose pointers (e.g., "see the `medical-chart-review` skill's `references/coding-icd10-hcc.md`") rather than clickable links so each skill works standalone.
 
+## Routing matrix (for agents with all skills loaded)
+
+If you've installed multiple skills and want fast disambiguation:
+
+| If the user says... | Load skill |
+|---|---|
+| "review this chart", "audit this record", "abstract this note", "chart review", "CDI review", "coding audit", "med rec", "quality gap chase" | `medical-chart-review` |
+| "build a HEDIS extractor", "GSD / BCS-E / FUH / MRP / TRC NLP", "per-measure NLP", "MRRV-ready pipeline", "HEDIS model card" | `hedis-nlp` |
+| "build an HCC extractor", "suspect engine", "validate engine", "RAF NLP", "MEAT validation", "CMS-HCC V28 / V24 NLP", "RADV readiness" | `hcc-nlp` |
+| "review our BAA", "breach 4-factor assessment", "OCR audit prep", "HIPAA risk analysis", "de-identify dataset", "Safe Harbor vs Expert Determination", "HIPAA technical safeguards" | `hipaa-compliance` |
+| "audit my feature spec", "target leakage check", "claims ML model card", "pre-deployment review", "split design for member-year data", "calibration / drift", "claims ML fairness audit" | `claims-ml` |
+| "ICD-10 / CPT / HCPCS / NDC / RxNorm / SNOMED / LOINC question", "value set lookup", "GEMs crosswalk", "ICD↔HCC mapping", "NDC↔RxNorm", "code-system version / drift", "grouper / DRG / APC selection" | `healthcare-code-systems` |
+
 ## Install
 
 Each skill is independently installable via [`skills.sh`](https://www.skills.sh) or by cloning into the appropriate directory for your agent. Use the `--skill <name>` flag to pick a specific skill from this monorepo.
