@@ -3,6 +3,8 @@
 > **Classifying the chart first?** This file covers the *universal* anatomy that applies to most encounter notes. For **chart-type detection** (inpatient vs observation vs SNF vs HHA vs hospice vs IRF vs L&D vs perioperative vs telehealth vs behavioral health, plus payer-program signals), see [`chart-types.md`](chart-types.md). Setting-specific documents (MDS, OASIS, IRF-PAI, hospice CTI, anesthesia record, partogram, growth chart) are catalogued there - not here.
 >
 > **Validating dates against a section?** This file defines the sections; [`date-of-service.md`](date-of-service.md) defines which sections are valid evidence for DoS attribution (Procedures / HPI / Op Note Body = valid; Plan / PMH / FamHx / Allergies / ROS = invalid for procedure DoS).
+>
+> **Reading the chart from a FHIR feed (DocumentReference, Composition, Encounter, US Core profiles) rather than a native EHR view?** The clinical anatomy stays here; the FHIR resource shapes and US Core profiles live in the `fhir-r4-implementation` skill's `references/us-core-ig.md`.
 
 ## Universal chart sections
 

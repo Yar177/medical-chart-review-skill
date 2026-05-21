@@ -5,11 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skill Spec](https://img.shields.io/badge/spec-agentskills.io-blue)](https://agentskills.io/)
 
-A monorepo of **6 healthcare AI agent skills** - chart review, HEDIS NLP, HCC NLP, HIPAA compliance, claims-ML failure-mode auditing, and healthcare code systems / crosswalks / value sets. Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience and works with Claude Code, Cursor, GitHub Copilot, Codex, Windsurf, Gemini, and [40+ other agents](https://www.skills.sh/agent).
+A monorepo of **7 healthcare AI agent skills** - chart review, HEDIS NLP, HCC NLP, HIPAA compliance, claims-ML failure-mode auditing, healthcare code systems / crosswalks / value sets, and FHIR R4 implementation (US Core, CARIN BB, Da Vinci, SMART, Bulk Data). Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience and works with Claude Code, Cursor, GitHub Copilot, Codex, Windsurf, Gemini, and [40+ other agents](https://www.skills.sh/agent).
 
 ## Quickstart
 
-Pick one (or use `--skill '*'` to install all six):
+Pick one (or use `--skill '*'` to install all seven):
 
 ```bash
 npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review
@@ -18,8 +18,9 @@ npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
 npx skills add Yar177/medical-chart-review-skill --skill claims-ml
 npx skills add Yar177/medical-chart-review-skill --skill healthcare-code-systems
+npx skills add Yar177/medical-chart-review-skill --skill fhir-r4-implementation
 
-# All six at once
+# All seven at once
 npx skills add Yar177/medical-chart-review-skill --skill '*'
 ```
 
@@ -35,6 +36,7 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 | [`hipaa-compliance/`](hipaa-compliance/) | Builders / compliance officers / privacy + security teams for any healthcare app | HIPAA Privacy + Security + Breach Notification Rules, BAA review, de-identification methodology, OCR audit prep, breach response, technical safeguards for web / mobile / cloud / AI services handling PHI |
 | [`claims-ml/`](claims-ml/) | Data-science / ML engineering teams building supervised models on claims | Healthcare-ML failure-mode auditor: target leakage (10 classes), splits, target definitions, evaluation (actuary + ML lens), calibration / drift, production-scoring fitness, baselines, fairness; pre-deployment checklist + model card |
 | [`healthcare-code-systems/`](healthcare-code-systems/) | Data engineering, analytics, data-science, and platform teams | Authoritative reference + working templates for the code systems that healthcare data runs on: ICD-10-CM / PCS, ICD-9 + GEMs, CPT + modifiers, HCPCS Level II, NDC, RxNorm, SNOMED CT, LOINC + UCUM, CVX, NUCC, NPI, revenue / TOB / POS / DRG / APC, CCSR / Elixhauser / Charlson / BETOS, value sets (VSAC, NCQA HEDIS, eCQM), crosswalks (GEMs, NDC↔RxNorm, SNOMED↔ICD, LOINC↔CPT, ICD-10→HCC), versioning / drift, sources / licensing |
+| [`fhir-r4-implementation/`](fhir-r4-implementation/) | Health-IT / interop engineering, platform, integration, and FHIR app-dev teams | FHIR R4 (4.0.1) implementation reference for US payer / provider interop: resource taxonomy, identity + versioning, search, bundles + transactions, FHIRPath, profiles + conformance, terminology services, operations (incl. R4 Subscription vs R5 SubscriptionTopic), SMART App Launch + Backend Services, Bulk Data export, US Core 6.1.0, CARIN BB 2.1.0, Da Vinci PDex / HRex / Plan-Net, conformance testing (HAPI / `$validate` / Inferno), CMS-9115-F + CMS-0057-F alignment |
 
 ## Which skill should I install?
 
@@ -44,7 +46,8 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 - **Designing / reviewing HIPAA compliance for an app: BAAs, breach response, OCR audit prep, de-id strategy, technical safeguards, cloud + AI service boundaries** → install [`hipaa-compliance/`](hipaa-compliance/)
 - **Building or auditing supervised ML on claims (cost, hospitalization, readmit, ED, onset, mortality, eligibility, anomaly): leakage audit, split design, calibration / drift, production-scoring fitness, fairness** → install [`claims-ml/`](claims-ml/)
 - **Working with healthcare code systems and crosswalks: ICD-10, CPT, HCPCS, NDC, RxNorm, SNOMED, LOINC, value sets, GEMs, ICD↔HCC, NDC↔RxNorm; versioning / drift monitoring; provider / institutional codes; grouper selection** → install [`healthcare-code-systems/`](healthcare-code-systems/)
-- **Building all of the above as a unified platform** → install all six
+- **Implementing FHIR R4 endpoints / clients / IGs: US Core, CARIN BB, Da Vinci PDex / HRex / Plan-Net, SMART App Launch + Backend Services, Bulk Data; profiles, must-support, search, conformance testing (HAPI / `$validate` / Inferno); CMS-9115-F and CMS-0057-F (Jan 2027) alignment** → install [`fhir-r4-implementation/`](fhir-r4-implementation/)
+- **Building all of the above as a unified platform** → install all seven
 
 The skills are designed to coexist. Cross-references between them are written as prose pointers (e.g., "see the `medical-chart-review` skill's `references/coding-icd10-hcc.md`") rather than clickable links so each skill works standalone.
 
@@ -60,6 +63,7 @@ If you've installed multiple skills and want fast disambiguation:
 | "review our BAA", "breach 4-factor assessment", "OCR audit prep", "HIPAA risk analysis", "de-identify dataset", "Safe Harbor vs Expert Determination", "HIPAA technical safeguards" | `hipaa-compliance` |
 | "audit my feature spec", "target leakage check", "claims ML model card", "pre-deployment review", "split design for member-year data", "calibration / drift", "claims ML fairness audit" | `claims-ml` |
 | "ICD-10 / CPT / HCPCS / NDC / RxNorm / SNOMED / LOINC question", "value set lookup", "GEMs crosswalk", "ICD↔HCC mapping", "NDC↔RxNorm", "code-system version / drift", "grouper / DRG / APC selection" | `healthcare-code-systems` |
+| "FHIR R4 implementation", "US Core / CARIN BB / Da Vinci profile", "SMART App Launch / Backend Services", "Bulk Data `$export`", "`$validate` / HAPI / Inferno", "CapabilityStatement", "CMS-9115-F / CMS-0057-F Patient Access / Payer-to-Payer / Provider Directory API", "R4 Subscription vs R5 SubscriptionTopic" | `fhir-r4-implementation` |
 
 ## Install
 
@@ -75,8 +79,9 @@ npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
 npx skills add Yar177/medical-chart-review-skill --skill claims-ml
 npx skills add Yar177/medical-chart-review-skill --skill healthcare-code-systems
+npx skills add Yar177/medical-chart-review-skill --skill fhir-r4-implementation
 
-# Or all six
+# Or all seven
 npx skills add Yar177/medical-chart-review-skill --skill '*'
 
 # Target a specific agent (e.g. claude-code, cursor, codex, github-copilot)
@@ -107,6 +112,7 @@ cp -R /tmp/mcr-skills/hcc-nlp             ~/.claude/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    ~/.claude/skills/
 cp -R /tmp/mcr-skills/claims-ml           ~/.claude/skills/
 cp -R /tmp/mcr-skills/healthcare-code-systems ~/.claude/skills/
+cp -R /tmp/mcr-skills/fhir-r4-implementation ~/.claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -121,6 +127,7 @@ cp -R /tmp/mcr-skills/hcc-nlp             .claude/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    .claude/skills/
 cp -R /tmp/mcr-skills/claims-ml           .claude/skills/
 cp -R /tmp/mcr-skills/healthcare-code-systems .claude/skills/
+cp -R /tmp/mcr-skills/fhir-r4-implementation .claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -137,6 +144,7 @@ cp -R /tmp/mcr-skills/hcc-nlp             ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    ~/.copilot/skills/
 cp -R /tmp/mcr-skills/claims-ml           ~/.copilot/skills/
 cp -R /tmp/mcr-skills/healthcare-code-systems ~/.copilot/skills/
+cp -R /tmp/mcr-skills/fhir-r4-implementation ~/.copilot/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -151,15 +159,16 @@ cp -R /tmp/mcr-skills/hcc-nlp             .github/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    .github/skills/
 cp -R /tmp/mcr-skills/claims-ml           .github/skills/
 cp -R /tmp/mcr-skills/healthcare-code-systems .github/skills/
+cp -R /tmp/mcr-skills/fhir-r4-implementation .github/skills/
 rm -rf /tmp/mcr-skills
 ```
 
-The skill folder names must remain `medical-chart-review`, `hedis-nlp`, `hcc-nlp`, `hipaa-compliance`, `claims-ml`, and `healthcare-code-systems` - they must match the `name` field in each `SKILL.md`.
+The skill folder names must remain `medical-chart-review`, `hedis-nlp`, `hcc-nlp`, `hipaa-compliance`, `claims-ml`, `healthcare-code-systems`, and `fhir-r4-implementation` - they must match the `name` field in each `SKILL.md`.
 
 ### Verify it loaded
 
-- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`, `/hipaa-compliance`, `/claims-ml`, `/healthcare-code-systems`.
-- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the six skills.
+- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`, `/hipaa-compliance`, `/claims-ml`, `/healthcare-code-systems`, `/fhir-r4-implementation`.
+- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the seven skills.
 
 ## Repository structure
 
@@ -210,11 +219,17 @@ medical-chart-review-skill/    (this repo)
 │   ├── references/            (10 files - target-leakage, splits, target-definitions, evaluation, calibration-and-drift, production-scoring, feature-engineering, baselines, fairness, target-types-and-projects)
 │   └── templates/             (5 files - feature-spec audit, leakage audit, model card, pre-deployment checklist, recalibration plan)
 │
-└── healthcare-code-systems/   (code-systems / crosswalks / value-sets reference for data + analytics teams)
+├── healthcare-code-systems/   (code-systems / crosswalks / value-sets reference for data + analytics teams)
+│   ├── SKILL.md
+│   ├── README.md
+│   ├── references/            (17 files - icd10-cm, icd10-pcs, icd9-and-legacy, cpt-and-modifiers, hcpcs-level-ii, institutional-billing-codes, snomed-ct, loinc-and-ucum, rxnorm-ndc-and-drugs, immunizations-and-other, provider-identifiers, crosswalks, value-sets-and-vsac, code-groupers, versioning-and-drift, sources-and-licensing, common-pitfalls)
+│   └── templates/             (5 files - code-system-inventory, crosswalk-spec, value-set-manifest, code-drift-monitoring, grouper-evaluation)
+│
+└── fhir-r4-implementation/   (FHIR R4 implementation reference for health-IT / interop / FHIR app-dev teams)
     ├── SKILL.md
     ├── README.md
-    ├── references/            (17 files - icd10-cm, icd10-pcs, icd9-and-legacy, cpt-and-modifiers, hcpcs-level-ii, institutional-billing-codes, snomed-ct, loinc-and-ucum, rxnorm-ndc-and-drugs, immunizations-and-other, provider-identifiers, crosswalks, value-sets-and-vsac, code-groupers, versioning-and-drift, sources-and-licensing, common-pitfalls)
-    └── templates/             (5 files - code-system-inventory, crosswalk-spec, value-set-manifest, code-drift-monitoring, grouper-evaluation)
+    ├── references/            (13 files - resource-taxonomy, resource-identity-and-versioning, search-parameters, bundles-and-transactions, fhirpath, profiles-and-conformance, terminology-services, operations, smart-on-fhir, bulk-data-export, us-core-ig, carin-bb-ig, da-vinci-overview, conformance-testing, common-pitfalls)
+    └── templates/             (5 files - resource-design-spec, capability-statement-skeleton, claims-to-eob-mapping, smart-app-launch-checklist, fhir-conformance-audit)
 ```
 
 ## Versioning

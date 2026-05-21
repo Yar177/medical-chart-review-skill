@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "If you use these skills in research, please cite this repository."
-title: "medical-chart-review-skill: Healthcare AI agent skills (chart review, HEDIS NLP, HCC NLP, HIPAA compliance, claims-ML, healthcare code systems)"
-version: "0.2.0"
-date-released: 2026-05-20
+title: "medical-chart-review-skill: Healthcare AI agent skills (chart review, HEDIS NLP, HCC NLP, HIPAA compliance, claims-ML, healthcare code systems, FHIR R4 implementation)"
+version: "0.3.0"
+date-released: 2026-06-15
 abstract: >-
-  A monorepo of six independently installable Agent Skills for healthcare
+  A monorepo of seven independently installable Agent Skills for healthcare
   AI workflows. Includes: medical-chart-review (clinical chart audit, CDI,
   coding validation, HEDIS gap analysis, medication reconciliation),
   hedis-nlp (per-measure HEDIS NLP extractor design with MRRV-ready
@@ -14,12 +14,19 @@ abstract: >-
   guidance, BAA review, de-identification, OCR audit prep, and technical
   safeguards), claims-ml (healthcare-ML failure-mode auditor for supervised
   models on claims: target leakage, splits, calibration, drift, production
-  scoring, fairness), and healthcare-code-systems (reference and tooling
+  scoring, fairness), healthcare-code-systems (reference and tooling
   for the standardized code systems behind US healthcare data: ICD-10,
   CPT, HCPCS, SNOMED CT, LOINC, RxNorm, NDC, value sets, crosswalks,
-  groupers, versioning/drift, sources/licensing). Outputs are advisory
-  and must be reviewed by credentialed humans before clinical, billing,
-  regulatory, or compliance use.
+  groupers, versioning/drift, sources/licensing), and fhir-r4-implementation
+  (FHIR R4 implementation reference for US payer / provider interop:
+  resource taxonomy, identity and versioning, search, bundles, FHIRPath,
+  profiles, terminology, operations including R4 Subscription vs R5
+  SubscriptionTopic, SMART App Launch and Backend Services, Bulk Data,
+  US Core 6.1.0, CARIN BB 2.1.0, Da Vinci PDex / HRex / Plan-Net,
+  conformance testing with HAPI Validator / $validate / Inferno, aligned
+  to CMS-9115-F and CMS-0057-F). Outputs are advisory and must be reviewed
+  by credentialed humans before clinical, billing, regulatory, or
+  compliance use.
 type: software
 authors:
   - family-names: "Sher"
@@ -73,3 +80,14 @@ keywords:
   - elixhauser
   - charlson
   - npi
+  - fhir
+  - fhir-r4
+  - us-core
+  - carin-bb
+  - da-vinci
+  - smart-on-fhir
+  - bulk-data
+  - inferno
+  - cms-9115-f
+  - cms-0057-f
+  - interoperability

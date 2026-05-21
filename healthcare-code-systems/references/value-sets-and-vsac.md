@@ -1,5 +1,7 @@
 # Value sets and VSAC
 
+> **Wiring a value set into a FHIR system (terminology server `$expand`, `$validate-code`, profile binding-strength, ValueSet / CodeSystem resources)?** Code-system selection and value-set definition stays in this skill; the FHIR mechanics live in the `fhir-r4-implementation` skill's `references/terminology-services.md`.
+
 > **Why this file exists:** A **value set** is a named, versioned collection of codes from one or more code systems that satisfies some clinical concept (e.g., "diabetes diagnosis codes", "ACE inhibitor / ARB medications"). HEDIS measures, eCQMs, public health surveillance, and clinical decision support all depend on value sets. Getting their **versioning** and **definition style** (intensional vs expansion) right is what keeps them stable.
 
 ## 1. What a value set is

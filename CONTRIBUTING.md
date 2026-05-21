@@ -13,6 +13,7 @@ Thanks for your interest in improving this skill. Healthcare content has a high 
    - CDI / queries: ACDIS / AHIMA Practice Briefs
    - Drugs: FDA labeling, Beers Criteria, Lexicomp/Micromedex references
    - Privacy: 45 CFR (HIPAA), 42 CFR Part 2
+   - FHIR: hl7.org/fhir/R4 base spec + US Core / CARIN BB / Da Vinci IGs (pin version)
 3. **No upcoding guidance.** Coding suggestions must be MEAT-supported. Provider-query examples must be non-leading per ACDIS/AHIMA 2022.
 4. **No clinical decision support.** This skill reviews documentation. It does not diagnose, prescribe, or recommend treatment for real patients.
 5. **Update the changelog.** Every PR touching `SKILL.md`, `references/`, or `templates/` updates `CHANGELOG.md`.

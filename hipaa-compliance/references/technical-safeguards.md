@@ -1,5 +1,7 @@
 # Technical Safeguards - implementation depth (164.312)
 
+> **Implementing audit logging in a FHIR system (`Provenance` on writes, `AuditEvent` per access, US Core required Provenance)?** HIPAA audit-log *program* design (retention, monitoring, anomaly detection, breach-investigation use) stays here; the FHIR resource mechanics live in the `fhir-r4-implementation` skill's `references/us-core-ig.md` and `references/common-pitfalls.md` §15.
+
 Depth-of-implementation reference for the Security Rule's technical safeguards. Pair with [`security-rule.md`](security-rule.md) for the standards-and-specs taxonomy.
 
 ## 1. Encryption at rest
