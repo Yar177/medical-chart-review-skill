@@ -1,17 +1,25 @@
 cff-version: 1.2.0
 message: "If you use these skills in research, please cite this repository."
-title: "medical-chart-review-skill: Healthcare AI agent skills (chart review, HEDIS NLP, HCC NLP, HIPAA compliance)"
+title: "medical-chart-review-skill: Healthcare AI agent skills (chart review, HEDIS NLP, HCC NLP, HIPAA compliance, claims-ML, healthcare code systems)"
+version: "0.2.0"
+date-released: 2026-05-20
 abstract: >-
-  A monorepo of four independently installable Agent Skills for healthcare
+  A monorepo of six independently installable Agent Skills for healthcare
   AI workflows. Includes: medical-chart-review (clinical chart audit, CDI,
   coding validation, HEDIS gap analysis, medication reconciliation),
   hedis-nlp (per-measure HEDIS NLP extractor design with MRRV-ready
   pipelines), hcc-nlp (CMS-HCC V28/V24/HHS-HCC risk-adjustment extractor
-  design with MEAT, hierarchy enforcement, and RADV readiness), and
+  design with MEAT, hierarchy enforcement, and RADV readiness),
   hipaa-compliance (HIPAA Privacy/Security/Breach Notification Rule
   guidance, BAA review, de-identification, OCR audit prep, and technical
-  safeguards). Outputs are advisory and must be reviewed by credentialed
-  humans before clinical, billing, regulatory, or compliance use.
+  safeguards), claims-ml (healthcare-ML failure-mode auditor for supervised
+  models on claims: target leakage, splits, calibration, drift, production
+  scoring, fairness), and healthcare-code-systems (reference and tooling
+  for the standardized code systems behind US healthcare data: ICD-10,
+  CPT, HCPCS, SNOMED CT, LOINC, RxNorm, NDC, value sets, crosswalks,
+  groupers, versioning/drift, sources/licensing). Outputs are advisory
+  and must be reviewed by credentialed humans before clinical, billing,
+  regulatory, or compliance use.
 type: software
 authors:
   - family-names: "Sher"
@@ -24,6 +32,9 @@ identifiers:
   - type: doi
     value: "10.5281/zenodo.20278242"
     description: "Zenodo archive of v0.1.2"
+  - type: doi
+    value: "10.5281/zenodo.20278242"
+    description: "Concept DOI (always resolves to the latest version)"
 license: MIT
 keywords:
   - agent-skills
@@ -45,3 +56,20 @@ keywords:
   - phi
   - ehr
   - emr
+  - claims-ml
+  - icd-10
+  - cpt
+  - hcpcs
+  - snomed-ct
+  - loinc
+  - rxnorm
+  - ndc
+  - value-sets
+  - vsac
+  - crosswalks
+  - gems
+  - code-groupers
+  - ccsr
+  - elixhauser
+  - charlson
+  - npi

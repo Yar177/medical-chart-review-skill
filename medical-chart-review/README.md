@@ -4,7 +4,7 @@ An AI agent skill for expert-level review of medical charts, EMRs, and EHRs. Des
 
 > ⚠️ This skill produces documentation analysis, not medical advice. Final clinical, coding, and compliance decisions require credentialed humans (physicians, CCS/CPC/CRC coders, CCDS specialists).
 
-This is one of five skills in this monorepo. For NLP engineering work, see the sibling `hedis-nlp` and `hcc-nlp` skills. For supervised ML on claims data, see `claims-ml`. For HIPAA program work, see `hipaa-compliance`.
+This is one of six skills in this monorepo. For NLP engineering work, see the sibling `hedis-nlp` and `hcc-nlp` skills. For supervised ML on claims data, see `claims-ml`. For HIPAA program work, see `hipaa-compliance`. For code-system / crosswalk / value-set reference, see `healthcare-code-systems`.
 
 ## Install
 
@@ -83,6 +83,7 @@ Triggered by requests like:
 - [`hcc-nlp`](../hcc-nlp/) - HCC / risk-adjustment extractor design (V28 / V24 / HHS-HCC, MEAT, hierarchies, RADV readiness)
 - [`hipaa-compliance`](../hipaa-compliance/) - HIPAA Privacy + Security + Breach Notification, BAA review, OCR audit prep, de-identification methodology. This skill's `references/hipaa-privacy.md` is the reviewer-facing 18-identifier checklist; the sibling is the broader builder / compliance-officer view.
 - [`claims-ml`](../claims-ml/) - healthcare-ML failure-mode auditor (leakage, splits, calibration / drift, production scoring, fairness). Use when the question is "is this claims-ML model production-fit" rather than "is this chart well-documented."
+- [`healthcare-code-systems`](../healthcare-code-systems/) - reference and tooling for the code systems behind every chart (ICD-10-CM / PCS, CPT + modifiers, HCPCS Level II, NDC, RxNorm, SNOMED CT, LOINC, value sets, GEMs, ICD-10 → HCC crosswalks, code-system drift). This skill's `references/coding-icd10-hcc.md` is the auditor lens on the same codes.
 
 ## Compliance & safety guardrails
 

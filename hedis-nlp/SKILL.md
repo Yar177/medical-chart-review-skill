@@ -32,6 +32,8 @@ If any gate fails, stop and report back.
 - Operating supplemental-data pipelines and provenance for hybrid sampling
 - Reviewing failure-mode catalogs and regression test fixtures
 
+> **For the underlying code-system reference** - structure of ICD-10-CM / CPT / HCPCS / LOINC / SNOMED CT / RxNorm / NDC, value-set management (VSAC, OIDs, NCQA HEDIS Measurement Year versioning, intensional vs expansion definitions), crosswalk fundamentals (GEMs, SNOMED ↔ ICD, NDC ↔ RxNorm, LOINC ↔ CPT), code-system release cadences, drift monitoring, and grouper selection (CCSR, Elixhauser, Charlson) - see the `healthcare-code-systems` skill in the same repo. This skill stays focused on per-measure HEDIS extraction architecture.
+
 ## 2. Task Types - Pick One Explicitly
 
 Always ask the user (or restate) which task you're doing. Each has different rules.

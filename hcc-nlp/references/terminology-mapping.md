@@ -2,6 +2,8 @@
 
 > **Why this file exists:** ICD-10-CM → HCC mapping is the single biggest source of "looks like a bug but is a crosswalk version problem" failures in HCC NLP. This file maps the terminology landscape, points to the authoritative sources, and lists the gotchas.
 
+> **For deeper code-system reference:** the structural detail of ICD-10-CM (Excludes1 / 2, "with" convention, NOS / NEC, Z-code traps, FY annual update), CPT / HCPCS modifier semantics, NDC ↔ RxNorm normalization, SNOMED ↔ ICD-10-CM mapping with map-advice, value-set management (VSAC, OIDs, intensional vs expansion), grouper selection (CCSR, Elixhauser, Charlson), and code-system drift monitoring are covered in depth by the `healthcare-code-systems` skill in the same repo. This file stays focused on the HCC NLP slice.
+
 We do not redistribute CMS or HHS crosswalk files in this skill. They are large, change annually, and have specific licensing / sourcing expectations. Always pull from the official annual release.
 
 ---

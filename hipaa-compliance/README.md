@@ -91,6 +91,7 @@ The agent will run the PHI/scope gate from `SKILL.md` §0, then load [`reference
 - [`hedis-nlp`](../hedis-nlp/) - HEDIS NLP engineering. HIPAA questions arising from a HEDIS pipeline (BAA with a vendor, breach response for an extraction-pipeline incident) come back here.
 - [`hcc-nlp`](../hcc-nlp/) - HCC / risk-adjustment NLP. Same pattern - pipeline-specific HIPAA questions route here.
 - [`claims-ml`](../claims-ml/) - healthcare-ML failure-mode auditor. Same pattern - PHI handling questions arising from claims-ML model training / scoring environments (training-data BAAs, de-id strategy, breach handling for scoring pipelines) route here.
+- [`healthcare-code-systems`](../healthcare-code-systems/) - code-system / crosswalk / value-set reference. HIPAA touchpoints include licensing posture for CPT / SNOMED / commercial drug DBs (UMLS license, AMA Data File license) when planning cross-org data sharing or vendor flows.
 
 ## Compliance & safety guardrails
 

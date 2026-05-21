@@ -2,6 +2,8 @@
 
 > **For NLP / data-science teams building HCC extraction pipelines:** see the `hcc-nlp` skill in the same repo. It packages this auditor-oriented knowledge into model-friendly form (MEAT as an NLP task, hierarchies as a post-extraction step, V28 / V24 / HHS-HCC versioning, RAF dollar-weighted metrics, RADV readiness, suspect vs validate engines, per-HCC cards, test fixtures).
 
+> **For the underlying code-system reference** - ICD-10-CM structure / Excludes1 vs Excludes2 / "with" convention / Z-code traps / FY annual update / longitudinal ICD-9 handling via GEMs, CPT and modifier semantics, HCPCS Level II / J-codes / G-codes, ICD-10 → HCC crosswalk versioning (V24 / V28 / HHS-HCC), value-set management (VSAC, OIDs, NCQA HEDIS value sets), and code-system drift monitoring - see the `healthcare-code-systems` skill in the same repo.
+
 ## ICD-10-CM basics
 
 - 3–7 character alphanumeric codes (e.g., `E11.9` = Type 2 DM without complications)

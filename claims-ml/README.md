@@ -4,7 +4,7 @@ An AI agent skill for auditing healthcare ML pipelines built on claims data. Des
 
 > ⚠️ This skill produces ML-engineering review, not actuarial certification, clinical guidance, or legal / fairness advice. Final model-deployment decisions require sign-off from a credentialed actuary, medical director, and compliance review.
 
-This is one of five skills in this monorepo. For chart review see `medical-chart-review`; for HEDIS extractor engineering see `hedis-nlp`; for HCC extractor engineering see `hcc-nlp`; for HIPAA program work see `hipaa-compliance`.
+This is one of six skills in this monorepo. For chart review see `medical-chart-review`; for HEDIS extractor engineering see `hedis-nlp`; for HCC extractor engineering see `hcc-nlp`; for HIPAA program work see `hipaa-compliance`; for code-system / crosswalk / value-set reference see `healthcare-code-systems`.
 
 ## Install
 
@@ -79,6 +79,7 @@ Triggered by requests like:
 - [`hcc-nlp`](../hcc-nlp/) - HCC extractor engineering; claims-ml consumes HCC extractor outputs as features and provides leakage / evaluation review for ML built on them
 - [`hedis-nlp`](../hedis-nlp/) - HEDIS extractor engineering; claims-ml consumes HEDIS engine outputs as features and reviews downstream ML
 - [`hipaa-compliance`](../hipaa-compliance/) - PHI handling on training data, de-identification methodology for analytics environments, BAA review for ML vendor stacks
+- [`healthcare-code-systems`](../healthcare-code-systems/) - code-system / crosswalk / value-set / grouper reference. Claims-ml feature pipelines consume CCSR / Elixhauser / Charlson groupers, ICD-10 → HCC crosswalks, NDC ↔ RxNorm bridges, and value sets defined here; pin versions per its `references/versioning-and-drift.md`.
 
 ## Compliance & safety guardrails
 

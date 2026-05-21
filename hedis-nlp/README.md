@@ -65,6 +65,7 @@ The agent will run the PHI/scope gate from `SKILL.md` §0, then load the GSD mea
 - [`hcc-nlp`](../hcc-nlp/) - HCC / risk-adjustment NLP. HEDIS and HCC are different products; do not conflate.
 - [`hipaa-compliance`](../hipaa-compliance/) - HIPAA compliance for the platform hosting this pipeline: BAA review with EHR / annotation / cloud vendors, breach response for extraction-pipeline incidents, OCR audit prep, de-identification methodology if the pipeline produces de-id outputs.
 - [`claims-ml`](../claims-ml/) - healthcare-ML failure-mode auditor. Use when this skill's outputs feed a supervised ML model (HEDIS-engine-consumer models, gap-closure prediction); claims-ml audits leakage / calibration / drift / fairness on those downstream models.
+- [`healthcare-code-systems`](../healthcare-code-systems/) - foundational code-system reference. Its `references/value-sets-and-vsac.md` (VSAC, OIDs, NCQA HEDIS MY versioning, intensional vs expansion), `references/loinc-and-ucum.md`, and `references/rxnorm-ndc-and-drugs.md` are the data-engineering layer beneath HEDIS measure logic.
 
 ## Compliance & safety guardrails
 

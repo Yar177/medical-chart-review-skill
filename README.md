@@ -5,11 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skill Spec](https://img.shields.io/badge/spec-agentskills.io-blue)](https://agentskills.io/)
 
-A monorepo of **5 healthcare AI agent skills** - chart review, HEDIS NLP, HCC NLP, HIPAA compliance, and claims-ML failure-mode auditing. Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience and works with Claude Code, Cursor, GitHub Copilot, Codex, Windsurf, Gemini, and [40+ other agents](https://www.skills.sh/agent).
+A monorepo of **6 healthcare AI agent skills** - chart review, HEDIS NLP, HCC NLP, HIPAA compliance, claims-ML failure-mode auditing, and healthcare code systems / crosswalks / value sets. Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience and works with Claude Code, Cursor, GitHub Copilot, Codex, Windsurf, Gemini, and [40+ other agents](https://www.skills.sh/agent).
 
 ## Quickstart
 
-Pick one (or use `--skill '*'` to install all five):
+Pick one (or use `--skill '*'` to install all six):
 
 ```bash
 npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review
@@ -17,8 +17,9 @@ npx skills add Yar177/medical-chart-review-skill --skill hedis-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
 npx skills add Yar177/medical-chart-review-skill --skill claims-ml
+npx skills add Yar177/medical-chart-review-skill --skill healthcare-code-systems
 
-# All five at once
+# All six at once
 npx skills add Yar177/medical-chart-review-skill --skill '*'
 ```
 
@@ -33,6 +34,7 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 | [`hcc-nlp/`](hcc-nlp/) | Data-science / NLP engineering teams | HCC / risk-adjustment extractor design (suspect + validate engines), CMS-HCC V28 / V24 / HHS-HCC versioning, MEAT, hierarchies, RADV readiness, per-HCC model cards |
 | [`hipaa-compliance/`](hipaa-compliance/) | Builders / compliance officers / privacy + security teams for any healthcare app | HIPAA Privacy + Security + Breach Notification Rules, BAA review, de-identification methodology, OCR audit prep, breach response, technical safeguards for web / mobile / cloud / AI services handling PHI |
 | [`claims-ml/`](claims-ml/) | Data-science / ML engineering teams building supervised models on claims | Healthcare-ML failure-mode auditor: target leakage (10 classes), splits, target definitions, evaluation (actuary + ML lens), calibration / drift, production-scoring fitness, baselines, fairness; pre-deployment checklist + model card |
+| [`healthcare-code-systems/`](healthcare-code-systems/) | Data engineering, analytics, data-science, and platform teams | Authoritative reference + working templates for the code systems that healthcare data runs on: ICD-10-CM / PCS, ICD-9 + GEMs, CPT + modifiers, HCPCS Level II, NDC, RxNorm, SNOMED CT, LOINC + UCUM, CVX, NUCC, NPI, revenue / TOB / POS / DRG / APC, CCSR / Elixhauser / Charlson / BETOS, value sets (VSAC, NCQA HEDIS, eCQM), crosswalks (GEMs, NDC↔RxNorm, SNOMED↔ICD, LOINC↔CPT, ICD-10→HCC), versioning / drift, sources / licensing |
 
 ## Which skill should I install?
 
@@ -41,7 +43,8 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 - **Building HCC extractors, suspect engines, validate engines, RAF pipelines, RADV-ready workflows** → install [`hcc-nlp/`](hcc-nlp/)
 - **Designing / reviewing HIPAA compliance for an app: BAAs, breach response, OCR audit prep, de-id strategy, technical safeguards, cloud + AI service boundaries** → install [`hipaa-compliance/`](hipaa-compliance/)
 - **Building or auditing supervised ML on claims (cost, hospitalization, readmit, ED, onset, mortality, eligibility, anomaly): leakage audit, split design, calibration / drift, production-scoring fitness, fairness** → install [`claims-ml/`](claims-ml/)
-- **Building all of the above as a unified platform** → install all five
+- **Working with healthcare code systems and crosswalks: ICD-10, CPT, HCPCS, NDC, RxNorm, SNOMED, LOINC, value sets, GEMs, ICD↔HCC, NDC↔RxNorm; versioning / drift monitoring; provider / institutional codes; grouper selection** → install [`healthcare-code-systems/`](healthcare-code-systems/)
+- **Building all of the above as a unified platform** → install all six
 
 The skills are designed to coexist. Cross-references between them are written as prose pointers (e.g., "see the `medical-chart-review` skill's `references/coding-icd10-hcc.md`") rather than clickable links so each skill works standalone.
 
@@ -58,8 +61,9 @@ npx skills add Yar177/medical-chart-review-skill --skill hedis-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
 npx skills add Yar177/medical-chart-review-skill --skill claims-ml
+npx skills add Yar177/medical-chart-review-skill --skill healthcare-code-systems
 
-# Or all five
+# Or all six
 npx skills add Yar177/medical-chart-review-skill --skill '*'
 
 # Target a specific agent (e.g. claude-code, cursor, codex, github-copilot)
@@ -89,6 +93,7 @@ cp -R /tmp/mcr-skills/hedis-nlp           ~/.claude/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             ~/.claude/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    ~/.claude/skills/
 cp -R /tmp/mcr-skills/claims-ml           ~/.claude/skills/
+cp -R /tmp/mcr-skills/healthcare-code-systems ~/.claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -102,6 +107,7 @@ cp -R /tmp/mcr-skills/hedis-nlp           .claude/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             .claude/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    .claude/skills/
 cp -R /tmp/mcr-skills/claims-ml           .claude/skills/
+cp -R /tmp/mcr-skills/healthcare-code-systems .claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -117,6 +123,7 @@ cp -R /tmp/mcr-skills/hedis-nlp           ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    ~/.copilot/skills/
 cp -R /tmp/mcr-skills/claims-ml           ~/.copilot/skills/
+cp -R /tmp/mcr-skills/healthcare-code-systems ~/.copilot/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -130,15 +137,16 @@ cp -R /tmp/mcr-skills/hedis-nlp           .github/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             .github/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    .github/skills/
 cp -R /tmp/mcr-skills/claims-ml           .github/skills/
+cp -R /tmp/mcr-skills/healthcare-code-systems .github/skills/
 rm -rf /tmp/mcr-skills
 ```
 
-The skill folder names must remain `medical-chart-review`, `hedis-nlp`, `hcc-nlp`, `hipaa-compliance`, and `claims-ml` - they must match the `name` field in each `SKILL.md`.
+The skill folder names must remain `medical-chart-review`, `hedis-nlp`, `hcc-nlp`, `hipaa-compliance`, `claims-ml`, and `healthcare-code-systems` - they must match the `name` field in each `SKILL.md`.
 
 ### Verify it loaded
 
-- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`, `/hipaa-compliance`, `/claims-ml`.
-- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the five skills.
+- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`, `/hipaa-compliance`, `/claims-ml`, `/healthcare-code-systems`.
+- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the six skills.
 
 ## Repository structure
 
@@ -183,11 +191,17 @@ medical-chart-review-skill/    (this repo)
 │   ├── references/            (12 files - Three Rules, BAA, de-id, technical safeguards, OCR audit, IR, state-law boundaries)
 │   └── templates/             (5 files - BAA review, breach 4-factor, risk analysis, IR playbook, OCR audit binder)
 │
-└── claims-ml/                 (claims-ML failure-mode auditor for data-science / ML teams)
+├── claims-ml/                 (claims-ML failure-mode auditor for data-science / ML teams)
+│   ├── SKILL.md
+│   ├── README.md
+│   ├── references/            (10 files - target-leakage, splits, target-definitions, evaluation, calibration-and-drift, production-scoring, feature-engineering, baselines, fairness, target-types-and-projects)
+│   └── templates/             (5 files - feature-spec audit, leakage audit, model card, pre-deployment checklist, recalibration plan)
+│
+└── healthcare-code-systems/   (code-systems / crosswalks / value-sets reference for data + analytics teams)
     ├── SKILL.md
     ├── README.md
-    ├── references/            (10 files - target-leakage, splits, target-definitions, evaluation, calibration-and-drift, production-scoring, feature-engineering, baselines, fairness, target-types-and-projects)
-    └── templates/             (5 files - feature-spec audit, leakage audit, model card, pre-deployment checklist, recalibration plan)
+    ├── references/            (17 files - icd10-cm, icd10-pcs, icd9-and-legacy, cpt-and-modifiers, hcpcs-level-ii, institutional-billing-codes, snomed-ct, loinc-and-ucum, rxnorm-ndc-and-drugs, immunizations-and-other, provider-identifiers, crosswalks, value-sets-and-vsac, code-groupers, versioning-and-drift, sources-and-licensing, common-pitfalls)
+    └── templates/             (5 files - code-system-inventory, crosswalk-spec, value-set-manifest, code-drift-monitoring, grouper-evaluation)
 ```
 
 ## Versioning

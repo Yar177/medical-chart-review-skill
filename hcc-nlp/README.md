@@ -77,6 +77,7 @@ The agent will run the PHI/scope gate from `SKILL.md` §0, then load [`reference
 - [`hedis-nlp`](../hedis-nlp/) - HEDIS NLP. HEDIS and HCC are different products; do not conflate.
 - [`hipaa-compliance`](../hipaa-compliance/) - HIPAA compliance for the platform hosting this pipeline: BAA review, breach response, OCR audit prep, de-identification methodology, technical safeguards. RADV exposure makes audit-evidence retention especially relevant.
 - [`claims-ml`](../claims-ml/) - healthcare-ML failure-mode auditor. Claims-ML models commonly consume HCC outputs (HCC-rollup features, prior-year RAF); claims-ml's `references/target-leakage.md` §L3 (RAF circularity) and `references/feature-engineering.md` §2 cover the downstream pitfalls.
+- [`healthcare-code-systems`](../healthcare-code-systems/) - foundational code-system reference. Its `references/icd10-cm.md`, `references/crosswalks.md` (ICD-10 → HCC for V24 / V28 / HHS-HCC), and `references/versioning-and-drift.md` are the data-engineering layer underneath this skill's NLP extraction logic.
 
 ## Compliance & safety guardrails
 
