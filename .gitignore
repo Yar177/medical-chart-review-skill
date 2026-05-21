@@ -1,0 +1,9 @@
+# Local-only planning, notes, and drafts (never pushed to remote)
+.local/
+
+# OS / editor cruft
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/

@@ -5,19 +5,20 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skill Spec](https://img.shields.io/badge/spec-agentskills.io-blue)](https://agentskills.io/)
 
-A monorepo of **4 healthcare AI agent skills** - chart review, HEDIS NLP, HCC NLP, and HIPAA compliance. Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience and works with Claude Code, Cursor, GitHub Copilot, Codex, Windsurf, Gemini, and [40+ other agents](https://www.skills.sh/agent).
+A monorepo of **5 healthcare AI agent skills** - chart review, HEDIS NLP, HCC NLP, HIPAA compliance, and claims-ML failure-mode auditing. Each subdirectory is an independently installable [Agent Skill](https://agentskills.io/) packaged for a distinct audience and works with Claude Code, Cursor, GitHub Copilot, Codex, Windsurf, Gemini, and [40+ other agents](https://www.skills.sh/agent).
 
 ## Quickstart
 
-Pick one (or use `--skill '*'` to install all four):
+Pick one (or use `--skill '*'` to install all five):
 
 ```bash
 npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review
 npx skills add Yar177/medical-chart-review-skill --skill hedis-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
+npx skills add Yar177/medical-chart-review-skill --skill claims-ml
 
-# All four at once
+# All five at once
 npx skills add Yar177/medical-chart-review-skill --skill '*'
 ```
 
@@ -31,6 +32,7 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 | [`hedis-nlp/`](hedis-nlp/) | Data-science / NLP engineering teams | Per-measure HEDIS extractor design, DoS attribution, assertion handling, evaluation, annotation, model-card documentation, MRRV-ready pipelines |
 | [`hcc-nlp/`](hcc-nlp/) | Data-science / NLP engineering teams | HCC / risk-adjustment extractor design (suspect + validate engines), CMS-HCC V28 / V24 / HHS-HCC versioning, MEAT, hierarchies, RADV readiness, per-HCC model cards |
 | [`hipaa-compliance/`](hipaa-compliance/) | Builders / compliance officers / privacy + security teams for any healthcare app | HIPAA Privacy + Security + Breach Notification Rules, BAA review, de-identification methodology, OCR audit prep, breach response, technical safeguards for web / mobile / cloud / AI services handling PHI |
+| [`claims-ml/`](claims-ml/) | Data-science / ML engineering teams building supervised models on claims | Healthcare-ML failure-mode auditor: target leakage (10 classes), splits, target definitions, evaluation (actuary + ML lens), calibration / drift, production-scoring fitness, baselines, fairness; pre-deployment checklist + model card |
 
 ## Which skill should I install?
 
@@ -38,7 +40,8 @@ npx skills add Yar177/medical-chart-review-skill --skill '*'
 - **Building per-measure HEDIS extractors (GSD, BCS-E, FUH, MRP, TRC, etc.)** → install [`hedis-nlp/`](hedis-nlp/)
 - **Building HCC extractors, suspect engines, validate engines, RAF pipelines, RADV-ready workflows** → install [`hcc-nlp/`](hcc-nlp/)
 - **Designing / reviewing HIPAA compliance for an app: BAAs, breach response, OCR audit prep, de-id strategy, technical safeguards, cloud + AI service boundaries** → install [`hipaa-compliance/`](hipaa-compliance/)
-- **Building all of the above as a unified platform** → install all four
+- **Building or auditing supervised ML on claims (cost, hospitalization, readmit, ED, onset, mortality, eligibility, anomaly): leakage audit, split design, calibration / drift, production-scoring fitness, fairness** → install [`claims-ml/`](claims-ml/)
+- **Building all of the above as a unified platform** → install all five
 
 The skills are designed to coexist. Cross-references between them are written as prose pointers (e.g., "see the `medical-chart-review` skill's `references/coding-icd10-hcc.md`") rather than clickable links so each skill works standalone.
 
@@ -54,8 +57,9 @@ npx skills add Yar177/medical-chart-review-skill --skill medical-chart-review
 npx skills add Yar177/medical-chart-review-skill --skill hedis-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hcc-nlp
 npx skills add Yar177/medical-chart-review-skill --skill hipaa-compliance
+npx skills add Yar177/medical-chart-review-skill --skill claims-ml
 
-# Or all four
+# Or all five
 npx skills add Yar177/medical-chart-review-skill --skill '*'
 
 # Target a specific agent (e.g. claude-code, cursor, codex, github-copilot)
@@ -84,6 +88,7 @@ cp -R /tmp/mcr-skills/medical-chart-review ~/.claude/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           ~/.claude/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             ~/.claude/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    ~/.claude/skills/
+cp -R /tmp/mcr-skills/claims-ml           ~/.claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -96,6 +101,7 @@ cp -R /tmp/mcr-skills/medical-chart-review .claude/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           .claude/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             .claude/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    .claude/skills/
+cp -R /tmp/mcr-skills/claims-ml           .claude/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -110,6 +116,7 @@ cp -R /tmp/mcr-skills/medical-chart-review ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             ~/.copilot/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    ~/.copilot/skills/
+cp -R /tmp/mcr-skills/claims-ml           ~/.copilot/skills/
 rm -rf /tmp/mcr-skills
 ```
 
@@ -122,15 +129,16 @@ cp -R /tmp/mcr-skills/medical-chart-review .github/skills/
 cp -R /tmp/mcr-skills/hedis-nlp           .github/skills/
 cp -R /tmp/mcr-skills/hcc-nlp             .github/skills/
 cp -R /tmp/mcr-skills/hipaa-compliance    .github/skills/
+cp -R /tmp/mcr-skills/claims-ml           .github/skills/
 rm -rf /tmp/mcr-skills
 ```
 
-The skill folder names must remain `medical-chart-review`, `hedis-nlp`, `hcc-nlp`, and `hipaa-compliance` - they must match the `name` field in each `SKILL.md`.
+The skill folder names must remain `medical-chart-review`, `hedis-nlp`, `hcc-nlp`, `hipaa-compliance`, and `claims-ml` - they must match the `name` field in each `SKILL.md`.
 
 ### Verify it loaded
 
-- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`, `/hipaa-compliance`.
-- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the four skills.
+- **Claude Code**: ask *"What skills do you have available?"* or type `/medical-chart-review`, `/hedis-nlp`, `/hcc-nlp`, `/hipaa-compliance`, `/claims-ml`.
+- **VS Code Copilot**: Chat → Configure Chat (gear icon) → Skills tab. Or type `/` in chat and look for the five skills.
 
 ## Repository structure
 
@@ -159,7 +167,7 @@ medical-chart-review-skill/    (this repo)
 │       ├── per-measure-model-card.md
 │       └── hedis-abstraction.md
 │
-└── hcc-nlp/                   (HCC engineering skill)
+├── hcc-nlp/                   (HCC engineering skill)
 │   ├── SKILL.md
 │   ├── README.md
 │   ├── references/            (12 files + cards/ + test-fixtures/)
@@ -169,11 +177,17 @@ medical-chart-review-skill/    (this repo)
 │       ├── hcc-model-card.md
 │       └── hcc-audit-nlp.md
 │
-└── hipaa-compliance/         (HIPAA builder / compliance-officer skill)
+├── hipaa-compliance/          (HIPAA builder / compliance-officer skill)
+│   ├── SKILL.md
+│   ├── README.md
+│   ├── references/            (12 files - Three Rules, BAA, de-id, technical safeguards, OCR audit, IR, state-law boundaries)
+│   └── templates/             (5 files - BAA review, breach 4-factor, risk analysis, IR playbook, OCR audit binder)
+│
+└── claims-ml/                 (claims-ML failure-mode auditor for data-science / ML teams)
     ├── SKILL.md
     ├── README.md
-    ├── references/            (12 files - Three Rules, BAA, de-id, technical safeguards, OCR audit, IR, state-law boundaries)
-    └── templates/             (5 files - BAA review, breach 4-factor, risk analysis, IR playbook, OCR audit binder)
+    ├── references/            (10 files - target-leakage, splits, target-definitions, evaluation, calibration-and-drift, production-scoring, feature-engineering, baselines, fairness, target-types-and-projects)
+    └── templates/             (5 files - feature-spec audit, leakage audit, model card, pre-deployment checklist, recalibration plan)
 ```
 
 ## Versioning

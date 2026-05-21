@@ -90,6 +90,7 @@ The agent will run the PHI/scope gate from `SKILL.md` §0, then load [`reference
 - [`medical-chart-review`](../medical-chart-review/) - clinical chart review for clinicians, coders, CDI / quality auditors. Its `references/hipaa-privacy.md` is the reviewer-facing 18-identifier checklist used during chart abstraction; this skill is the broader builder / compliance-officer view.
 - [`hedis-nlp`](../hedis-nlp/) - HEDIS NLP engineering. HIPAA questions arising from a HEDIS pipeline (BAA with a vendor, breach response for an extraction-pipeline incident) come back here.
 - [`hcc-nlp`](../hcc-nlp/) - HCC / risk-adjustment NLP. Same pattern - pipeline-specific HIPAA questions route here.
+- [`claims-ml`](../claims-ml/) - healthcare-ML failure-mode auditor. Same pattern - PHI handling questions arising from claims-ML model training / scoring environments (training-data BAAs, de-id strategy, breach handling for scoring pipelines) route here.
 
 ## Compliance & safety guardrails
 

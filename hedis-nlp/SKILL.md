@@ -66,6 +66,8 @@ For clinical / coding / chart-review knowledge (ICD-10, MEAT criteria, EHR secti
 
 For HCC / risk-adjustment NLP, use the `hcc-nlp` skill in the same repo. HEDIS and HCC are different products with different rules.
 
+For supervised ML built on top of HEDIS-engine outputs (gap-closure prediction, outreach prioritization), use the sibling `claims-ml` skill. Its `references/target-types-and-projects.md` §10 covers HEDIS-engine-consumer models specifically; its leakage / calibration / drift / fairness audits apply to those downstream models.
+
 ## 5. Output Principles
 
 - **Cite source files** by relative path with line ranges when relevant

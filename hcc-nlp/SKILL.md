@@ -75,6 +75,8 @@ For clinical / coding / chart-review knowledge (auditor-oriented ICD-10, MEAT cr
 
 For HEDIS NLP, use the `hedis-nlp` skill in the same repo. HEDIS and HCC are different products with different rules.
 
+For supervised ML on claims (cost / hospitalization / readmit / ED / onset / mortality / eligibility / anomaly) that consumes HCC outputs (HCC-rollup features, prior-year RAF), use the sibling `claims-ml` skill. Its `references/target-leakage.md` §L3 covers RAF circularity and its `references/feature-engineering.md` §2 covers comorbidity-rollup pitfalls.
+
 ## 5. Output Principles
 
 - **Cite source files** by relative path

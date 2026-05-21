@@ -4,7 +4,7 @@ An AI agent skill for expert-level review of medical charts, EMRs, and EHRs. Des
 
 > ⚠️ This skill produces documentation analysis, not medical advice. Final clinical, coding, and compliance decisions require credentialed humans (physicians, CCS/CPC/CRC coders, CCDS specialists).
 
-This is one of three skills in this monorepo. For NLP engineering work, see the sibling `hedis-nlp` and `hcc-nlp` skills.
+This is one of five skills in this monorepo. For NLP engineering work, see the sibling `hedis-nlp` and `hcc-nlp` skills. For supervised ML on claims data, see `claims-ml`. For HIPAA program work, see `hipaa-compliance`.
 
 ## Install
 
@@ -82,6 +82,7 @@ Triggered by requests like:
 - [`hedis-nlp`](../hedis-nlp/) - per-measure HEDIS extractor design (DoS, assertion, evaluation, model cards)
 - [`hcc-nlp`](../hcc-nlp/) - HCC / risk-adjustment extractor design (V28 / V24 / HHS-HCC, MEAT, hierarchies, RADV readiness)
 - [`hipaa-compliance`](../hipaa-compliance/) - HIPAA Privacy + Security + Breach Notification, BAA review, OCR audit prep, de-identification methodology. This skill's `references/hipaa-privacy.md` is the reviewer-facing 18-identifier checklist; the sibling is the broader builder / compliance-officer view.
+- [`claims-ml`](../claims-ml/) - healthcare-ML failure-mode auditor (leakage, splits, calibration / drift, production scoring, fairness). Use when the question is "is this claims-ML model production-fit" rather than "is this chart well-documented."
 
 ## Compliance & safety guardrails
 

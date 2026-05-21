@@ -75,7 +75,7 @@ Always ask the user (or restate) which task you're doing. Each has different rul
 
 For chart-review-side HIPAA basics (the 18 Safe Harbor identifier list applied during clinical abstraction), the auditor-focused `medical-chart-review` skill's `references/hipaa-privacy.md` is the right entry point - this skill is the builder / compliance-officer view.
 
-For NLP engineering on PHI (HEDIS or HCC pipelines), use the sibling `hedis-nlp` or `hcc-nlp` skills. HIPAA compliance questions arising from those pipelines (BAA with a model vendor, breach response for an extraction pipeline incident) come back here.
+For NLP engineering on PHI (HEDIS or HCC pipelines), use the sibling `hedis-nlp` or `hcc-nlp` skills. HIPAA compliance questions arising from those pipelines (BAA with a model vendor, breach response for an extraction pipeline incident) come back here. Same pattern for supervised ML on claims (`claims-ml`): pipeline-specific HIPAA questions route here.
 
 ## 5. Output Principles
 

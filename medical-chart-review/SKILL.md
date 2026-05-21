@@ -33,7 +33,7 @@ If any of these gates fail, stop and report back to the user before proceeding.
 - Summarizing longitudinal patient history across encounters
 - Mapping data from Epic, Oracle Health (Cerner), Athenahealth, Meditech, eClinicalWorks, NextGen, Allscripts/Veradigm
 
-Not for: building HEDIS or HCC NLP extraction pipelines (those have their own skills in this repo - see `hedis-nlp/` and `hcc-nlp/`).
+Not for: building HEDIS or HCC NLP extraction pipelines (those have their own skills in this repo - see `hedis-nlp/` and `hcc-nlp/`). Not for designing or auditing supervised ML on claims (see `claims-ml/`).
 
 ## 2. Review Types — Pick One Explicitly
 
