@@ -462,7 +462,7 @@ If any of these distributions shift dramatically across runs, treat it as a regr
 - [`evaluation-and-validation.md`](evaluation-and-validation.md) - metrics and failure-mode catalog *(Phase 4)*
 - [`../hedis/README.md`](../hedis/README.md) - per-measure cards with measure-specific DoS tables
 - [`../hedis-supplemental-data.md`](../hedis-supplemental-data.md) - MRRV implications
-- Sibling [`../../hcc-nlp/references/date-of-service.md`](../../hcc-nlp/references/date-of-service.md) - HCC contract and HCC-specific cascade deltas
+- Sibling skill: `hcc-nlp/references/date-of-service.md` covers the HCC contract and HCC-specific cascade deltas (cross-skill prose pointer; load via the hcc-nlp skill).
 
 ## Defer to humans
 
