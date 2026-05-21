@@ -37,6 +37,9 @@ repository-code: "https://github.com/Yar177/medical-chart-review-skill"
 url: "https://www.skills.sh/Yar177/medical-chart-review-skill"
 identifiers:
   - type: doi
+    value: "10.5281/zenodo.20326014"
+    description: "Zenodo archive of v0.3.0"
+  - type: doi
     value: "10.5281/zenodo.20319276"
     description: "Zenodo archive of v0.2.0"
   - type: doi
